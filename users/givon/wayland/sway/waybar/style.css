@@ -1,0 +1,118 @@
+/* ==========================================================================*/
+/* Bar */
+/* ==========================================================================*/
+* {
+  border: none;
+  font-size: 15pt;
+  font-family: "Iosevka Etoile", "Font Awesome 5 Free Solid", monospace;
+}
+
+window#waybar {
+  background: rgb(26, 24, 38);
+}
+
+tooltip {
+  background: rgb(26, 24, 38);
+  border: 0.1em solid rgb(242, 205, 205);
+}
+
+tooltip label {
+  color: rgb(217, 224, 238);
+}
+
+/* ==========================================================================*/
+/* Modules-Left */
+/* ==========================================================================*/
+
+
+/* Workspaces */
+#workspaces button {
+  box-shadow: none;
+  color: rgb(110, 108, 126);
+  margin: 0em -0.5em;
+  text-shadow: none;
+  transition-duration: 0;
+}
+
+#workspaces button.urgent {
+  color: rgb(242, 143, 173);
+}
+
+#workspaces button.focused {
+  color: rgb(150, 205, 251);
+}
+
+/* ==========================================================================*/
+/* Modules-Center */
+/* ==========================================================================*/
+
+
+/* Window */
+#window {
+  color: rgb(217, 224, 238);
+}
+
+
+/* ==========================================================================*/
+/* Modules-Right */
+/* ==========================================================================*/
+
+
+#pulseaudio,
+#battery,
+#network,
+#clock {
+  margin: 0 0.3em;
+}
+
+
+/* PulseAudio */
+#pulseaudio {
+  color: rgb(150, 205, 251);
+}
+
+
+#pulseaudio.muted {
+  color: rgb(242, 143, 173);
+}
+
+/* Battery */
+#battery {
+  color: rgb(171, 233, 179);
+}
+
+
+#battery.okay {
+  color: rgb(250, 227, 176);
+}
+
+
+#batter.poor {
+  color: rgb(245, 194, 231);
+}
+
+
+#battery.critical {
+  color: rgb(242, 143, 173);
+}
+
+/* Network */
+#network {
+  color: rgb(221, 182, 242);
+}
+
+
+#network.disconnected {
+  color: rgb(242, 143, 173);
+}
+
+
+#network.disabled {
+  color: rgb(110, 108, 126);
+}
+
+/* Clock */
+#clock {
+  color: rgb(217, 224, 238);
+  margin-right: 1em;
+}

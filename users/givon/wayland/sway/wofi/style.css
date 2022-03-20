@@ -1,0 +1,52 @@
+* {
+  font-family: "Iosevka SS12 Extended", monospace;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#window {
+  animation-name: fade-in;
+  animation-duration: 0.5s;
+  background-color: rgb(22, 19, 32);
+  border-radius: 1em;
+  border: 0.1em solid rgb(242, 189, 150);
+}
+
+#input {
+  border: 0.1em solid rgb(242, 189, 150);
+  color: rgb(217, 224, 238);
+  background-color: rgb(30, 30, 46);
+  margin: 0.8em;
+  font-size: 1.2em;
+}
+
+#scroll {
+  padding-left: 0.5em;
+}
+
+#entry {
+  background-color: inherit;
+  color: rgb(217, 224, 238);
+  font-weight: bold;
+}
+
+
+#entry:selected {
+  border: 0.1em solid rgb(248, 189, 150);
+  border-radius: 0.1em;
+  font-style: italic;
+  padding: 0 0.5em;
+  margin: 0em 0.5em;
+}
+
+
+#entry image + label {
+  margin-left: 1em;
+}
