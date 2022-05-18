@@ -154,6 +154,29 @@ in
               };
             };
           };
+        swayidle = {
+          enable = true;
+          events = [
+            { event = "lock"; command = "${cfg.locker.executable}"; }
+            { event = "before-sleep"; command = "${cfg.locker.executable}"; }
+          ];
+          timeouts = [
+            {
+              timeout = 300;
+              command = "${pkgs.light}/bin/light -O && ${pkgs.light}/bin/light -S 1";
+              resumeCommand = "${pkgs.light}/bin/light -I";
+            }
+            {
+              timeout = 330;
+              command = cfg.locker.executable;
+            }
+            {
+              timeout = 360;
+              command = "${cfg.package}/bin/swaymsg \"output * dpms off\"";
+              resumeCommand = "${cfg.package}/bin/swaymsg \"output * dpms on\"";
+            }
+          ];
+        };
       };
 
       wayland.windowManager.sway = {
