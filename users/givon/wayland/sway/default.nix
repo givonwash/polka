@@ -266,6 +266,7 @@ in
           keybindings = with cfg.keys; {
             "${modifier}+return" = "exec ${cfg.terminal.executable}";
             "${modifier}+space" = "exec ${cfg.launcher.executable}";
+            "${modifier}+period" = "exec ${cfg.locker.executable}";
             "${modifier}+x" = "kill";
             "${modifier}+shift+r" = "reload";
             "${modifier}+shift+e" = "exit";
