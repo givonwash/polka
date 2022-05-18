@@ -216,6 +216,6 @@
         };
       };
 
-      users.users.${me} = config._.${me}.userConfig;
+      users.users.${me} = cfg.userConfig;
     };
 }
