@@ -27,11 +27,12 @@ return {
                 ['<leader>o'] = '<cmd>only<cr>',
                 ['<leader>c'] = '<cmd>close<cr>',
 
-                -- buffer navigation
+                -- buffer navigation & manipulation
                 ['j'] = 'gj',
                 ['k'] = 'gk',
                 ['zl'] = 'zL',
                 ['zh'] = 'zH',
+                ['g.'] = '<cmd>bdelete<cr>',
 
                 -- quickfix list navigation
                 ['<C-n>'] = '<cmd>cnext<cr>',
