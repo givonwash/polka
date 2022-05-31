@@ -37,7 +37,6 @@
   font-weight: bold;
 }
 
-
 #entry:selected {
   border: 0.1em solid rgb(248, 189, 150);
   border-radius: 0.1em;
@@ -45,7 +44,6 @@
   padding: 0 0.5em;
   margin: 0em 0.5em;
 }
-
 
 #entry image + label {
   margin-left: 1em;
