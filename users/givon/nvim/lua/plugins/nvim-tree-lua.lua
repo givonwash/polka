@@ -6,7 +6,7 @@ return {
         require("nvim-tree").setup {
             update_cwd = true,
             update_focused_file = {
-                enabled = true,
+                enable = true,
                 update_cwd = true,
             }
         }

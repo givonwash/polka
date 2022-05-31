@@ -58,13 +58,12 @@ return {
                 },
                 ---@param fallback fun(): nil
                 ['<TAB>'] = function(fallback)
-                    local utils = require("utils")
                     if cmp.visible() then
                         cmp.select_next_item()
                     elseif (
                         vim.bo.buftype ~= 'prompt'
-                        and utils.cursor_follows_word()
-                    ) then
+                            and require("utils.buf").cursor_follows_word()
+                        ) then
                         cmp.complete()
                     else
                         fallback()
@@ -86,10 +85,15 @@ return {
                 { name = 'path' },
                 { name = 'emoji' },
             }),
+            window = {
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered(),
+            }
         }
 
 
         cmp.setup.cmdline(':', {
+            mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({ { name = 'path' }, { name = 'cmdline' } })
         })
     end,

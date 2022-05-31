@@ -1,38 +1,41 @@
----@class Server
----@field name string
----@field cmd string[]
-
 local M = {}
+
+local lsp = vim.lsp
 
 M.client = {
     capabilities = require("plugins.nvim-cmp")["lsp.capabilities"],
     handlers = {
-        ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+        ['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
             border = 'rounded',
         }),
-        ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        ['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, {
             border = 'rounded',
             close_events = { 'CursorMoved', 'BufHidden', 'InsertCharPre' },
         }),
     },
-    -- @param client table<string, any>
-    -- @return nil
-    on_attach = function(client)
+    ---@param client table<string, any>
+    ---@param bufnr integer
+    ---@return nil
+    on_attach = function(client, bufnr)
         require('core.keymaps').define({
             n = {
-                ['gd'] = { cmd = '<cmd>lua vim.lsp.buf.definition()<cr>', is_buf_local = true },
-                ['<C-k>'] = { cmd = '<cmd>lua vim.lsp.buf.signature_help()<cr>', is_buf_local = true },
-                ['ga'] = { cmd = '<cmd>lua vim.lsp.buf.code_action()<cr>', is_buf_local = true },
-                ['gr'] = { cmd = '<cmd>lua vim.lsp.buf.rename()<cr>', is_buf_local = true },
-                ['K'] = { cmd = '<cmd>lua vim.lsp.buf.hover()<cr>', is_buf_local = true },
+                ['gd'] = { cmd = lsp.buf.definition, opts = { buffer = true } },
+                ['<C-k>'] = { cmd = lsp.buf.signature_help, opts = { buffer = true } },
+                ['ga'] = { cmd = lsp.buf.code_action, opts = { buffer = true } },
+                ['gr'] = { cmd = lsp.buf.rename, opts = { buffer = true } },
+                ['K'] = { cmd = lsp.buf.hover, opts = { buffer = true } },
             },
             i = {
-                ['<C-k>'] = { cmd = '<cmd>lua vim.lsp.buf.signature_help()<cr>', is_buf_local = true },
+                ['<C-k>'] = { cmd = lsp.buf.signature_help, opts = { buffer = true } },
             }
         })
 
         if client.resolved_capabilities.document_formatting then
-            vim.cmd [[au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)]]
+            local fn = require('utils.fn')
+
+            require('core.autocmds').define_group(string.format('format_on_save_%d_%d', client.id, bufnr), {
+                { event = 'BufWritePre', opts = { buffer = bufnr, callback = fn.defer(lsp.buf.formatting_sync, { nil, 1000 }) } }
+            })
         end
     end,
 }
@@ -47,7 +50,7 @@ M.server = {
     sumneko_lua = {},
 }
 
----@param servers Server[]
+---@param servers { name: string, cmd: string[] }[]
 ---@return nil
 M.setup = function(servers)
     for _, server in ipairs(servers) do

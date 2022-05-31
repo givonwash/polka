@@ -1,7 +1,7 @@
 return {
     ---@return nil
     setup = function()
-        require("project_nvim").setup { detection_methods = { "pattern", "lsp" } }
+        require("project_nvim").setup()
         require("telescope").load_extension "projects"
     end
 }

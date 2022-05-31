@@ -1,29 +1,25 @@
 return {
     ---@return nil
     setup = function()
+        local fn = require('utils.fn')
+
         require("gitsigns").setup {
-            signs = {
-                add = { text = '|' },
-                change = { text = '|' },
-                delete = { text = '|' },
-                topdelete = { text = '⤒' },
-                changedelete = { text = '↹' },
-            },
             on_attach = function()
                 require('core.keymaps').define {
                     n = {
-                        ['<leader>gb'] = { cmd = '<cmd>lua require("gitsigns").blame_line()<cr>', is_buf_local = true },
-                        ['<leader>gj'] = { cmd = '<cmd>lua require("gitsigns").next_hunk()<cr>', is_buf_local = true },
-                        ['<leader>gk'] = { cmd = '<cmd>lua require("gitsigns").prev_hunk()<cr>', is_buf_local = true },
-                        ['<leader>gp'] = { cmd = '<cmd>lua require("gitsigns").preview_hunk()<cr>', is_buf_local = true },
-                        ['<leader>gr'] = { cmd = '<cmd>lua require("gitsigns").reset_hunk()<cr>', is_buf_local = true },
+                        ['<leader>gb'] = { cmd = fn.defer(require("gitsigns").blame_line), opts = { buffer = true } },
+                        ['<leader>gd'] = { cmd = fn.defer(require("gitsigns").diffthis), opts = { buffer = true } },
+                        ['<leader>gj'] = { cmd = fn.defer(require("gitsigns").next_hunk), opts = { buffer = true } },
+                        ['<leader>gk'] = { cmd = fn.defer(require("gitsigns").prev_hunk), opts = { buffer = true } },
+                        ['<leader>gp'] = { cmd = fn.defer(require("gitsigns").preview_hunk), opts = { buffer = true } },
+                        ['<leader>gr'] = { cmd = fn.defer(require("gitsigns").reset_hunk), opts = { buffer = true } },
                     },
                     o = {
-                        ['ih'] = { cmd = ':<C-u>lua require("gitsigns").select_hunk()<cr>', is_buf_local = true },
+                        ['ih'] = { cmd = fn.defer(require("gitsigns").select_hunk), opts = { buffer = true } },
                     },
                     v = {
-                        ['<leader>gr'] = { cmd = '<cmd>lua require("gitsigns").reset_hunk()<cr>', is_buf_local = true },
-                        ['ih'] = { cmd = ':<C-u>lua require("gitsigns").select_hunk()<cr>', is_buf_local = true },
+                        ['<leader>gr'] = { cmd = fn.defer(require("gitsigns").reset_hunk), opts = { buffer = true } },
+                        ['ih'] = { cmd = fn.defer(require("gitsigns").select_hunk), opts = { buffer = true } },
                     }
                 }
 

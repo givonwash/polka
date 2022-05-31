@@ -2,9 +2,17 @@
 
 {
   home-manager.users.${me} = { pkgs, ... }: rec {
-    home.sessionVariables = {
-      EDITOR = "${programs.neovim.package}/bin/nvim";
+    home = {
+      packages = with pkgs; [
+        black
+        nodePackages.prettier
+        python310Packages.isort
+      ];
+      sessionVariables = {
+        EDITOR = "${programs.neovim.package}/bin/nvim";
+      };
     };
+
     programs.neovim = {
       enable = true;
       extraConfig = ''
@@ -53,7 +61,22 @@
         luasnip
         {
           config = ''
-            require("plugins.null-ls-nvim").setup()
+            require("plugins.null-ls-nvim").setup {
+                code_actions = {
+                    gitsigns = nil,
+                },
+                formatting = {
+                    black = {
+                        command = "${pkgs.black}/bin/black",
+                    },
+                    isort = {
+                        command = "${pkgs.python310Packages.isort}/bin/isort",
+                    },
+                    prettier = {
+                        command = "${pkgs.nodePackages.prettier}/bin/prettier"
+                    }
+                }
+            }
           '';
           plugin = null-ls-nvim;
           type = "lua";

@@ -1,17 +1,19 @@
 return {
     ---@return nil
     setup = function()
+        local fn = require('utils.fn')
+
         require("core.keymaps").define({
             n = {
-                ["<leader>fb"] = [[<cmd>lua require("telescope.builtin").buffers()<cr>]],
-                ["<leader>ff"] = [[<cmd>lua require("telescope.builtin").find_files()<cr>]],
-                ["<leader>fg"] = [[<cmd>lua require("telescope.builtin").git_files()<cr>]],
-                ["<leader>fh"] = [[<cmd>lua require("telescope.builtin").help_tags()<cr>]],
-                ["<leader>fk"] = [[<cmd>lua require("telescope.builtin").grep_string()<cr>]],
-                ["<leader>fm"] = [[<cmd>lua require("telescope.builtin").man_pages()<cr>]],
-                ["<leader>fr"] = [[<cmd>lua require("telescope.builtin").live_grep()<cr>]],
-                ["<leader>ft"] = [[<cmd>lua require("telescope.builtin").builtin()<cr>]],
-                ["<leader>fs"] = [[<cmd>lua require("telescope.builtin").lsp_references()<cr>]]
+                ["<leader>fb"] = fn.defer(require("telescope.builtin").buffers),
+                ["<leader>ff"] = fn.defer(require("telescope.builtin").find_files),
+                ["<leader>fg"] = fn.defer(require("telescope.builtin").git_files),
+                ["<leader>fh"] = fn.defer(require("telescope.builtin").help_tags),
+                ["<leader>fk"] = fn.defer(require("telescope.builtin").grep_string),
+                ["<leader>fm"] = fn.defer(require("telescope.builtin").man_pages),
+                ["<leader>fr"] = fn.defer(require("telescope.builtin").live_grep),
+                ["<leader>ft"] = fn.defer(require("telescope.builtin").builtin),
+                ["<leader>fs"] = fn.defer(require("telescope.builtin").lsp_references),
             }
         })
 
