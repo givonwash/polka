@@ -7,6 +7,7 @@
     (import ./wayland { inherit me; })
     (import ./wezterm { inherit me; })
     (import ./firefox.nix { inherit me; })
+    (import ./git.nix { inherit me; })
     (import ./gtk.nix { inherit me; })
     (import ./xdg.nix { inherit me; })
   ];

@@ -33,6 +33,10 @@
                       signal-desktop
                       spotify
                     ];
+                    git = {
+                      email = "givonwash@gmail.com";
+                      userName = "givonwash";
+                    };
                     sway = {
                       enable = true;
                       keys = {
