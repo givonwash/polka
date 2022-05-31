@@ -10,6 +10,7 @@
     (import ./git.nix { inherit me; })
     (import ./gtk.nix { inherit me; })
     (import ./xdg.nix { inherit me; })
+    (import ./zathura.nix { inherit me; })
   ];
 
   options._.${me} =
