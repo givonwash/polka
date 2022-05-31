@@ -26,9 +26,9 @@
       plugins = with pkgs.vimPlugins; [
         {
           config = ''
-            require("plugins.barbar-nvim").setup()
+            require("plugins.bufferline-nvim").setup()
           '';
-          plugin = barbar-nvim;
+          plugin = bufferline-nvim;
           type = "lua";
         }
         {
