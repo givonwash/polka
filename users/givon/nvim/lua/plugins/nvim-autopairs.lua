@@ -1,6 +1,6 @@
 return {
     ---@return nil
     setup = function()
-        require("nvim-autopairs").setup()
-    end
+        require('nvim-autopairs').setup()
+    end,
 }

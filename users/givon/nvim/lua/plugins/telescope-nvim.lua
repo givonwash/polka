@@ -1,21 +1,21 @@
 return {
     ---@return nil
     setup = function()
-        local fn = require('utils.fn')
+        local fn = require 'utils.fn'
 
-        require("core.keymaps").define({
+        require('core.keymaps').define {
             n = {
-                ["<leader>fb"] = fn.defer(require("telescope.builtin").buffers),
-                ["<leader>ff"] = fn.defer(require("telescope.builtin").find_files),
-                ["<leader>fg"] = fn.defer(require("telescope.builtin").git_files),
-                ["<leader>fh"] = fn.defer(require("telescope.builtin").help_tags),
-                ["<leader>fk"] = fn.defer(require("telescope.builtin").grep_string),
-                ["<leader>fm"] = fn.defer(require("telescope.builtin").man_pages),
-                ["<leader>fr"] = fn.defer(require("telescope.builtin").live_grep),
-                ["<leader>ft"] = fn.defer(require("telescope.builtin").builtin),
-                ["<leader>fs"] = fn.defer(require("telescope.builtin").lsp_references),
-            }
-        })
+                ['<leader>fb'] = fn.defer(require('telescope.builtin').buffers),
+                ['<leader>ff'] = fn.defer(require('telescope.builtin').find_files),
+                ['<leader>fg'] = fn.defer(require('telescope.builtin').git_files),
+                ['<leader>fh'] = fn.defer(require('telescope.builtin').help_tags),
+                ['<leader>fk'] = fn.defer(require('telescope.builtin').grep_string),
+                ['<leader>fm'] = fn.defer(require('telescope.builtin').man_pages),
+                ['<leader>fr'] = fn.defer(require('telescope.builtin').live_grep),
+                ['<leader>ft'] = fn.defer(require('telescope.builtin').builtin),
+                ['<leader>fs'] = fn.defer(require('telescope.builtin').lsp_references),
+            },
+        }
 
         local actions = require 'telescope.actions'
 
@@ -43,7 +43,7 @@ return {
                 man_pages = {
                     sections = { 'ALL' },
                 },
-            }
+            },
         }
-    end
+    end,
 }

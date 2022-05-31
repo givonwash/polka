@@ -32,7 +32,6 @@ return {
             TypeParameter = '',
         }
 
-
         cmp.setup {
             formatting = {
                 format = function(_, item)
@@ -42,7 +41,7 @@ return {
             },
             snippet = {
                 expand = function(args)
-                    require("luasnip").lsp_expand(args.body)
+                    require('luasnip').lsp_expand(args.body)
                 end,
             },
             mapping = {
@@ -54,16 +53,16 @@ return {
                 },
                 ['<CR>'] = cmp.mapping.confirm {
                     behavior = cmp.ConfirmBehavior.Insert,
-                    select = false
+                    select = false,
                 },
                 ---@param fallback fun(): nil
                 ['<TAB>'] = function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
-                    elseif (
+                    elseif
                         vim.bo.buftype ~= 'prompt'
-                            and require("utils.buf").cursor_follows_word()
-                        ) then
+                        and require('utils.buf').cursor_follows_word()
+                    then
                         cmp.complete()
                     else
                         fallback()
@@ -76,26 +75,27 @@ return {
                     else
                         fallback()
                     end
-                end
+                end,
             },
-            sources = cmp.config.sources({
+            sources = cmp.config.sources {
                 { name = 'nvim_lsp' },
                 { name = 'buffer' },
                 { name = 'luasnip' },
                 { name = 'path' },
                 { name = 'emoji' },
-            }),
+            },
             window = {
                 completion = cmp.config.window.bordered(),
                 documentation = cmp.config.window.bordered(),
-            }
+            },
         }
-
 
         cmp.setup.cmdline(':', {
             mapping = cmp.mapping.preset.cmdline(),
-            sources = cmp.config.sources({ { name = 'path' }, { name = 'cmdline' } })
+            sources = cmp.config.sources { { name = 'path' }, { name = 'cmdline' } },
         })
     end,
-    ["lsp.capabilities"] = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    ['lsp.capabilities'] = require('cmp_nvim_lsp').update_capabilities(
+        vim.lsp.protocol.make_client_capabilities()
+    ),
 }

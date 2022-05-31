@@ -11,7 +11,7 @@ return {
     ---@param sources SourcesConfig
     ---@return nil
     setup = function(sources)
-        local null_ls = require("null-ls")
+        local null_ls = require 'null-ls'
         ---@type any[]
         local configured_sources = {}
 
@@ -28,8 +28,8 @@ return {
         end
 
         null_ls.setup {
-            on_attach = require("plugins.nvim-lspconfig").client.on_attach,
-            sources = configured_sources
+            on_attach = require('plugins.nvim-lspconfig').client.on_attach,
+            sources = configured_sources,
         }
     end,
 }

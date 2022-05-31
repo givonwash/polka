@@ -3,8 +3,8 @@ return {
     setup = function()
         require('nvim-treesitter.configs').setup {
             highlight = {
-                enable = true
-            }
+                enable = true,
+            },
         }
-    end
+    end,
 }

@@ -1,18 +1,27 @@
 return {
     ---@return nil
     setup = function()
-        local fn = require('utils.fn')
+        local fn = require 'utils.fn'
 
         require('core.autocmds').define_group('vimrc', {
             { event = 'FileType', opts = { command = 'wincmd L', pattern = { 'help', 'man' } } },
-            { event = 'BufWritePre', opts = { command = 'mark ` | %s:\\v\\s+$::ge | normal! ``', pattern = { 'help', 'man' } } },
-            { event = 'TextYankPost', opts = { callback = fn.defer(vim.highlight.on_yank), pattern = { 'help', 'man' } } },
+            {
+                event = 'BufWritePre',
+                opts = {
+                    command = 'mark ` | %s:\\v\\s+$::ge | normal! ``',
+                    pattern = { 'help', 'man' },
+                },
+            },
+            {
+                event = 'TextYankPost',
+                opts = { callback = fn.defer(vim.highlight.on_yank), pattern = { 'help', 'man' } },
+            },
         })
 
-        require('core.keymaps').define({
+        require('core.keymaps').define {
             i = {
                 -- leave insert mode
-                ['jj'] = '<esc>'
+                ['jj'] = '<esc>',
             },
             n = {
                 -- pane navigation & manipulation
@@ -47,25 +56,40 @@ return {
                 ['OO'] = 'm`O<esc>``',
 
                 -- copy/paste system clipboard
-                ['<leader>y'] = { cmd = '"+y', opts = { silent = false }},
-                ['<leader>p'] = { cmd = '"+p', opts = { silent = false }},
+                ['<leader>y'] = { cmd = '"+y', opts = { silent = false } },
+                ['<leader>p'] = { cmd = '"+p', opts = { silent = false } },
 
                 -- better searching
-                ['?'] = { cmd = '?\\v', opts = { silent = false }},
-                ['/'] = { cmd = '/\\v', opts = { silent = false }},
+                ['?'] = { cmd = '?\\v', opts = { silent = false } },
+                ['/'] = { cmd = '/\\v', opts = { silent = false } },
 
                 -- fast substitution
-                ['<leader><leader>'] = { cmd = ':%s:\\v::g<left><left><left>', opts = { silent = false }},
-                ['<leader>;'] = { cmd = ':s:\\v::g<left><left><left>', opts = { silent = false }},
-                ["<leader>'"] = { cmd = ':.,$s:\\v::g<left><left><left>', opts = { silent = false }},
-                ['<leader>k'] = { cmd = ':%s:\\v<<C-r><C-w>>::g<left><left>', opts = { silent = false }},
+                ['<leader><leader>'] = {
+                    cmd = ':%s:\\v::g<left><left><left>',
+                    opts = { silent = false },
+                },
+                ['<leader>;'] = { cmd = ':s:\\v::g<left><left><left>', opts = { silent = false } },
+                ["<leader>'"] = {
+                    cmd = ':.,$s:\\v::g<left><left><left>',
+                    opts = { silent = false },
+                },
+                ['<leader>k'] = {
+                    cmd = ':%s:\\v<<C-r><C-w>>::g<left><left>',
+                    opts = { silent = false },
+                },
 
                 -- fast increment/decrement
-                ['<leader>a'] = { cmd = ':s:\\v\\d+:\\=submatch(0) + 1:ge<cr>', opts = { silent = false }},
-                ['<leader>x'] = { cmd = ':s:\\v\\d+:\\=submatch(0) - 1:ge<cr>', opts = { silent = false }},
+                ['<leader>a'] = {
+                    cmd = ':s:\\v\\d+:\\=submatch(0) + 1:ge<cr>',
+                    opts = { silent = false },
+                },
+                ['<leader>x'] = {
+                    cmd = ':s:\\v\\d+:\\=submatch(0) - 1:ge<cr>',
+                    opts = { silent = false },
+                },
 
                 -- fast :g commands
-                ['<leader>g'] = { cmd = ':%g:\\v', opts = { silent = false }},
+                ['<leader>g'] = { cmd = ':%g:\\v', opts = { silent = false } },
 
                 -- toggle spell checking
                 ['<leader>s'] = '<cmd>setlocal spell!<cr>',
@@ -92,10 +116,10 @@ return {
             },
             v = {
                 -- copy/paste system clipboard
-                ['<leader>y'] = { cmd = '"+y', opts = { silent = false }},
-                ['<leader>p'] = { cmd = '"+p', opts = { silent = false }},
-            }
-        })
+                ['<leader>y'] = { cmd = '"+y', opts = { silent = false } },
+                ['<leader>p'] = { cmd = '"+p', opts = { silent = false } },
+            },
+        }
 
         vim.opt.number = true
         vim.opt.relativenumber = true
@@ -131,5 +155,5 @@ return {
             { name = 'DiagnosticSignInfo', text = '', numhl = 'LspDiagnosticsInformation' },
             { name = 'DiagnosticSignHint', text = '', numhl = 'LspDiagnosticsHint' },
         }
-    end
+    end,
 }

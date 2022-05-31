@@ -16,10 +16,9 @@ return {
                     local opts = vim.tbl_extend('force', defaults, cmd.opts or {})
                     vim.keymap.set(mode, keys, cmd.cmd, opts)
                 else
-                    vim.notify(string.format("Unsupported type %s provided to define", cmd_type))
+                    vim.notify(string.format('Unsupported type %s provided to define', cmd_type))
                 end
             end
         end
     end,
 }
-

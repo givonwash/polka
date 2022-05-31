@@ -15,5 +15,5 @@ return {
             local opts = vim.tbl_extend('force', cmd.opts, { group = group_id })
             api.nvim_create_autocmd(cmd.event, opts)
         end
-    end
+    end,
 }

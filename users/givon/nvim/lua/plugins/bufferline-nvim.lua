@@ -12,7 +12,7 @@ return {
                 ['gp'] = '<cmd>BufferLinePick<cr>',
                 ['gsd'] = '<cmd>BufferLineSortByDirectory<cr>',
                 ['gse'] = '<cmd>BufferLineSortByExtension<cr>',
-            }
+            },
         }
-    end
+    end,
 }
