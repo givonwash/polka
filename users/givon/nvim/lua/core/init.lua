@@ -1,11 +1,13 @@
 return {
     ---@return nil
     setup = function()
-        require('core.autocmds').define_group({
-            [[au FileType help,man wincmd L]],
-            [[au BufWritePre * mark ` | %s:\v\s+$::ge | normal! ``]],
-            [[au TextYankPost * silent! lua vim.highlight.on_yank() ]],
-        }, 'vimrc')
+        local fn = require('utils.fn')
+
+        require('core.autocmds').define_group('vimrc', {
+            { event = 'FileType', opts = { command = 'wincmd L', pattern = { 'help', 'man' } } },
+            { event = 'BufWritePre', opts = { command = 'mark ` | %s:\\v\\s+$::ge | normal! ``', pattern = { 'help', 'man' } } },
+            { event = 'TextYankPost', opts = { callback = fn.defer(vim.highlight.on_yank), pattern = { 'help', 'man' } } },
+        })
 
         require('core.keymaps').define({
             i = {

@@ -1,14 +1,19 @@
 return {
-    ---@param autocmds string[] #autocmds to include in the augroup
-    ---@param name string #name of the augroup
+    ---@param group string|{ name: string, opts?: { clear: boolean } }
+    ---@param cmds { event: string|string[], opts: table<string, any> }[]
     ---@return nil
-    define_group = function(autocmds, name)
-        local cmd = vim.cmd
-        cmd('augroup ' .. name)
-        cmd 'autocmd!'
-        for _, au in pairs(autocmds) do
-            cmd(au)
+    define_group = function(group, cmds)
+        local api = vim.api
+
+        if type(group) == 'table' then
+            local group_id = api.nvim_create_augroup(group.name, group.opts)
+        else
+            local group_id = api.nvim_create_augroup(group, {})
         end
-        cmd 'augroup end'
+
+        for _, cmd in ipairs(cmds) do
+            local opts = vim.tbl_extend('force', cmd.opts, { group = group_id })
+            api.nvim_create_autocmd(cmd.event, opts)
+        end
     end
 }
