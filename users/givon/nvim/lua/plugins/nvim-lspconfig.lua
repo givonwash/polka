@@ -57,15 +57,18 @@ M.server = {
             python = { analysis = { { typeCheckingMode = 'strict' } } },
         },
     },
-    rnix = {},
-    sumneko_lua = {},
 }
 
 ---@param servers { name: string, cmd: string[] }[]
 ---@return nil
 M.setup = function(servers)
     for _, server in ipairs(servers) do
-        local opts = vim.tbl_extend('keep', { cmd = server.cmd }, M.server[server.name], M.client)
+        local opts = vim.tbl_extend(
+            'keep',
+            { cmd = server.cmd },
+            M.server[server.name] or {},
+            M.client
+        )
         require('lspconfig')[server.name].setup(opts)
     end
 end
