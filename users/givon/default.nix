@@ -97,7 +97,7 @@
           icons = {
             name = mkOption {
               type = types.str;
-              example = "Font Awesome 5 Free Solid";
+              example = "Font Awesome 6 Free Solid";
               description = ''
                 Name of icon font to use
               '';

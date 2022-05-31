@@ -85,7 +85,7 @@
                           package = pkgs.twitter-color-emoji;
                         };
                         icons = {
-                          name = "Font Awesome 5 Free Solid";
+                          name = "Font Awesome 6 Free Solid";
                           package = pkgs.font-awesome;
                         };
                         monospace = {
