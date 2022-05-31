@@ -45,6 +45,12 @@
     opengl.enable = true;
   };
 
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 30d";
+  };
+
   networking = {
     networkmanager.enable = true;
     useDHCP = false;
