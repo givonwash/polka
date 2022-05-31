@@ -89,9 +89,9 @@
                           package = pkgs.font-awesome;
                         };
                         monospace = {
-                          name = "Iosevka SS12";
-                          package = pkgs.iosevka-bin.override {
-                            variant = "ss12";
+                          name = "Iosevka Nerd Font";
+                          package = pkgs.nerdfonts.override {
+                            fonts = [ "Iosevka" ];
                           };
                         };
                         sans-serif = {
