@@ -2,6 +2,8 @@ local M = {}
 
 local lsp = vim.lsp
 
+local IGNORED_FORMATTING_SERVERS = require('utils.collections').set:new 'sumneko_lua'
+
 M.client = {
     capabilities = require('plugins.nvim-cmp')['lsp.capabilities'],
     handlers = {
@@ -30,7 +32,10 @@ M.client = {
             },
         }
 
-        if client.resolved_capabilities.document_formatting then
+        if
+            not IGNORED_FORMATTING_SERVERS:contains(client.name)
+            and client.resolved_capabilities.document_formatting
+        then
             local fn = require 'utils.fn'
 
             require('core.autocmds').define_group(

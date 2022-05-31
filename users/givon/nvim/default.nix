@@ -7,6 +7,7 @@
         black
         nodePackages.prettier
         python310Packages.isort
+        stylua
       ];
       sessionVariables = {
         EDITOR = "${programs.neovim.package}/bin/nvim";
@@ -73,8 +74,11 @@
                         command = "${pkgs.python310Packages.isort}/bin/isort",
                     },
                     prettier = {
-                        command = "${pkgs.nodePackages.prettier}/bin/prettier"
-                    }
+                        command = "${pkgs.nodePackages.prettier}/bin/prettier",
+                    },
+                    stylua = {
+                        command = "${pkgs.stylua}/bin/stylua",
+                    },
                 }
             }
           '';
