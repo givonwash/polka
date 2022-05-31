@@ -143,6 +143,22 @@
               '';
             };
           };
+          serif = {
+            name = mkOption {
+              type = types.str;
+              example = "Noto Serif";
+              description = ''
+                Name of san-serif font to use
+              '';
+            };
+            package = mkOption {
+              type = types.package;
+              example = literalExpression "pkgs.noto-fonts";
+              description = ''
+                Package containing sans-serif font to use
+              '';
+            };
+          };
         };
         icons = {
           name = mkOption {
@@ -212,6 +228,7 @@
             cfg.theme.fonts.icons.package
             cfg.theme.fonts.monospace.package
             cfg.theme.fonts.sans-serif.package
+            cfg.theme.fonts.serif.package
             cfg.theme.icons.package
           ] ++ cfg.extraPkgs;
           stateVersion = "22.05";

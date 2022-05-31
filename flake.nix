@@ -100,6 +100,10 @@
                             variant = "sgr-iosevka-etoile";
                           };
                         };
+                        serif = {
+                          name = "Noto Serif";
+                          package = pkgs.noto-fonts;
+                        };
                       };
                       icons = {
                         name = "Papirus-Dark";
