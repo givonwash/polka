@@ -2,24 +2,24 @@ local M = {}
 
 ---@class Set
 ---@field _hashed table<string|integer, boolean>
-M.set = {}
+M.Set = {}
 
----@vararg string|integer
+---@param elements (string|integer)[]
 ---@return Set
-function M.set:new(...)
+function M.Set:new(elements)
     local hashed = {}
-    for _, hashable in ipairs { ... } do
-        hashed[hashable] = true
+    for _, element in ipairs(elements) do
+        hashed[element] = true
     end
 
     self.__index = self
     return setmetatable({ _hashed = hashed }, self)
 end
 
----@param e string|integer
+---@param element string|integer
 ---@return boolean
-function M.set:contains(e)
-    return self._hashed[e] == true
+function M.Set:contains(element)
+    return self._hashed[element] == true
 end
 
 return M
