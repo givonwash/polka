@@ -37,7 +37,7 @@ in
             format = "<span weight='bold'>{}</span>";
             max-length = 50;
             rewrite = {
-              "(.*)\\s*—\\s*(Mozilla )?Firefox?$" = "<span color='${theme.colors.red}'></span> $1";
+              "(.*)\\s*—\\s*(Mozilla )?Firefox?$" = "$1";
             };
           };
           clock = {
