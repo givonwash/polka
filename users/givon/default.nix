@@ -9,6 +9,7 @@
     (import ./firefox.nix { inherit me; })
     (import ./git.nix { inherit me; })
     (import ./gtk.nix { inherit me; })
+    (import ./ssh.nix { inherit me; })
     (import ./xdg.nix { inherit me; })
     (import ./zathura.nix { inherit me; })
   ];
