@@ -234,6 +234,32 @@
           ] ++ cfg.extraPkgs;
           stateVersion = "22.05";
         };
+        xdg.configFile."fontconfig/conf.d/20-default-fonts.conf".text =
+          let
+            inherit (cfg.theme) fonts;
+          in
+          ''
+            <?xml version='1.0'?>
+            <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
+            <fontconfig>
+              <alias>
+                <family>emoji</family>
+                <prefer><family>${fonts.emoji.name}</family></prefer>
+              </alias>
+              <alias>
+                <family>monospace</family>
+                <prefer><family>${fonts.monospace.name}</family></prefer>
+              </alias>
+              <alias>
+                <family>sans-serif</family>
+                <prefer><family>${fonts.sans-serif.name}</family></prefer>
+              </alias>
+              <alias>
+                <family>serif</family>
+                <prefer><family>${fonts.serif.name}</family></prefer>
+              </alias>
+            </fontconfig>
+          '';
       };
 
       users.users.${me} = cfg.userConfig;
