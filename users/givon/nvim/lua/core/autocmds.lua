@@ -4,11 +4,12 @@ return {
     ---@return nil
     define_group = function(group, cmds)
         local api = vim.api
+        local group_id
 
         if type(group) == 'table' then
-            local group_id = api.nvim_create_augroup(group.name, group.opts)
+            group_id = api.nvim_create_augroup(group.name, group.opts)
         else
-            local group_id = api.nvim_create_augroup(group, {})
+            group_id = api.nvim_create_augroup(group, {})
         end
 
         for _, cmd in ipairs(cmds) do
