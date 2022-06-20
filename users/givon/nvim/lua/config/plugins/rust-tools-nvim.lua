@@ -2,7 +2,7 @@ return {
     ---@return nil
     setup = function()
         require('rust-tools').setup {
-            server = require('plugins.nvim-lspconfig').client,
+            server = require('config.plugins.nvim-lspconfig').client,
         }
     end,
 }

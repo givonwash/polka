@@ -28,7 +28,7 @@ return {
         end
 
         null_ls.setup {
-            on_attach = require('plugins.nvim-lspconfig').client.on_attach,
+            on_attach = require('config.plugins.nvim-lspconfig').client.on_attach,
             sources = configured_sources,
         }
     end,

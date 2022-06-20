@@ -2,10 +2,10 @@ local M = {}
 
 local lsp = vim.lsp
 
-local IGNORED_FORMATTING_SERVERS = require('utils.collections').Set:new { 'sumneko_lua' }
+local IGNORED_FORMATTING_SERVERS = require('lib.collections').Set:new { 'sumneko_lua' }
 
 M.client = {
-    capabilities = require('plugins.nvim-cmp')['lsp.capabilities'],
+    capabilities = require('config.plugins.nvim-cmp')['lsp.capabilities'],
     handlers = {
         ['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
             border = 'rounded',
@@ -32,10 +32,12 @@ M.client = {
             },
         }
 
+        local capabilities = client.resolved_capabilities
+
         if IGNORED_FORMATTING_SERVERS:contains(client.name) then
-            client.resolved_capabilities.document_formatting = false
-            client.resolved_capabilities.document_range_formatting = false
-        elseif client.resolved_capabilities.document_formatting then
+            capabilities.document_formatting = false
+            capabilities.document_range_formatting = false
+        elseif capabilities.document_formatting then
             local fn = require 'utils.fn'
 
             require('core.autocmds').define_group(string.format('FormatOnSave', client.id, bufnr), {

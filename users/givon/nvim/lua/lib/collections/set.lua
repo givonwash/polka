@@ -1,12 +1,10 @@
-local M = {}
-
 ---@class Set
 ---@field _hashed table<string|integer, boolean>
-M.Set = {}
+local Set = {}
 
 ---@param elements (string|integer)[]
 ---@return Set
-function M.Set:new(elements)
+function Set:new(elements)
     local hashed = {}
     for _, element in ipairs(elements) do
         hashed[element] = true
@@ -18,8 +16,8 @@ end
 
 ---@param element string|integer
 ---@return boolean
-function M.Set:contains(element)
+function Set:contains(element)
     return self._hashed[element] == true
 end
 
-return M
+return Set
