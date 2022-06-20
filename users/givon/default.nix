@@ -7,6 +7,7 @@
     (import ./wezterm { inherit me; })
     (import ./firefox.nix { inherit me; })
     (import ./git.nix { inherit me; })
+    (import ./gpg.nix { inherit me; })
     (import ./gtk.nix { inherit me; })
     (import ./shell.nix { inherit me; })
     (import ./ssh.nix { inherit me; })
