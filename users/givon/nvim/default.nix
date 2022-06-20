@@ -3,12 +3,6 @@
 {
   home-manager.users.${me} = { pkgs, ... }: rec {
     home = {
-      packages = with pkgs; [
-        black
-        nodePackages.prettier
-        python310Packages.isort
-        stylua
-      ];
       sessionVariables = {
         EDITOR = "${programs.neovim.package}/bin/nvim";
       };
@@ -67,18 +61,10 @@
                     gitsigns = nil,
                 },
                 formatting = {
-                    black = {
-                        command = "${pkgs.black}/bin/black",
-                    },
-                    isort = {
-                        command = "${pkgs.python310Packages.isort}/bin/isort",
-                    },
-                    prettier = {
-                        command = "${pkgs.nodePackages.prettier}/bin/prettier",
-                    },
-                    stylua = {
-                        command = "${pkgs.stylua}/bin/stylua",
-                    },
+                    black = nil,
+                    isort = nil,
+                    prettier = nil,
+                    stylua = nil,
                 }
             }
           '';
@@ -96,17 +82,15 @@
           config = ''
             require("config.plugins.nvim-lspconfig").setup {
                 {
-                    name = "pyright",
-                    cmd = { "${pkgs.pyright}/bin/pyright-languageserver", "--stdio" }
+                    name = 'pyright',
+                    opts = {
+                        settings = {
+                            python = { analysis = { { typeCheckingMode = 'strict' } } },
+                        },
+                    },
                 },
-                {
-                    name = "rnix",
-                    cmd = { "${pkgs.rnix-lsp}/bin/rnix-lsp" }
-                },
-                {
-                    name = "sumneko_lua",
-                    cmd = { "${pkgs.sumneko-lua-language-server}/bin/lua-language-server" }
-                }
+                { name = 'rnix' },
+                { name = 'sumneko_lua' },
             }
           '';
           plugin = nvim-lspconfig;
@@ -179,11 +163,15 @@
         vim-surround
       ];
       extraPackages = with pkgs; [
+        black
         fd
+        nodePackages.prettier
         pyright
+        python310Packages.isort
         ripgrep
         rnix-lsp
         rust-analyzer
+        stylua
         sumneko-lua-language-server
       ];
     };

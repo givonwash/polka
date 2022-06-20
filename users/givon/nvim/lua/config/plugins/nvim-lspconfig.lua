@@ -53,24 +53,11 @@ M.client = {
     end,
 }
 
-M.server = {
-    pyright = {
-        settings = {
-            python = { analysis = { { typeCheckingMode = 'strict' } } },
-        },
-    },
-}
-
----@param servers { name: string, cmd: string[] }[]
+---@param servers { name: string, opts?: table<string, any> }[]
 ---@return nil
 M.setup = function(servers)
     for _, server in ipairs(servers) do
-        local opts = vim.tbl_extend(
-            'keep',
-            { cmd = server.cmd },
-            M.server[server.name] or {},
-            M.client
-        )
+        local opts = vim.tbl_extend('keep', server.opts or {}, M.client)
         require('lspconfig')[server.name].setup(opts)
     end
 end
