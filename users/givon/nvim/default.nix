@@ -4,7 +4,7 @@
   home-manager.users.${me} = { pkgs, ... }: rec {
     home = {
       sessionVariables = {
-        EDITOR = "${programs.neovim.package}/bin/nvim";
+        EDITOR = "nvim";
       };
     };
 
