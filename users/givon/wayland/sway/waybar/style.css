@@ -3,7 +3,7 @@
 /* ==========================================================================*/
 * {
   border: none;
-  font-size: 15pt;
+  font-size: 1rem;
   font-family: "Iosevka Etoile", "Font Awesome 6 Free Solid", monospace;
 }
 
@@ -26,9 +26,10 @@ tooltip label {
 
 /* Workspaces */
 #workspaces button {
+  background: none;
   box-shadow: none;
-  margin: 0em -0.5em;
   color: @grays-0;
+  margin: 0em -1em;
   text-shadow: none;
   transition-duration: 0;
 }
