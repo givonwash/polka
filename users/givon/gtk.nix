@@ -21,6 +21,10 @@ in
         name = theme.icons.name;
         package = theme.icons.package;
       };
+      theme = {
+        name = theme.gtkTheme.name;
+        package = theme.gtkTheme.package;
+      };
     };
   };
 }

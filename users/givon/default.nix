@@ -162,6 +162,22 @@
             };
           };
         };
+        gtkTheme = {
+          name = mkOption {
+            type = types.str;
+            example = "Catppuccin-blue";
+            description = ''
+              Name of GTK theme to use
+            '';
+          };
+          package = mkOption {
+            type = types.package;
+            example = literalExpression "pkgs.catppuccin-gtk";
+            description = ''
+              Package containing GTK theme to use
+            '';
+          };
+        };
         icons = {
           name = mkOption {
             type = types.str;
@@ -231,6 +247,7 @@
             cfg.theme.fonts.monospace.package
             cfg.theme.fonts.sans-serif.package
             cfg.theme.fonts.serif.package
+            cfg.theme.gtkTheme.package
             cfg.theme.icons.package
           ] ++ cfg.extraPkgs;
           stateVersion = "22.05";

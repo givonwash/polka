@@ -105,6 +105,10 @@
                           package = pkgs.noto-fonts;
                         };
                       };
+                      gtkTheme = {
+                        name = "Catppuccin";
+                        package = pkgs.catppuccin-gtk;
+                      };
                       icons = {
                         name = "Papirus-Dark";
                         package = pkgs.papirus-icon-theme;
