@@ -40,7 +40,7 @@ M.client = {
         elseif capabilities.document_formatting then
             local fn = require 'utils.fn'
 
-            require('core.autocmds').define_group(string.format('FormatOnSave', client.id, bufnr), {
+            require('core.autocmds').define_group(string.format('FormatOnSaveClient%dBuf%d', client.id, bufnr), {
                 {
                     event = 'BufWritePre',
                     opts = {
