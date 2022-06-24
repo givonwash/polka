@@ -1,8 +1,8 @@
-{ me, ... }: { pkgs, ... }:
+{ me, utils, ... }: { pkgs, ... }:
 
 {
   imports = [
-    (import ./sway { inherit me; })
+    (import ./sway { inherit me utils; })
   ];
 
   home-manager.users.${me} = { config, pkgs, ... }: {

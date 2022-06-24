@@ -1,7 +1,10 @@
-{ me, ... }: { config, ... }:
+{ me, utils, ... }: { config, lib, ... }:
 
 let
   cfg = config._.${me};
+  theme = cfg.theme;
+  inherit (builtins) concatStringsSep isList readFile toString;
+  inherit (lib) attrsets lists;
 in
 {
   home-manager.users.${me} = { pkgs, ... }: {
@@ -26,7 +29,11 @@ in
         prompt=:: 🍉 ::
         term=${cfg.sway.terminal.executable}
       '';
-      "wofi/style.css".source = ./style.css;
+      "wofi/style.css".text = ''
+        ${utils.css.mkGtkColors theme.colors}
+
+        ${readFile ./style.css}
+      '';
     };
   };
 }

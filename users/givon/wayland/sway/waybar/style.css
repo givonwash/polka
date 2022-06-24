@@ -8,16 +8,16 @@
 }
 
 window#waybar {
-  background: rgb(26, 24, 38);
+  background: @blacks-1;
 }
 
 tooltip {
-  background: rgb(26, 24, 38);
-  border: 0.1em solid rgb(242, 205, 205);
+  background: @blacks-1;
+  border: 0.1em solid @flamingo;
 }
 
 tooltip label {
-  color: rgb(217, 224, 238);
+  color: @white;
 }
 
 /* ==========================================================================*/
@@ -27,18 +27,18 @@ tooltip label {
 /* Workspaces */
 #workspaces button {
   box-shadow: none;
-  color: rgb(110, 108, 126);
   margin: 0em -0.5em;
+  color: @grays-0;
   text-shadow: none;
   transition-duration: 0;
 }
 
 #workspaces button.urgent {
-  color: rgb(242, 143, 173);
+  color: @red;
 }
 
 #workspaces button.focused {
-  color: rgb(150, 205, 251);
+  color: @blue;
 }
 
 /* ==========================================================================*/
@@ -47,7 +47,7 @@ tooltip label {
 
 /* Window */
 #window {
-  color: rgb(217, 224, 238);
+  color: @white;
 }
 
 /* ==========================================================================*/
@@ -63,45 +63,45 @@ tooltip label {
 
 /* PulseAudio */
 #pulseaudio {
-  color: rgb(150, 205, 251);
+  color: @blue;
 }
 
 #pulseaudio.muted {
-  color: rgb(242, 143, 173);
+  color: @red;
 }
 
 /* Battery */
 #battery {
-  color: rgb(171, 233, 179);
+  color: @green;
 }
 
 #battery.okay {
-  color: rgb(250, 227, 176);
+  color: @yellow;
 }
 
 #batter.poor {
-  color: rgb(245, 194, 231);
+  color: @pink;
 }
 
 #battery.critical {
-  color: rgb(242, 143, 173);
+  color: @red;
 }
 
 /* Network */
 #network {
-  color: rgb(221, 182, 242);
+  color: @mauve;
 }
 
 #network.disconnected {
-  color: rgb(242, 143, 173);
+  color: @red;
 }
 
 #network.disabled {
-  color: rgb(110, 108, 126);
+  color: @grays-0;
 }
 
 /* Clock */
 #clock {
-  color: rgb(217, 224, 238);
+  color: @white;
   margin-right: 1em;
 }

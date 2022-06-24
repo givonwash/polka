@@ -14,15 +14,15 @@
 #window {
   animation-name: fade-in;
   animation-duration: 0.5s;
-  background-color: rgb(22, 19, 32);
+  background-color: @blacks-0;
   border-radius: 1em;
-  border: 0.1em solid rgb(242, 189, 150);
+  border: 0.1em solid @peach;
 }
 
 #input {
-  border: 0.1em solid rgb(242, 189, 150);
-  color: rgb(217, 224, 238);
-  background-color: rgb(30, 30, 46);
+  border: 0.1em solid @peach;
+  color: @white;
+  background-color: @blacks-2;
   margin: 0.8em;
   font-size: 1.2em;
 }
@@ -33,12 +33,12 @@
 
 #entry {
   background-color: inherit;
-  color: rgb(217, 224, 238);
+  color: @white;
   font-weight: bold;
 }
 
 #entry:selected {
-  border: 0.1em solid rgb(248, 189, 150);
+  border: 0.1em solid @peach;
   border-radius: 0.1em;
   font-style: italic;
   padding: 0 0.5em;

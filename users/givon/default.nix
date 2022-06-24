@@ -1,18 +1,18 @@
-{ me, ... }: { config, lib, options, ... }:
+{ me, utils, ... }: { config, lib, options, ... }:
 
 {
   imports = [
-    (import ./nvim { inherit me; })
-    (import ./wayland { inherit me; })
-    (import ./wezterm { inherit me; })
-    (import ./firefox.nix { inherit me; })
-    (import ./git.nix { inherit me; })
-    (import ./gpg.nix { inherit me; })
-    (import ./gtk.nix { inherit me; })
-    (import ./shell.nix { inherit me; })
-    (import ./ssh.nix { inherit me; })
-    (import ./xdg.nix { inherit me; })
-    (import ./zathura.nix { inherit me; })
+    (import ./nvim { inherit me utils; })
+    (import ./wayland { inherit me utils; })
+    (import ./wezterm { inherit me utils; })
+    (import ./firefox.nix { inherit me utils; })
+    (import ./git.nix { inherit me utils; })
+    (import ./gpg.nix { inherit me utils; })
+    (import ./gtk.nix { inherit me utils; })
+    (import ./shell.nix { inherit me utils; })
+    (import ./ssh.nix { inherit me utils; })
+    (import ./xdg.nix { inherit me utils; })
+    (import ./zathura.nix { inherit me utils; })
   ];
 
   options._.${me} =

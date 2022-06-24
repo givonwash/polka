@@ -1,10 +1,10 @@
-{ me, ... }: { config, lib, ... }:
+{ me, utils, ... }: { config, lib, ... }:
 
 let
   cfg = config._.${me};
   theme = cfg.theme;
-  inherit (builtins) listToAttrs;
-  inherit (lib) mkIf;
+  inherit (builtins) concatStringsSep isList listToAttrs readFile toString;
+  inherit (lib) attrsets lists mkIf;
 in
 {
   home-manager.users.${me} = { pkgs, ... }: mkIf cfg.sway.enable {
@@ -82,7 +82,11 @@ in
           };
         };
       };
-      style = ./style.css;
+      style = ''
+        ${utils.css.mkGtkColors theme.colors}
+
+        ${readFile ./style.css}
+      '';
       systemd = {
         enable = true;
         target = "sway-session.target";
