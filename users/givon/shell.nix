@@ -59,6 +59,7 @@
       };
       exa.enable = true;
       htop.enable = true;
+      man.generateCaches = true;
       starship = {
         enable = true;
         enableZshIntegration = true;
@@ -78,5 +79,6 @@
   };
 
   programs.zsh.enable = true;
+
   users.users.${me}.shell = pkgs.zsh;
 }
