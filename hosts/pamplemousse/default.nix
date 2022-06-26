@@ -24,7 +24,10 @@
     extraModulePackages = [ ];
   };
 
-  documentation.man.man-db.enable = true;
+  documentation.man = {
+    generateCaches = true;
+    man-db.enable = true;
+  };
 
   fileSystems = {
     "/" = {
