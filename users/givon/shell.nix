@@ -45,7 +45,7 @@
           gpush = "git push";
           gs = "git status";
           gshow = "git show";
-          gss = "git stauts --short";
+          gss = "git status --short";
           gsw = "git switch";
           l = "exa -la --git --time modified --time-style long-iso --group --icons";
           ll = "exa -la --git --time modified --time-style long-iso --group --icons --only-dirs";
