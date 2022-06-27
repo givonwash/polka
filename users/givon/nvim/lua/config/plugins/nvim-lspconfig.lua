@@ -40,15 +40,18 @@ M.client = {
         elseif capabilities.document_formatting then
             local fn = require 'utils.fn'
 
-            require('core.autocmds').define_group(string.format('FormatOnSaveClient%dBuf%d', client.id, bufnr), {
+            require('core.autocmds').define_group(
+                string.format('FormatOnSaveClient%dBuf%d', client.id, bufnr),
                 {
-                    event = 'BufWritePre',
-                    opts = {
-                        buffer = bufnr,
-                        callback = fn.defer(lsp.buf.formatting_sync, { nil, 1000 }),
+                    {
+                        event = 'BufWritePre',
+                        opts = {
+                            buffer = bufnr,
+                            callback = fn.defer(lsp.buf.formatting_sync, { nil, 1000 }),
+                        },
                     },
-                },
-            })
+                }
+            )
         end
     end,
 }
