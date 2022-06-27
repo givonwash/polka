@@ -119,6 +119,12 @@ return {
                 ['<S-M-l>'] = '<C-\\><C-N>cmd>wincmd L<cr>',
             },
             v = {
+                -- buffer navigation
+                ['j'] = 'gj',
+                ['k'] = 'gk',
+                ['zl'] = 'zL',
+                ['zh'] = 'zH',
+
                 -- copy/paste system clipboard
                 ['<leader>y'] = { cmd = '"+y', opts = { silent = false } },
                 ['<leader>p'] = { cmd = '"+p', opts = { silent = false } },
