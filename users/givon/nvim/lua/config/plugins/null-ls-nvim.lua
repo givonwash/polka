@@ -14,7 +14,7 @@ return {
                     table.insert(configured_sources, builtins[source.source].with(source.config))
                 else
                     local msg = 'Unexpected type %s received for null-ls source configuration'
-                    error(string.format(msg, type(source)))
+                    vim.notify(string.format(msg, type(source)))
                 end
             end
         end
