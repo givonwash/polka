@@ -56,16 +56,9 @@
         luasnip
         {
           config = ''
-            require("config.plugins.null-ls-nvim").setup {
-                code_actions = {
-                    gitsigns = nil,
-                },
-                formatting = {
-                    black = nil,
-                    isort = nil,
-                    prettier = nil,
-                    stylua = nil,
-                }
+            require('config.plugins.null-ls-nvim').setup {
+                code_actions = { 'gitsigns' },
+                formatting = { 'black', 'isort', 'prettier', 'stylua', }
             }
           '';
           plugin = null-ls-nvim;

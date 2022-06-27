@@ -1,28 +1,20 @@
----@alias NestedAnyTable table<string, table<string, any>>
---
----@class SourcesConfig
----@field code_actions? NestedAnyTable
----@field diagnostics? NestedAnyTable
----@field formatting? NestedAnyTable
----@field hover? NestedAnyTable
----@field completion? NestedAnyTable
---
 return {
-    ---@param sources SourcesConfig
-    ---@return nil
-    setup = function(sources)
+    ---@param opts table<string, (string|table<string, any>)[]>
+    setup = function(opts)
         local null_ls = require 'null-ls'
-        ---@type any[]
         local configured_sources = {}
 
-        for name, group in pairs(sources) do
-            local builtins = null_ls.builtins[name]
+        for provider, sources in pairs(opts) do
+            local builtins = null_ls.builtins[provider]
 
-            for source, config in pairs(group) do
-                if config == nil then
+            for _, source in ipairs(sources) do
+                if type(source) == 'string' then
                     table.insert(configured_sources, builtins[source])
+                elseif type(source) == 'table' then
+                    table.insert(configured_sources, builtins[source.source].with(source.config))
                 else
-                    table.insert(configured_sources, builtins[source].with(config))
+                    local msg = 'Unexpected type %s received for null-ls source configuration'
+                    error(string.format(msg, type(source)))
                 end
             end
         end
