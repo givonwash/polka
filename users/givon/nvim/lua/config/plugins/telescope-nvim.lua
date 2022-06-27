@@ -6,6 +6,8 @@ return {
         require('core.keymaps').define {
             n = {
                 ['<leader>fb'] = fn.defer(require('telescope.builtin').buffers),
+                ['<leader>fc'] = fn.defer(require('telescope.builtin').commands),
+                ['<leader>fd'] = fn.defer(require('telescope.builtin').diagnostics),
                 ['<leader>ff'] = fn.defer(require('telescope.builtin').find_files),
                 ['<leader>fg'] = fn.defer(require('telescope.builtin').git_files),
                 ['<leader>fh'] = fn.defer(require('telescope.builtin').help_tags),
@@ -14,6 +16,9 @@ return {
                 ['<leader>fr'] = fn.defer(require('telescope.builtin').live_grep),
                 ['<leader>ft'] = fn.defer(require('telescope.builtin').builtin),
                 ['<leader>fs'] = fn.defer(require('telescope.builtin').lsp_references),
+                ['<leader>fw'] = fn.defer(
+                    require('telescope.builtin').lsp_dynamic_workspace_symbols
+                ),
             },
         }
 
@@ -33,6 +38,8 @@ return {
                         ['<C-s>'] = actions.toggle_selection,
                         ['<C-j>'] = actions.move_selection_next,
                         ['<C-k>'] = actions.move_selection_previous,
+                        ['<TAB>'] = actions.move_selection_previous,
+                        ['<S-TAB>'] = actions.move_selection_next,
                     },
                 },
             },
