@@ -43,6 +43,10 @@ return {
                 ['zh'] = 'zH',
                 ['g.'] = '<cmd>bdelete<cr>',
 
+                -- diagnostic navigation
+                ['g['] = fn.defer(vim.diagnostic.goto_prev),
+                ['g]'] = fn.defer(vim.diagnostic.goto_next),
+
                 -- quickfix list navigation
                 ['<C-n>'] = '<cmd>cnext<cr>',
                 ['<C-p>'] = '<cmd>cprev<cr>',
