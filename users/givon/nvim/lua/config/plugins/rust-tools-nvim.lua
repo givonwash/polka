@@ -2,7 +2,11 @@ return {
     ---@return nil
     setup = function()
         require('rust-tools').setup {
-            server = require('config.plugins.nvim-lspconfig').client,
+            server = vim.tbl_extend(
+                'keep',
+                require('config.plugins.nvim-lspconfig').client,
+                { settings = { ['rust-analyzer'] = { checkOnSave = 'clippy' } } }
+            ),
         }
     end,
 }
