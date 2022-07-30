@@ -1,8 +1,9 @@
 local M = {}
 
----@param fn fun(...): any
+---@generic T
+---@param fn fun(...): T
 ---@param args? any
----@return nil
+---@return fun(): T
 M.defer = function(fn, args)
     return function()
         if args == nil then
