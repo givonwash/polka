@@ -3,6 +3,7 @@
 {
   imports = [
     (import ./sway { inherit me utils; })
+    (import ./plasma.nix { inherit me utils; })
   ];
 
   home-manager.users.${me} = { pkgs, ... }: {
