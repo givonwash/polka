@@ -10,5 +10,6 @@
     ./hardware.nix
     ./plasma.nix
     ./security.nix
+    ./sway.nix
   ];
 }

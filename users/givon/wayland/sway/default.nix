@@ -8,7 +8,6 @@ let
 in
 {
   imports = [
-    (import ./mako.nix { inherit me; })
     (import ./swaylock.nix { inherit me; })
     (import ./waybar { inherit me utils; })
     (import ./wofi { inherit me utils; })
@@ -134,10 +133,6 @@ in
       ];
 
       services = {
-        gammastep = {
-          enable = true;
-          provider = "geoclue2";
-        };
         kanshi =
           let
             firstWorkspace = elemAt cfg.workspaces 0;
@@ -332,15 +327,13 @@ in
           seat."*".xcursor_theme = "${theme.cursor.name} 24";
           terminal = cfg.terminal.executable;
         };
-        package = cfg.package;
-        wrapperFeatures.gtk = true;
+        package = null;
       };
     };
     programs = {
       dconf.enable = true;
       light.enable = true;
     };
-    services.geoclue2.enable = true;
     xdg.portal.wlr.enable = true;
   };
 }
