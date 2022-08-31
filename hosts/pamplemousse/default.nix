@@ -8,6 +8,7 @@
     ./environment.nix
     ./filesystem.nix
     ./hardware.nix
+    ./plasma.nix
     ./security.nix
   ];
 }
