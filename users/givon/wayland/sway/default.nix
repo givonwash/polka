@@ -129,7 +129,6 @@ in
         jq
         playerctl
         slurp
-        wl-clipboard
       ];
 
       services = {
