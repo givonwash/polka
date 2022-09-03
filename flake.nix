@@ -37,6 +37,7 @@
                       email = "givonwash@gmail.com";
                       userName = "givonwash";
                     };
+                    gnome.enable = true;
                     sway = {
                       enable = true;
                       keys = {

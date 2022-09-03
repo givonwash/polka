@@ -7,8 +7,9 @@
     ./boot.nix
     ./environment.nix
     ./filesystem.nix
+    ./gdm.nix
+    ./gnome.nix
     ./hardware.nix
-    ./plasma.nix
     ./security.nix
     ./sway.nix
   ];
