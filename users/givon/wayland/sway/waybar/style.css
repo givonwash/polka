@@ -8,11 +8,11 @@
 }
 
 window#waybar {
-  background: @blacks-1;
+  background: @blacks-0;
 }
 
 tooltip {
-  background: @blacks-1;
+  background: @blacks-0;
   border: 0.1em solid @flamingo;
 }
 
