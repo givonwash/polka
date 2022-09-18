@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    gnome.dconf-editor
+    gnomeExtensions.pop-shell
+  ];
   services = {
     gnome = {
       core-os-services.enable = true;
