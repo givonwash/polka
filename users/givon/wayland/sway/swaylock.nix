@@ -32,7 +32,7 @@ in
             daemonize
             font-size=20
             font="${fonts.sans-serif.name}"
-            image=${wallpaper.source}
+            image=${wallpaper}
             indicator-caps-lock
             indicator-idle-visible
             indicator-radius=100
@@ -48,7 +48,7 @@ in
             ring-color=${black}
             ring-ver-color=${blue}
             ring-wrong-color=${red}
-            scaling=${wallpaper.mode}
+            scaling=stretch
             separator-color=${black}
             show-failed-attempts
             text-caps-lock-color=${white}
