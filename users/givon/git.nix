@@ -1,29 +1,32 @@
 { me, ... }: { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkIf mkOption types;
+  inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config._.${me}.git;
   nvimEnabled = config.home-manager.users.${me}.programs.neovim.enable;
 in
 {
   options._.${me}.git = {
-    email = mkOption {
+    enable = mkEnableOption "git";
+    email = mkOption rec {
       type = types.str;
-      example = "myemail@gmail.com";
+      example = default;
+      default = "givonwash@gmail.com";
       description = ''
         Email to use for git user
       '';
     };
-    userName = mkOption {
+    userName = mkOption rec {
       type = types.str;
-      example = "myuser";
+      example = default;
+      default = "givonwash";
       description = ''
         Username to use for git user
       '';
     };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     home-manager.users.${me} = { ... }: {
       programs.git = {
         enable = true;

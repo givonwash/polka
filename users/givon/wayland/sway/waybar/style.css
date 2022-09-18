@@ -29,7 +29,6 @@ tooltip label {
   background: none;
   box-shadow: none;
   color: @grays-0;
-  margin: 0em -1em;
   text-shadow: none;
   transition-duration: 0;
 }

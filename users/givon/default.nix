@@ -1,4 +1,4 @@
-{ me, utils, ... }: { config, lib, options, ... }:
+{ me, utils, ... }: { config, lib, options, pkgs, ... }:
 
 {
   imports = [
@@ -65,9 +65,10 @@
           )
         );
         cursor = {
-          name = mkOption {
+          name = mkOption rec {
             type = types.str;
-            example = "Bibata-Original-Ice";
+            example = default;
+            default = "Bibata-Original-Ice";
             description = ''
               Name of cursor to use
             '';
@@ -75,6 +76,7 @@
           package = mkOption {
             type = types.package;
             example = literalExpression "pkgs.bibata-cursors";
+            default = pkgs.bibata-cursors;
             description = ''
               Package containing cursor to use
             '';
@@ -82,9 +84,10 @@
         };
         fonts = {
           emoji = {
-            name = mkOption {
+            name = mkOption rec {
               type = types.str;
-              example = "Twitter Color Emoji";
+              example = default;
+              default = "Twitter Color Emoji";
               description = ''
                 Name of emoji font to use
               '';
@@ -92,15 +95,17 @@
             package = mkOption {
               type = types.package;
               example = literalExpression "pkgs.twitter-color-emoji";
+              default = pkgs.twitter-color-emoji;
               description = ''
                 Package containing emoji font to use
               '';
             };
           };
           icons = {
-            name = mkOption {
+            name = mkOption rec {
               type = types.str;
-              example = "Font Awesome 6 Free Solid";
+              example = default;
+              default = "Font Awesome 6 Free Solid";
               description = ''
                 Name of icon font to use
               '';
@@ -108,15 +113,17 @@
             package = mkOption {
               type = types.package;
               example = literalExpression "pkgs.font-awesome";
+              default = pkgs.font-awesome;
               description = ''
                 Package containing icon font to use
               '';
             };
           };
           monospace = {
-            name = mkOption {
+            name = mkOption rec {
               type = types.str;
-              example = "Iosevka";
+              example = default;
+              default = "Iosevka Nerd Font";
               description = ''
                 Name of monospace font to use
               '';
@@ -124,15 +131,19 @@
             package = mkOption {
               type = types.package;
               example = literalExpression "pkgs.iosevka";
+              default = pkgs.nerdfonts.override {
+                fonts = [ "Iosevka" ];
+              };
               description = ''
                 Package containing monospace font to use
               '';
             };
           };
           sans-serif = {
-            name = mkOption {
+            name = mkOption rec {
               type = types.str;
-              example = "Roboto";
+              example = default;
+              default = "Iosevka Etoile";
               description = ''
                 Name of san-serif font to use
               '';
@@ -140,15 +151,19 @@
             package = mkOption {
               type = types.package;
               example = literalExpression "pkgs.roboto";
+              default = pkgs.iosevka-bin.override {
+                variant = "sgr-iosevka-etoile";
+              };
               description = ''
                 Package containing sans-serif font to use
               '';
             };
           };
           serif = {
-            name = mkOption {
+            name = mkOption rec {
               type = types.str;
-              example = "Noto Serif";
+              example = default;
+              default = "Noto Serif";
               description = ''
                 Name of san-serif font to use
               '';
@@ -156,6 +171,7 @@
             package = mkOption {
               type = types.package;
               example = literalExpression "pkgs.noto-fonts";
+              default = pkgs.noto-fonts;
               description = ''
                 Package containing sans-serif font to use
               '';
@@ -163,9 +179,10 @@
           };
         };
         gtkTheme = {
-          name = mkOption {
+          name = mkOption rec {
             type = types.str;
-            example = "Catppuccin-blue";
+            example = default;
+            default = "Catppuccin";
             description = ''
               Name of GTK theme to use
             '';
@@ -173,15 +190,17 @@
           package = mkOption {
             type = types.package;
             example = literalExpression "pkgs.catppuccin-gtk";
+            default = pkgs.catppuccin-gtk;
             description = ''
               Package containing GTK theme to use
             '';
           };
         };
         icons = {
-          name = mkOption {
+          name = mkOption rec {
             type = types.str;
-            example = "Papirus-Dark";
+            example = default;
+            default = "Papirus-Dark";
             description = ''
               Name of icon theme to use
             '';
@@ -189,26 +208,19 @@
           package = mkOption {
             type = types.package;
             example = literalExpression "pkgs.papirus-icon-theme";
+            default = pkgs.papirus-icon-theme;
             description = ''
               Package containing icon theme to use
             '';
           };
         };
-        wallpaper = {
-          mode = mkOption {
-            type = types.enum [ "center" "fill" "fit" "stretch" ];
-            example = "";
-            description = ''
-              Mode to set wallpaper with
-            '';
-          };
-          source = mkOption {
-            type = types.path;
-            example = literalExpression "./wallpapers/waves.jpg";
-            description = ''
-              Path to wallpaper
-            '';
-          };
+        wallpaper = mkOption {
+          type = types.path;
+          example = literalExpression "./wallpapers/waves.jpg";
+          default = ./wallpapers/waves.jpg;
+          description = ''
+            Path to wallpaper
+          '';
         };
       };
       extraPkgs = mkOption {

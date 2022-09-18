@@ -17,9 +17,10 @@ in
     enable = mkEnableOption "sway";
     keys =
       let
-        mkKeyOption = key: example: mkOption {
+        mkKeyOption = key: default: mkOption {
+          inherit default;
           type = types.str;
-          example = example;
+          example = default;
           description = ''
             Value to use for ${key}
           '';
@@ -42,6 +43,7 @@ in
       );
       type = types.enum [ pkgs.wofi ];
       example = literalExpression "pkgs.wofi";
+      default = pkgs.wofi;
       description = ''
         Launcher to use
       '';
@@ -58,6 +60,7 @@ in
       );
       type = types.enum [ pkgs.swaylock ];
       example = literalExpression "pkgs.swaylock";
+      default = pkgs.swaylock;
       description = ''
         Package containing supported locker to use
       '';
@@ -74,6 +77,7 @@ in
       );
       type = types.enum [ pkgs.wezterm ];
       example = literalExpression "pkgs.wezterm";
+      default = pkgs.wezterm;
       description = ''
         Package containing supported terminal to use
       '';
@@ -111,6 +115,12 @@ in
         apply = (workspaces: sort (l: r: l.name < r.name) workspaces);
         type = with types;
           addCheck (listOf (submodule workspaceOptions)) (workspaces: length workspaces >= 1);
+        default = [
+          { key = "1"; name = "1-web"; icon = "[1]"; }
+          { key = "2"; name = "2-code"; icon = "[2]"; }
+          { key = "3"; name = "3-extras"; icon = "[3]"; }
+          { key = "0"; name = "4-music"; icon = "[!]"; }
+        ];
         description = ''
           Sway workspaces to create
         '';
@@ -322,7 +332,7 @@ in
               escape = "mode default";
             };
           };
-          output."*".bg = with theme.wallpaper; "${source} ${mode}";
+          output."*".bg = with theme; "${wallpaper} stretch";
           seat."*".xcursor_theme = "${theme.cursor.name} 24";
           terminal = cfg.terminal.executable;
         };
