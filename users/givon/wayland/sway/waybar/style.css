@@ -4,7 +4,7 @@
 * {
   border: none;
   font-size: 1rem;
-  font-family: "Iosevka Etoile", "Font Awesome 6 Free Solid", monospace;
+  font-family: monospace;
 }
 
 window#waybar {
@@ -29,8 +29,13 @@ tooltip label {
   background: none;
   box-shadow: none;
   color: @grays-0;
+  margin: 0em -1em;
   text-shadow: none;
   transition-duration: 0;
+}
+
+#workspaces button:first-child {
+  margin-left: -0.5em;
 }
 
 #workspaces button.urgent {

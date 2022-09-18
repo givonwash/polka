@@ -27,58 +27,48 @@ in
             numeric-first = false;
             format = "{icon}";
             format-icons = {
-              default = "";
+              default = "[?]";
             } // (listToAttrs (map
               (workspace: { name = workspace.name; value = workspace.icon; })
               cfg.sway.workspaces
             ));
           };
           "sway/window" = {
-            format = "<span weight='bold'>{}</span>";
+            format = ":: <span weight='bold'>{}</span> ::";
             max-length = 50;
             rewrite = {
               "(.*)\\s*—\\s*(Mozilla )?Firefox?$" = "$1";
             };
           };
           clock = {
-            format = "<span color='${theme.colors.yellow}'> </span>{:%a %b %d %I:%M %p}";
+            format = "[{:%a %b %d %I:%M %p}]";
             interval = 60;
             tooltip-format = "<span face='${theme.fonts.monospace.name}'>{calendar}</span>";
           };
           battery = {
+            format = "[{capacity}%]";
             states = {
               okay = 40;
               poor = 20;
               critical = 5;
             };
-            format = "{icon}";
-            format-icons = [ "" "" "" "" "" ];
-            tooltip-format = "{capacity}%";
           };
           network = {
-            format-ethernet = "";
-            format-wifi = "";
-            format-disconnected = "";
-            format-disabled = "";
+            format-ethernet = "[{ifname}]";
+            format-wifi = "[{essid}: {signalStrength}%]";
+            format-disconnected = "[<span color='${theme.colors.red}'>X</span>]";
+            format-disabled = "[#]";
             max-length = 30;
-            tooltip-format = "Network: {essid}\nStrength: {signalStrength}\nFrequency: {frequency}";
+            tooltip-format = "Interface: {ifname}\nIP: {ipaddr}\nGateway: {gwaddr}";
           };
           pulseaudio = {
-            format = "{icon}";
-            format-bluetooth = "{icon} ";
-            format-muted = "";
-            format-icons =
-              {
-                headphone = "";
-                hands-free = "";
-                headset = "";
-                phone = "";
-                car = "";
-                default = [ "" "" "" ];
-              };
+            format = "{format_source}::[{volume}%]";
+            format-source = "[{volume}%]";
+            format-source-muted = "[<span color='${theme.colors.red}'>X</span>]";
+            format-muted = "{format_source}::[<span color='${theme.colors.red}'>X</span>]";
             on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
             scroll-step = 0;
-            tooltip-format = "{volume}%";
+            tooltip-format = "{desc}: {volume}%";
           };
         };
       };
