@@ -35,6 +35,10 @@ return {
                 ['<S-M-l>'] = '<cmd>wincmd L<cr>',
                 ['<leader>o'] = '<cmd>only<cr>',
                 ['<leader>c'] = '<cmd>close<cr>',
+                ['<M-w>'] = '<cmd>vertical resize +1',
+                ['<S-M-w>'] = '<cmd>vertical resize -1',
+                ['<M-b>'] = '<cmd>resize +1',
+                ['<S-M-b>'] = '<cmd>resize -1',
 
                 -- buffer navigation & manipulation
                 ['j'] = 'gj',
