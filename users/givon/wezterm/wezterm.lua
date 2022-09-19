@@ -85,6 +85,16 @@ return {
             mods = 'LEADER',
             action = wezterm.action { ActivatePaneDirection = 'Right' },
         },
+        {
+            key = 'r',
+            mods = 'LEADER',
+            action = wezterm.action { RotatePanes = 'Clockwise' },
+        },
+        {
+            key = 'r',
+            mods = 'LEADER|SHIFT',
+            action = wezterm.action { RotatePanes = 'CounterClockwise' },
+        },
 
         -- tab navigation (absolute forward)
         { key = '1', mods = 'LEADER', action = wezterm.action { ActivateTab = 0 } },
