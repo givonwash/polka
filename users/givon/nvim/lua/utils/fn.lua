@@ -16,4 +16,17 @@ M.defer = function(fn, args)
     end
 end
 
+---@generic T
+---@param fns (fun(): T)[]
+---@return T?
+M.find_ok = function(fns)
+    for _, fn in ipairs(fns) do
+        local ok, result = pcall(fn)
+
+        if ok then
+            return result
+        end
+    end
+end
+
 return M

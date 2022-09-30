@@ -107,6 +107,9 @@ return {
 
                 -- toggle relative number
                 ['<leader>r'] = '<cmd>set relativenumber!<cr>',
+
+                -- navigate help and man pages
+                ['K'] = require('core.actions').goto_ft,
             },
             t = {
                 -- leave terminal mode

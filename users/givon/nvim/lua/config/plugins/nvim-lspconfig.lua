@@ -1,5 +1,6 @@
 local M = {}
 
+local fn = require 'utils.fn'
 local lsp = vim.lsp
 
 local IGNORED_FORMATTING_SERVERS = require('lib.collections').Set:new { 'sumneko_lua' }
@@ -19,13 +20,17 @@ M.client = {
     ---@param bufnr integer
     ---@return nil
     on_attach = function(client, bufnr)
+        local actions = require 'core.actions'
         require('core.keymaps').define {
             n = {
                 ['gd'] = { cmd = lsp.buf.definition, opts = { buffer = true } },
                 ['<C-k>'] = { cmd = lsp.buf.signature_help, opts = { buffer = true } },
                 ['ga'] = { cmd = lsp.buf.code_action, opts = { buffer = true } },
                 ['gr'] = { cmd = lsp.buf.rename, opts = { buffer = true } },
-                ['K'] = { cmd = lsp.buf.hover, opts = { buffer = true } },
+                ['K'] = {
+                    cmd = fn.defer(fn.find_ok, { { actions.goto_ft, lsp.buf.hover } }),
+                    opts = { buffer = true },
+                },
             },
             i = {
                 ['<C-k>'] = { cmd = lsp.buf.signature_help, opts = { buffer = true } },
@@ -38,8 +43,6 @@ M.client = {
             capabilities.document_formatting = false
             capabilities.document_range_formatting = false
         elseif capabilities.document_formatting then
-            local fn = require 'utils.fn'
-
             require('core.autocmds').define_group(
                 string.format('FormatOnSaveClient%dBuf%d', client.id, bufnr),
                 {
