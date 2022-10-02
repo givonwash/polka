@@ -79,7 +79,7 @@ in
           }
       }
 
-      local enable_wayland = ${if cfg.sway.enable then "true" else "false"}
+      local enable_wayland = ${if cfg.sway.enable or cfg.gnome.enable then "true" else "false"}
 
       ${readFile ./wezterm.lua}
     '';
