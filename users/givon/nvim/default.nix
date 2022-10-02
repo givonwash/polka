@@ -78,7 +78,7 @@
                     name = 'pyright',
                     opts = {
                         settings = {
-                            python = { analysis = { { typeCheckingMode = 'strict' } } },
+                            python = { analysis = { typeCheckingMode = 'strict' } },
                         },
                     },
                 },
