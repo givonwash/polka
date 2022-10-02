@@ -8,7 +8,7 @@
       extraOptions = ''
         experimental-features = nix-command flakes
       '';
-      package = nixFlakes;
+      package = nixVersions.stable;
     };
 
     nixpkgs.config.allowUnfree = true;
