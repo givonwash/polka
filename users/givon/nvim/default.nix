@@ -83,7 +83,7 @@
                     },
                 },
                 { name = 'rnix' },
-                { name = 'sumneko_lua' },
+                { name = 'sumneko_lua', config = { disable_formatting = true } },
             }
           '';
           plugin = nvim-lspconfig;
