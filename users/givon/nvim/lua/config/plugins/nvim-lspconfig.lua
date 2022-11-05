@@ -38,12 +38,12 @@ M.client = function(config)
                 },
             }
 
-            local capabilities = client.resolved_capabilities
+            local capabilities = client.server_capabilities
 
             if config.disable_formatting then
-                capabilities.document_formatting = false
-                capabilities.document_range_formatting = false
-            elseif capabilities.document_formatting then
+                capabilities.documentFormattingProvider = false
+                capabilities.documentRangeFormattingProvider = false
+            elseif capabilities.documentFormattingProvider then
                 require('core.autocmds').define_group(
                     string.format('FormatOnSaveClient%dBuf%d', client.id, bufnr),
                     {
@@ -51,7 +51,7 @@ M.client = function(config)
                             event = 'BufWritePre',
                             opts = {
                                 buffer = bufnr,
-                                callback = fn.defer(lsp.buf.formatting_sync, { nil, 1000 }),
+                                callback = fn.defer(lsp.buf.format),
                             },
                         },
                     }
