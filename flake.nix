@@ -30,6 +30,7 @@
                   name = "givon";
                   config = {
                     extraPkgs = with pkgs; [
+                      foliate
                       obsidian
                       signal-desktop
                       spotify
