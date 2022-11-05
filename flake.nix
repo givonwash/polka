@@ -30,6 +30,7 @@
                   name = "givon";
                   config = {
                     extraPkgs = with pkgs; [
+                      obsidian
                       signal-desktop
                       spotify
                       zoom-us
