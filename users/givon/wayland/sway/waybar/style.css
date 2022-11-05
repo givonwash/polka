@@ -63,7 +63,7 @@ tooltip label {
 #battery,
 #network,
 #clock {
-  margin: 0 0.3em;
+  margin: 0 -1em;
 }
 
 /* PulseAudio */
@@ -108,5 +108,4 @@ tooltip label {
 /* Clock */
 #clock {
   color: @white;
-  margin-right: 1em;
 }
