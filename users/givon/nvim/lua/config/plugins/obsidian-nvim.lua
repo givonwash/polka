@@ -16,9 +16,17 @@ return {
                 local time = tostring(os.time())
 
                 if title ~= nil then
-                    return time .. title:gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
+                    if title:find '/' ~= nil then
+                        local dirname = vim.fs.dirname(title)
+                        local filename = (
+                            vim.fs.basename(title):gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
+                        )
+                        return string.format('%s/%d-%s', dirname, time, filename)
+                    else
+                        return string.format('%d-%s', time, title)
+                    end
                 else
-                    return time .. 'untitled'
+                    return time .. '-untitled'
                 end
             end,
             notes_subdir = 'canvas',
