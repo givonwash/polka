@@ -6,6 +6,7 @@
     (import ./wayland { inherit me utils; })
     (import ./wezterm { inherit me utils; })
     (import ./firefox.nix { inherit me utils; })
+    (import ./foliate.nix { inherit me utils; })
     (import ./git.nix { inherit me utils; })
     (import ./gpg.nix { inherit me utils; })
     (import ./gtk.nix { inherit me utils; })
