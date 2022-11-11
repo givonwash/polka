@@ -138,6 +138,7 @@ return {
             },
         }
 
+        vim.opt.cmdheight = 0
         vim.opt.number = true
         vim.opt.relativenumber = true
         vim.opt.colorcolumn = { '+1' }
