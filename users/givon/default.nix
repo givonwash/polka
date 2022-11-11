@@ -218,7 +218,7 @@
         wallpaper = mkOption {
           type = types.path;
           example = literalExpression "./wallpapers/waves.jpg";
-          default = ./wallpapers/waves.jpg;
+          default = ./wallpapers/mandlebrot.png;
           description = ''
             Path to wallpaper
           '';
