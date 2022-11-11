@@ -13,20 +13,19 @@ return {
             ---@param title string
             ---@return string
             note_id_func = function(title)
-                local time = tostring(os.time())
-
                 if title ~= nil then
                     if title:find '/' ~= nil then
                         local dirname = vim.fs.dirname(title)
                         local filename = (
                             vim.fs.basename(title):gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
                         )
-                        return string.format('%s/%d-%s', dirname, time, filename)
+                        return string.format('%s/%s', dirname, filename)
                     else
-                        return string.format('%d-%s', time, title)
+                        return title
                     end
                 else
-                    return time .. '-untitled'
+                    local date = os.date '%Y%m%d'
+                    return date .. '-untitled'
                 end
             end,
             notes_subdir = 'canvas',
