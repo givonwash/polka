@@ -3,7 +3,7 @@
 let
   cfg = config._.${me}.sway;
   theme = config._.${me}.theme;
-  inherit (builtins) elemAt length listToAttrs sort stringLength;
+  inherit (builtins) elemAt length listToAttrs sort stringLength toString;
   inherit (lib) lists literalExpression mkIf mkEnableOption mkPackageOption mkOption types;
 in
 {
@@ -115,12 +115,11 @@ in
         apply = (workspaces: sort (l: r: l.name < r.name) workspaces);
         type = with types;
           addCheck (listOf (submodule workspaceOptions)) (workspaces: length workspaces >= 1);
-        default = [
-          { key = "1"; name = "1-web"; icon = "[1]"; }
-          { key = "2"; name = "2-code"; icon = "[2]"; }
-          { key = "3"; name = "3-extras"; icon = "[3]"; }
-          { key = "0"; name = "4-music"; icon = "[!]"; }
-        ];
+        default = (
+          map
+            (n: { key = n; name = "0${n}"; icon = "[${n}]"; })
+            (map toString (lists.range 1 9))
+        ) ++ [{ key = "0"; name = "10"; icon = "[!]"; }];
         description = ''
           Sway workspaces to create
         '';
