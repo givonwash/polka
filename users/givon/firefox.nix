@@ -26,7 +26,6 @@
           };
           NoDefaultBookmarks = true;
         };
-        forceWayland = true;
       };
       profiles = {
         default = {
