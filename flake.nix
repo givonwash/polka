@@ -36,6 +36,7 @@
                     extraPkgs = with pkgs; [
                       obsidian
                       signal-desktop
+                      slack
                       spotify
                       zoom-us
                     ];
