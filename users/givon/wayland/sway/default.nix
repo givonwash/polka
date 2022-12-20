@@ -144,7 +144,9 @@ in
       services = {
         gammastep = {
           enable = true;
-          provider = "geoclue2";
+          provider = "manual";
+          dawnTime = "6:30-8:00";
+          duskTime = "19:00-20:30";
         };
         kanshi =
           let
@@ -193,9 +195,9 @@ in
 
       systemd.user.services.gammastep = {
         Unit = {
-          After = mkForce [ "geoclue-agent.service" ];
+          After = mkForce [ ];
           PartOf = mkForce [ "sway-session.target" ];
-          Wants = mkForce [ "geoclue-agent.service" ];
+          Wants = mkForce [ ];
         };
         Install = mkForce {
           WantedBy = [ "sway-session.target" ];
@@ -362,13 +364,6 @@ in
     programs = {
       dconf.enable = true;
       light.enable = true;
-    };
-    services.geoclue2 = {
-      enable = true;
-      appConfig.gammastep = {
-        isAllowed = true;
-        isSystem = true;
-      };
     };
     xdg.portal.wlr.enable = true;
   };
