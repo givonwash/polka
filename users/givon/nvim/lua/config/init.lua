@@ -4,7 +4,7 @@ return {
         local fn = require 'utils.fn'
 
         require('core.autocmds').define_group('vimrc', {
-            { event = 'FileType', opts = { command = 'wincmd L', pattern = { 'help', 'man' } } },
+            { event = 'FileType', opts = { command = 'wincmd L', pattern = 'help' } },
             {
                 event = 'FileType',
                 opts = {
