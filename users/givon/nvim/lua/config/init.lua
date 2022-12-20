@@ -6,6 +6,15 @@ return {
         require('core.autocmds').define_group('vimrc', {
             { event = 'FileType', opts = { command = 'wincmd L', pattern = { 'help', 'man' } } },
             {
+                event = 'FileType',
+                opts = {
+                    callback = function()
+                        vim.opt.shiftwidth = 2
+                    end,
+                    pattern = 'sql',
+                },
+            },
+            {
                 event = 'BufWritePre',
                 opts = {
                     command = 'mark ` | %s:\\v\\s+$::ge | normal! ``',
