@@ -75,7 +75,13 @@ in
               plugin = lualine-nvim;
               type = "lua";
             }
-            luasnip
+            {
+              config = ''
+                require("config.plugins.luasnip").setup()
+              '';
+              plugin = luasnip;
+              type = "lua";
+            }
             {
               config = ''
                 require('config.plugins.null-ls-nvim').setup {
