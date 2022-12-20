@@ -178,6 +178,10 @@ in
               command = "${cfg.package}/bin/swaymsg \"output * dpms off\"";
               resumeCommand = "${cfg.package}/bin/swaymsg \"output * dpms on\"";
             }
+            {
+              timeout = 720;
+              command = "systemctl suspend";
+            }
           ];
         };
       };
