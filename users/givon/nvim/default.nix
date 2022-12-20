@@ -181,6 +181,13 @@ in
               plugin = trouble-nvim;
               type = "lua";
             }
+            {
+              config = ''
+                require("config.plugins.true-zen-nvim").setup()
+              '';
+              plugin = true-zen-nvim;
+              type = "lua";
+            }
             vim-surround
           ] ++ (optional cfg.obsidian-nvim.enable {
             config = ''
