@@ -13,7 +13,6 @@ in
       anchor = "top-right";
       backgroundColor = elemAt theme.colors.blacks 0;
       borderColor = theme.colors.peach;
-      defaultTimeout = 5000;
       extraConfig = ''
         [urgency=high]
         border-color=${theme.colors.red}
