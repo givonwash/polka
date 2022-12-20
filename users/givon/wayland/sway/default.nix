@@ -8,6 +8,7 @@ let
 in
 {
   imports = [
+    (import ./mako.nix { inherit me; })
     (import ./swaylock.nix { inherit me; })
     (import ./waybar { inherit me utils; })
     (import ./wofi { inherit me utils; })
