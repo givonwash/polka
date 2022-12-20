@@ -4,7 +4,7 @@ let
   cfg = config._.${me}.sway;
   theme = config._.${me}.theme;
   inherit (builtins) elemAt length listToAttrs sort stringLength toString;
-  inherit (lib) lists literalExpression mkIf mkEnableOption mkPackageOption mkOption types;
+  inherit (lib) lists literalExpression mkForce mkIf mkEnableOption mkPackageOption mkOption types;
 in
 {
   imports = [
@@ -142,6 +142,10 @@ in
       ];
 
       services = {
+        gammastep = {
+          enable = true;
+          provider = "geoclue2";
+        };
         kanshi =
           let
             firstWorkspace = elemAt cfg.workspaces 0;
@@ -184,6 +188,17 @@ in
               command = "systemctl suspend";
             }
           ];
+        };
+      };
+
+      systemd.user.services.gammastep = {
+        Unit = {
+          After = mkForce [ "geoclue-agent.service" ];
+          PartOf = mkForce [ "sway-session.target" ];
+          Wants = mkForce [ "geoclue-agent.service" ];
+        };
+        Install = mkForce {
+          WantedBy = [ "sway-session.target" ];
         };
       };
 
@@ -346,6 +361,13 @@ in
     programs = {
       dconf.enable = true;
       light.enable = true;
+    };
+    services.geoclue2 = {
+      enable = true;
+      appConfig.gammastep = {
+        isAllowed = true;
+        isSystem = true;
+      };
     };
     xdg.portal.wlr.enable = true;
   };
