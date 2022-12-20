@@ -15,6 +15,15 @@ return {
                 },
             },
             {
+                event = 'FileType',
+                opts = {
+                    callback = function()
+                        vim.opt.shiftwidth = 2
+                    end,
+                    pattern = 'nix',
+                },
+            },
+            {
                 event = 'BufWritePre',
                 opts = {
                     command = 'mark ` | %s:\\v\\s+$::ge | normal! ``',
