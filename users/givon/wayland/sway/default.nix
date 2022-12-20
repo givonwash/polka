@@ -248,6 +248,7 @@ in
           floating = {
             criteria = [
               { app_id = "^pavucontrol$"; }
+              { app_id = "^firefox$"; title = "Firefox — Sharing Indicator"; }
               { window_role = "pop-up"; }
               { window_role = "bubble"; }
               { window_role = "dialog"; }
