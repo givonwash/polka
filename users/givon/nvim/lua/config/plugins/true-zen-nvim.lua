@@ -4,6 +4,7 @@ return {
         local truezen = require 'true-zen'
 
         truezen.setup {
+            modes = { ataraxis = { minimum_writing_area = { width = 100 } } },
             integrations = { lualine = true },
         }
 
