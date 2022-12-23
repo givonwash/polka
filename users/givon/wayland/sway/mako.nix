@@ -25,6 +25,9 @@ in
 
         [mode=do-not-disturb]
         invisible=1
+
+        [mode=abbreviate]
+        format=<span color='${theme.colors.rosewater}' weight='bold'>%a</span>
       '';
       font = "${theme.fonts.sans-serif.name} 12";
       format = "<span color='${theme.colors.rosewater}' weight='bold'>%a: %s</span>\\n%b";
@@ -34,6 +37,11 @@ in
       textColor = "${theme.colors.white}";
       width = 400;
     };
+
+    services.swayidle.events = [
+      { event = "lock"; command = "${pkgs.mako}/bin/makoctl mode -a abbreviate"; }
+      { event = "unlock"; command = "${pkgs.mako}/bin/makoctl mode -r abbreviate"; }
+    ];
 
     wayland.windowManager.sway.config.keybindings =
       let
