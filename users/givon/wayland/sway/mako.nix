@@ -33,6 +33,7 @@ in
       format = "<span color='${theme.colors.rosewater}' weight='bold'>%a: %s</span>\\n%b";
       groupBy = "app-name,summary";
       height = 150;
+      iconPath = "${theme.icons.package}/share/icons/${theme.icons.name}";
       layer = "overlay";
       progressColor = "over ${theme.colors.green}";
       textColor = "${theme.colors.white}";
