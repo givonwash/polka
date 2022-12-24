@@ -14,5 +14,6 @@
     options = "--delete-older-than 30d";
   };
 
+  services.automatic-timezoned.enable = true;
   time.timeZone = "US/Pacific";
 }
