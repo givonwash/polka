@@ -34,6 +34,7 @@
                   name = givon;
                   config = {
                     extraPkgs = with pkgs; [
+                      bitwarden-cli
                       obsidian
                       signal-desktop
                       slack
