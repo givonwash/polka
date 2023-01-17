@@ -149,7 +149,7 @@ in
               config = ''
                 require("config.plugins.nvim-treesitter").setup()
               '';
-              plugin = (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars));
+              plugin = nvim-treesitter.withAllGrammars;
               type = "lua";
             }
             nvim-web-devicons
