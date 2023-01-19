@@ -144,7 +144,7 @@
             name = mkOption rec {
               type = types.str;
               example = default;
-              default = "Iosevka Etoile";
+              default = "Iosevka Aile";
               description = ''
                 Name of san-serif font to use
               '';
@@ -153,7 +153,7 @@
               type = types.package;
               example = literalExpression "pkgs.roboto";
               default = pkgs.iosevka-bin.override {
-                variant = "sgr-iosevka-etoile";
+                variant = "sgr-iosevka-aile";
               };
               description = ''
                 Package containing sans-serif font to use
@@ -164,7 +164,7 @@
             name = mkOption rec {
               type = types.str;
               example = default;
-              default = "Noto Serif";
+              default = "Iosevka Etoile";
               description = ''
                 Name of san-serif font to use
               '';
@@ -172,7 +172,9 @@
             package = mkOption {
               type = types.package;
               example = literalExpression "pkgs.noto-fonts";
-              default = pkgs.noto-fonts;
+              default = pkgs.iosevka-bin.override {
+                variant = "sgr-iosevka-etoile";
+              };
               description = ''
                 Package containing sans-serif font to use
               '';
@@ -265,7 +267,7 @@
           ] ++ cfg.extraPkgs;
           stateVersion = "22.05";
         };
-        xdg.configFile."fontconfig/conf.d/20-default-fonts.conf".text =
+        xdg.configFile."fontconfig/fonts.conf".text =
           let
             inherit (cfg.theme) fonts;
           in
@@ -273,22 +275,38 @@
             <?xml version='1.0'?>
             <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
             <fontconfig>
-              <alias>
-                <family>emoji</family>
-                <prefer><family>${fonts.emoji.name}</family></prefer>
-              </alias>
-              <alias>
-                <family>monospace</family>
-                <prefer><family>${fonts.monospace.name}</family></prefer>
-              </alias>
-              <alias>
-                <family>sans-serif</family>
-                <prefer><family>${fonts.sans-serif.name}</family></prefer>
-              </alias>
-              <alias>
-                <family>serif</family>
-                <prefer><family>${fonts.serif.name}</family></prefer>
-              </alias>
+              <match target="pattern">
+                <test qual="any" name="family" compare="eq"><string>ui-emoji</string></test>
+                <edit name="family" mode="assign" binding="same"><string>${fonts.emoji.name}</string></edit>
+              </match>
+              <match target="pattern">
+                <test qual="any" name="family" compare="eq"><string>emoji</string></test>
+                <edit name="family" mode="assign" binding="same"><string>${fonts.emoji.name}</string></edit>
+              </match>
+              <match target="pattern">
+                <test qual="any" name="family" compare="eq"><string>ui-monospace</string></test>
+                <edit name="family" mode="assign" binding="same"><string>${fonts.monospace.name}</string></edit>
+              </match>
+              <match target="pattern">
+                <test qual="any" name="family" compare="eq"><string>monospace</string></test>
+                <edit name="family" mode="assign" binding="same"><string>${fonts.monospace.name}</string></edit>
+              </match>
+              <match target="pattern">
+                <test qual="any" name="family" compare="eq"><string>ui-sans-serif</string></test>
+                <edit name="family" mode="assign" binding="same"><string>${fonts.sans-serif.name}</string></edit>
+              </match>
+              <match target="pattern">
+                <test qual="any" name="family" compare="eq"><string>sans-serif</string></test>
+                <edit name="family" mode="assign" binding="same"><string>${fonts.sans-serif.name}</string></edit>
+              </match>
+              <match target="pattern">
+                <test qual="any" name="family" compare="eq"><string>ui-serif</string></test>
+                <edit name="family" mode="assign" binding="same"><string>${fonts.serif.name}</string></edit>
+              </match>
+              <match target="pattern">
+                <test qual="any" name="family" compare="eq"><string>serif</string></test>
+                <edit name="family" mode="assign" binding="same"><string>${fonts.serif.name}</string></edit>
+              </match>
             </fontconfig>
           '';
       };
