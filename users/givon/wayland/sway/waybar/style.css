@@ -4,7 +4,7 @@
 * {
   border: none;
   font-size: 1rem;
-  font-family: monospace;
+  font-family: serif;
 }
 
 window#waybar {
@@ -14,6 +14,7 @@ window#waybar {
 tooltip {
   background: @blacks-0;
   border: 0.1em solid @flamingo;
+  font-family: monospace;
 }
 
 tooltip label {
