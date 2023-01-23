@@ -8,7 +8,6 @@
         cfg.enableGnomeExtensions = true;
         extraPolicies = {
           DisableFirefoxStudies = true;
-          DisablePocket = true;
           DisableSetDesktopBackground = true;
           DisableTelemetry = true;
           DNSOverHTTPS = {
