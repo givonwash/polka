@@ -74,8 +74,8 @@ return {
                             }
                         end
 
-                        vim.opt.linebreak = true
-                        vim.opt.wrap = true
+                        vim.opt_local.linebreak = true
+                        vim.opt_local.wrap = true
                     end,
                     pattern = '*.md',
                 },
