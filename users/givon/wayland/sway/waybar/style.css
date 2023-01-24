@@ -64,7 +64,7 @@ tooltip label {
 #battery,
 #network,
 #clock {
-  margin: 0;
+  margin: 0.2em;
 }
 
 /* PulseAudio */
@@ -91,6 +91,10 @@ tooltip label {
 
 #battery.critical {
   color: @red;
+}
+
+#battery.charging {
+  color: @green;
 }
 
 /* Network */
