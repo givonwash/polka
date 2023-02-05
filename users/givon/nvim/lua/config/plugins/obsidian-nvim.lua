@@ -24,8 +24,7 @@ return {
                         return title
                     end
                 else
-                    local date = os.date '%Y%m%d'
-                    return date .. '-untitled'
+                    return tostring(os.time())
                 end
             end,
             notes_subdir = 'canvas',
