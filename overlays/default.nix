@@ -7,8 +7,8 @@
       src = pkgs.fetchFromGitHub {
         owner = "epwalsh";
         repo = "obsidian.nvim";
-        rev = "f12a439385f4337ebf3ea6f0503a69fbcdff16a9";
-        sha256 = "sha256-+HqcNCV/SJOS98649xkV7n1S5GZGS7kKPeU1+9bFOXU=";
+        rev = "30f45ae3ef78b67d9eae16adfbaaf86089bd8855";
+        sha256 = "sha256-pMYvtNEYoVFaWlj35F1rDlfJkNY4y4S62RNpHBNBgto=";
         fetchSubmodules = true;
       };
       meta.homepage = "https://github.com/epwalsh/obsidian.nvim/";
