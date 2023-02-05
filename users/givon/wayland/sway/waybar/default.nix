@@ -48,6 +48,7 @@ in
           battery = {
             format = "[{capacity}%]";
             format-charging = "[~~]";
+            format-full = "[!!]";
             states = {
               okay = 40;
               poor = 20;
