@@ -39,7 +39,6 @@
                       signal-desktop
                       slack
                       spotify
-                      zoom-us
                     ];
                     git.enable = true;
                     gnome.enable = true;
