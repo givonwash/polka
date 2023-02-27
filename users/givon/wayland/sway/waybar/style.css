@@ -30,7 +30,7 @@ tooltip label {
   background: none;
   box-shadow: none;
   color: @grays-0;
-  margin: 0em -1em;
+  margin: 0em -0.75em;
   text-shadow: none;
   transition-duration: 0;
 }

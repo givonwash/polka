@@ -185,7 +185,7 @@
           name = mkOption rec {
             type = types.str;
             example = default;
-            default = "Catppuccin";
+            default = "Catppuccin-Mocha-Compact-Lavender-Dark";
             description = ''
               Name of GTK theme to use
             '';
@@ -193,7 +193,11 @@
           package = mkOption {
             type = types.package;
             example = literalExpression "pkgs.catppuccin-gtk";
-            default = pkgs.catppuccin-gtk;
+            default = pkgs.catppuccin-gtk.override {
+              accents = [ "lavender" ];
+              size = "compact";
+              variant = "mocha";
+            };
             description = ''
               Package containing GTK theme to use
             '';
