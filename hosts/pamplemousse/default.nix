@@ -12,5 +12,6 @@
     ./hardware.nix
     ./security.nix
     ./sway.nix
+    ./virtualisation.nix
   ];
 }
