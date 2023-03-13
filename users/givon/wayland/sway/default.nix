@@ -276,6 +276,7 @@ in
             "type:keyboard" = {
               repeat_delay = "250";
               repeat_rate = "30";
+              xkb_options = "compose:ralt";
             };
             "type:pointer" = {
               dwt = "enabled";
