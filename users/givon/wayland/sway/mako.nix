@@ -8,37 +8,55 @@ let
 in
 {
   home-manager.users.${me} = { config, pkgs, ... }: mkIf cfg.sway.enable {
-    programs.mako = {
-      enable = true;
-      anchor = "top-right";
-      backgroundColor = elemAt theme.colors.blacks 0;
-      borderColor = theme.colors.peach;
-      extraConfig = ''
-        [app-name=Spotify]
-        default-timeout=3000
+    programs.mako =
+      let
+        createFormat = { font-color, withGroup ? false, withSummary ? true, withBody ? true }:
+          let
+            group = if withGroup then "(%g) " else "";
+            summary = if withSummary then ": %s" else "";
+            heading = "${group}%a${summary}";
+            body = if withBody then "\\n%b" else "";
+          in
+          "<span color='${font-color}' weight='bold'>${heading}</span>${body}";
+      in
+      {
+        enable = true;
+        anchor = "top-right";
+        backgroundColor = elemAt theme.colors.blacks 0;
+        borderColor = theme.colors.peach;
+        defaultTimeout = 10000;
+        extraConfig = ''
+          [app-name=Spotify]
+          default-timeout=3000
 
-        [urgency=high]
-        border-color=${theme.colors.red}
+          [actionable]
+          format=${createFormat { font-color = theme.colors.lavender; }}
 
-        [grouped=true]
-        format=<span color='${theme.colors.rosewater}' weight='bold'>(%g) %a: %s</span>\n%b
+          [urgency=high]
+          border-color=${theme.colors.red}
 
-        [mode=do-not-disturb]
-        invisible=1
+          [grouped]
+          format=${createFormat { font-color = theme.colors.rosewater; withGroup = true; }}
 
-        [mode=abbreviate]
-        format=<span color='${theme.colors.rosewater}' weight='bold'>%a</span>
-      '';
-      font = "${theme.fonts.sans-serif.name} 12";
-      format = "<span color='${theme.colors.rosewater}' weight='bold'>%a: %s</span>\\n%b";
-      groupBy = "app-name,summary";
-      height = 150;
-      iconPath = "${theme.icons.package}/share/icons/${theme.icons.name}";
-      layer = "overlay";
-      progressColor = "over ${theme.colors.green}";
-      textColor = "${theme.colors.white}";
-      width = 400;
-    };
+          [actionable grouped]
+          format=${createFormat { font-color = theme.colors.lavender; withGroup = true; }}
+
+          [mode=do-not-disturb]
+          invisible=1
+
+          [mode=abbreviate]
+          format=${createFormat { font-color = theme.colors.rosewater; withSummary = false; withBody = false; }}
+        '';
+        font = "${theme.fonts.sans-serif.name} 12";
+        format = createFormat { font-color = theme.colors.rosewater; };
+        groupBy = "app-name,summary";
+        height = 150;
+        iconPath = "${theme.icons.package}/share/icons/${theme.icons.name}";
+        layer = "overlay";
+        progressColor = "over ${theme.colors.green}";
+        textColor = "${theme.colors.white}";
+        width = 400;
+      };
 
     services.swayidle.events = [
       { event = "lock"; command = "${pkgs.mako}/bin/makoctl mode -a abbreviate"; }
