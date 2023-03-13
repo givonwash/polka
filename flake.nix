@@ -23,7 +23,7 @@
               system = "x86_64-linux";
               nixpkgsConfig = {
                 config.allowUnfree = true;
-                overlays = [ (import ./overlays { inherit pkgs; }) ];
+                overlays = [ (import ./overlays) ];
               };
               pkgs = import nixpkgs ({ inherit system; } // nixpkgsConfig);
             in
