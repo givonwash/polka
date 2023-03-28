@@ -49,6 +49,7 @@ in
             merge = { conflictStyle = "diff3"; } // nvimdiff;
             pull = { rebase = true; };
           };
+        ignores = [ ".direnv" ];
         userEmail = cfg.email;
         userName = cfg.userName;
       };
