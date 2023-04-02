@@ -29,6 +29,9 @@ in
           [app-name=Spotify]
           default-timeout=3000
 
+          [app-name=Slack]
+          default-timeout=0
+
           [actionable]
           format=${createFormat { font-color = theme.colors.lavender; }}
 
