@@ -130,7 +130,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.pulseaudio ];
 
-    home-manager.users.${me} = { pkgs, ... }: {
+    home-manager.users.${me} = {
       home.packages = with pkgs; [
         cfg.launcher.package
         cfg.locker.package

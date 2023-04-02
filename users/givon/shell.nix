@@ -3,7 +3,7 @@
 {
   environment.pathsToLink = [ "/share/zsh" ];
 
-  home-manager.users.${me} = { pkgs, ... }: {
+  home-manager.users.${me} = {
     home = {
       packages = with pkgs; [
         curl

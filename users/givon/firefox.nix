@@ -1,7 +1,7 @@
-{ me, ... }: { ... }:
+{ me, ... }: { pkgs, ... }:
 
 {
-  home-manager.users.${me} = { pkgs, ... }: {
+  home-manager.users.${me} = {
     programs.firefox = {
       enable = true;
       package = pkgs.firefox.override {

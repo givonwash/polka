@@ -1,4 +1,4 @@
-{ me, ... }: { config, lib, ... }:
+{ me, ... }: { config, lib, pkgs, ... }:
 
 let
   cfg = config._.${me};
@@ -7,8 +7,8 @@ let
   inherit (lib) mkIf;
 in
 {
-  home-manager.users.${me} = { config, pkgs, ... }: mkIf cfg.sway.enable {
-    services.mako =
+  home-manager.users.${me} = mkIf cfg.sway.enable {
+    programs.mako =
       let
         createFormat = { font-color, withGroup ? false, withSummary ? true, withBody ? true }:
           let

@@ -1,4 +1,4 @@
-{ me, utils, ... }: { config, lib, ... }:
+{ me, utils, ... }: { config, lib, pkgs, ... }:
 
 let
   cfg = config._.${me};
@@ -7,7 +7,7 @@ let
   inherit (lib) attrsets lists;
 in
 {
-  home-manager.users.${me} = { pkgs, ... }: {
+  home-manager.users.${me} = { ... }: {
     home.packages = [ pkgs.wofi ];
 
     xdg.configFile = {

@@ -1,4 +1,4 @@
-{ me, utils, ... }: { config, lib, options, pkgs, ... }:
+{ me, utils, ... }: { config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -256,7 +256,7 @@
       cfg = config._.${me};
     in
     {
-      home-manager.users.${me} = { ... }: {
+      home-manager.users.${me} = {
         fonts.fontconfig.enable = true;
         home = {
           packages = [

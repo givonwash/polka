@@ -1,17 +1,11 @@
 {
   description = "NixOS System Configuration";
 
-  inputs = {
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-  };
   outputs = { home-manager, nixpkgs, ... }:
     let
       inherit (builtins) listToAttrs;
       utils = (import ./utils) { inherit home-manager nixpkgs; };
+      inherit (utils) mkConfig;
     in
     {
       nixosConfigurations = listToAttrs [
@@ -27,9 +21,10 @@
               };
               pkgs = import nixpkgs ({ inherit system; } // nixpkgsConfig);
             in
-            utils.mkConfig {
-              forHostName = name;
-              forUsers = [
+            mkConfig {
+              inherit system;
+              hostName = name;
+              users = [
                 {
                   name = givon;
                   config = {
@@ -52,8 +47,7 @@
                   };
                 }
               ];
-              forSystem = system;
-              withExtraModules = [
+              extraModules = [
                 { nixpkgs = nixpkgsConfig; }
                 { home-manager.useUserPackages = true; }
               ];

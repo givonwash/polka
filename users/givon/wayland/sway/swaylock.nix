@@ -10,7 +10,7 @@ in
 {
   config = mkIf (cfg.sway.enable && cfg.sway.locker.package == pkgs.swaylock)
     {
-      home-manager.users.${me} = { pkgs, ... }: {
+      home-manager.users.${me} = {
         xdg.configFile."swaylock/config".text =
           let
             inherit (theme) fonts colors wallpaper;

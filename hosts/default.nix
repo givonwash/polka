@@ -1,8 +1,8 @@
 {
-  mkHost = { forHostName, system }: { pkgs, ... }: {
-    imports = [ (./. + "/${forHostName}") ];
+  mkHost = { hostName }: { pkgs, ... }: {
+    imports = [ (./. + "/${hostName}") ];
 
-    networking.hostName = forHostName;
+    networking.hostName = hostName;
 
     nix = with pkgs; {
       extraOptions = ''

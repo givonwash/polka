@@ -1,12 +1,15 @@
 { config, lib, ... }:
 
+let
+  inherit (lib) mkDefault;
+in
 {
   hardware =
     let
       cfg = config.hardware;
     in
     {
-      cpu.intel.updateMicrocode = lib.mkDefault cfg.enableRedistributableFirmware;
+      cpu.intel.updateMicrocode = mkDefault cfg.enableRedistributableFirmware;
       bluetooth.enable = true;
       opengl.enable = true;
     };
@@ -17,5 +20,5 @@
     interfaces.wlp0s20f3.useDHCP = true;
   };
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  powerManagement.cpuFreqGovernor = mkDefault "powersave";
 }

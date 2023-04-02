@@ -27,7 +27,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home-manager.users.${me} = { ... }: {
+    home-manager.users.${me} = {
       programs.git = {
         enable = true;
         delta = {

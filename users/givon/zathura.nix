@@ -8,7 +8,7 @@ let
   inherit (builtins) elemAt;
 in
 {
-  home-manager.users.${me} = { ... }: {
+  home-manager.users.${me} = {
     programs.zathura = {
       enable = true;
       options = with colors; {

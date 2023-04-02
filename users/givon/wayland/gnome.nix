@@ -2,10 +2,10 @@
 
 let
   cfg = config._.${me};
-  inherit (lib) mkEnableOption mkIf types;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
-  options._.${me}.gnome = {
+  options. _.${ me}. gnome = {
     enable = mkEnableOption "gnome";
   };
 

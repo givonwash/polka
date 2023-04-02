@@ -1,4 +1,4 @@
-{ me, utils, ... }: { ... }:
+{ me, utils, ... }: { pkgs, ... }:
 
 {
   imports = [
@@ -6,7 +6,7 @@
     (import ./sway { inherit me utils; })
   ];
 
-  home-manager.users.${me} = { pkgs, ... }: {
+  home-manager.users.${me} = {
     home.packages = with pkgs; [ wl-clipboard ];
   };
 }

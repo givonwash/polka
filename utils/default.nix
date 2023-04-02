@@ -1,24 +1,25 @@
 { home-manager, nixpkgs }:
 
 let
-  users = import ../users;
-  hosts = import ../hosts;
+  userUtils = import ../users;
+  hostUtils = import ../hosts;
+  inherit (userUtils) mkUser;
+  inherit (hostUtils) mkHost;
   lib = nixpkgs.lib;
 in
 lib.fix (self: {
   css = import ./css.nix { inherit lib self; };
-  mkConfig = { forHostName, forUsers, forSystem, withExtraModules }:
+  mkConfig = { hostName, users, system, extraModules }:
     let
-      system = forSystem;
-      hostConfig = hosts.mkHost { inherit forHostName system; };
+      hostConfig = mkHost { inherit hostName; };
       userConfigs = map
-        (user: users.mkUser {
+        (user: mkUser {
           inherit system;
           inherit (user) config;
           user = user.name;
           utils = self;
         })
-        forUsers;
+        users;
       homeManagerNixOsConfig = { home-manager.useGlobalPkgs = true; };
     in
     lib.nixosSystem {
@@ -30,6 +31,6 @@ lib.fix (self: {
         homeManagerNixOsConfig
       ]
       ++ userConfigs
-      ++ withExtraModules;
+      ++ extraModules;
     };
 })

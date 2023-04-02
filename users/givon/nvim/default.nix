@@ -1,4 +1,4 @@
-{ me, ... }: { config, lib, ... }:
+{ me, ... }: { config, lib, pkgs, ... }:
 
 let
   inherit (lib) mkEnableOption mkIf mkOption optional types;
@@ -22,7 +22,7 @@ in
   };
 
   config = {
-    home-manager.users.${me} = { pkgs, ... }: rec {
+    home-manager.users.${me} = rec {
       home = {
         sessionVariables = {
           EDITOR = "nvim";

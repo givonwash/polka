@@ -1,10 +1,10 @@
-{ me, ... }: { config, ... }:
+{ me, ... }: { config, pkgs, ... }:
 let
   cfg = config._.${me};
   theme = cfg.theme;
 in
 {
-  home-manager.users.${me} = { pkgs, ... }: {
+  home-manager.users.${me} = {
     gtk = with pkgs; {
       enable = true;
       cursorTheme = {

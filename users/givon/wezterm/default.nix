@@ -1,4 +1,4 @@
-{ me, ... }: { config, ... }:
+{ me, ... }: { config, pkgs, ... }:
 
 let
   inherit (builtins) elemAt readFile;
@@ -8,7 +8,7 @@ let
   fonts = theme.fonts;
 in
 {
-  home-manager.users.${me} = { pkgs, ... }: {
+  home-manager.users.${me} = {
     home.packages = [ pkgs.wezterm ];
     xdg.configFile."wezterm/wezterm.lua".text = ''
       local theme =  {

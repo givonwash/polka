@@ -1,4 +1,4 @@
-{ me, utils, ... }: { config, lib, ... }:
+{ me, utils, ... }: { config, lib, pkgs, ... }:
 
 let
   cfg = config._.${me};
@@ -7,7 +7,7 @@ let
   inherit (lib) attrsets lists mkIf;
 in
 {
-  home-manager.users.${me} = { pkgs, ... }: mkIf cfg.sway.enable {
+  home-manager.users.${me} = mkIf cfg.sway.enable {
     home.packages = with pkgs; [
       pavucontrol
     ];
