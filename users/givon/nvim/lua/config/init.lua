@@ -27,7 +27,6 @@ return {
                 event = 'BufWritePre',
                 opts = {
                     command = 'mark ` | %s:\\v\\s+$::ge | normal! ``',
-                    pattern = { 'help', 'man' },
                 },
             },
             {
