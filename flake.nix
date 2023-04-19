@@ -30,6 +30,7 @@
                   config = {
                     extraPkgs = with pkgs; [
                       bitwarden-cli
+                      docker-compose
                       obsidian
                       signal-desktop
                       slack
