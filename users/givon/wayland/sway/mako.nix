@@ -8,7 +8,7 @@ let
 in
 {
   home-manager.users.${me} = mkIf cfg.sway.enable {
-    programs.mako =
+    services.mako =
       let
         createFormat = { font-color, withGroup ? false, withSummary ? true, withBody ? true }:
           let
