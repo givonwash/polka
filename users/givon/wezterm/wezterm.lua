@@ -13,12 +13,7 @@ return {
     font_size = 13.0,
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
     hide_tab_bar_if_only_one_tab = true,
-    window_frame = {
-        font = wezterm.font(theme.fonts['sans-serif'], { weight = 'Bold' }),
-        font_size = 13.0,
-        active_titlebar_bg = theme.colors.tab_bar.active_tab.bg_color,
-        inactive_titlebar_bg = theme.colors.tab_bar.inactive_tab.bg_color,
-    },
+    window_decorations = 'RESIZE',
 
     -- keybindings
     disable_default_key_bindings = true,
