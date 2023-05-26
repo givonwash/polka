@@ -112,6 +112,7 @@ in
                     },
                     { name = 'rnix' },
                     { name = 'lua_ls', config = { disable_formatting = true } },
+                    { name = 'terraformls' },
                 }
               '';
               plugin = nvim-lspconfig;
@@ -209,6 +210,7 @@ in
           rust-analyzer
           stylua
           sumneko-lua-language-server
+          terraform-ls
         ];
       };
     };
