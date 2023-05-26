@@ -40,7 +40,7 @@ return {
             },
             {
                 event = 'TextYankPost',
-                opts = { callback = fn.defer(vim.highlight.on_yank), pattern = { 'help', 'man' } },
+                opts = { callback = fn.defer(vim.highlight.on_yank) },
             },
         })
 
