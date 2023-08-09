@@ -113,6 +113,18 @@ in
                     { name = 'rnix' },
                     { name = 'lua_ls', config = { disable_formatting = true } },
                     { name = 'terraformls' },
+                    { name = 'tsserver' },
+                    {
+                        name = 'cssls',
+                        opts = { cmd = { 'css-languageserver', '--stdio' } },
+                        config = { disable_formatting = true }
+                    },
+                    {
+                        name = 'html',
+                        opts = { cmd = { 'html-languageserver', '--stdio' } },
+                        config = { disable_formatting = true }
+                    },
+                    { name = 'bashls' },
                 }
               '';
               plugin = nvim-lspconfig;
@@ -202,7 +214,11 @@ in
         extraPackages = with pkgs; [
           black
           fd
+          nodePackages.bash-language-server
           nodePackages.prettier
+          nodePackages.typescript-language-server
+          nodePackages.vscode-css-languageserver-bin
+          nodePackages.vscode-html-languageserver-bin
           pyright
           python310Packages.isort
           ripgrep
