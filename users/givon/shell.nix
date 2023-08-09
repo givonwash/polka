@@ -6,12 +6,15 @@
   home-manager.users.${me} = {
     home = {
       packages = with pkgs; [
+        awscli2
         curl
         fd
+        python311Packages.ipython
         jq
         ripgrep
         tealdeer
         xdg-utils
+        unzip
       ];
       shellAliases =
         let
