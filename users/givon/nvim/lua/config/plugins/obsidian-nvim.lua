@@ -27,7 +27,7 @@ return {
                     return tostring(os.time())
                 end
             end,
-            notes_subdir = 'canvas',
+            notes_subdir = 'tarp',
         }
 
         keymaps.define {
