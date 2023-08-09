@@ -1,7 +1,12 @@
 {
   description = "NixOS System Configuration";
 
-  outputs = { home-manager, nixpkgs, ... }:
+  inputs = {
+    pinnedPkgs.url = "nixpkgs/511468c36cf68f3848fa732056a46cdc2acf8d28";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  outputs = { home-manager, nixpkgs, pinnedPkgs, ... }:
     let
       inherit (builtins) listToAttrs;
       utils = (import ./utils) { inherit home-manager nixpkgs; };
@@ -15,9 +20,13 @@
             let
               givon = "givon";
               system = "x86_64-linux";
+              pinnedPkgs' = import pinnedPkgs { inherit system; };
               nixpkgsConfig = {
                 config.allowUnfree = true;
-                overlays = [ (import ./overlays) ];
+                overlays = [
+                  (import ./overlays)
+                  (_: _: { xdg-desktop-portal-gnome = pinnedPkgs'.xdg-desktop-portal-gnome; })
+                ];
               };
               pkgs = import nixpkgs ({ inherit system; } // nixpkgsConfig);
             in
