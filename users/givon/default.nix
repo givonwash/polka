@@ -185,7 +185,7 @@
           name = mkOption rec {
             type = types.str;
             example = default;
-            default = "Catppuccin-Mocha-Compact-Lavender-Dark";
+            default = "Catppuccin-Mocha-Compact-Lavender-dark";
             description = ''
               Name of GTK theme to use
             '';

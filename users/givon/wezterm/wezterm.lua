@@ -147,4 +147,5 @@ return {
     -- misc
     enable_wayland = enable_wayland,
     switch_to_last_active_tab_when_closing_tab = true,
+    warn_about_missing_glyphs = false,
 }
