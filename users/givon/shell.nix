@@ -50,8 +50,8 @@
           gshow = "git show";
           gss = "git status --short";
           gsw = "git switch";
-          l = "exa -la --git --time modified --time-style long-iso --group --icons";
-          ll = "exa -la --git --time modified --time-style long-iso --group --icons --only-dirs";
+          l = "eza -la --git --time modified --time-style long-iso --group --icons";
+          ll = "eza -la --git --time modified --time-style long-iso --group --icons --only-dirs";
           md = "mkdir -p";
           n = "\${EDITOR}";
           o = "${pkgs.xdg-utils}/bin/xdg-open";
@@ -65,7 +65,7 @@
         enableZshIntegration = true;
         nix-direnv.enable = true;
       };
-      exa.enable = true;
+      eza.enable = true;
       htop.enable = true;
       man.generateCaches = true;
       starship = {
