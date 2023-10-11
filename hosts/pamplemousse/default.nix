@@ -13,5 +13,6 @@
     ./security.nix
     ./sway.nix
     ./virtualisation.nix
+    ./xdg.nix
   ];
 }
