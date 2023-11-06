@@ -1,4 +1,4 @@
-{ me, utils, ... }: { config, lib, pkgs, ... }:
+{ config, lib, me, pkgs, polkaUtils, ... }:
 
 let
   cfg = config._.${me};
@@ -30,7 +30,7 @@ in
         term=${cfg.sway.terminal.executable}
       '';
       "wofi/style.css".text = ''
-        ${utils.css.mkGtkColors theme.colors}
+        ${polkaUtils.css.mkGtkColors theme.colors}
 
         ${readFile ./style.css}
       '';

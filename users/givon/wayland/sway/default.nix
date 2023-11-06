@@ -1,4 +1,4 @@
-{ me, utils, ... }: { config, lib, pkgs, ... }:
+{ config, lib, me, pkgs, ... }:
 
 let
   cfg = config._.${me}.sway;
@@ -8,10 +8,10 @@ let
 in
 {
   imports = [
-    (import ./mako.nix { inherit me; })
-    (import ./swaylock.nix { inherit me; })
-    (import ./waybar { inherit me utils; })
-    (import ./wofi { inherit me utils; })
+    ./mako.nix
+    ./swaylock.nix
+    ./waybar
+    ./wofi
   ];
 
   options._.${me}.sway = {

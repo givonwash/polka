@@ -3,7 +3,7 @@
 {
   mkGtkColors =
     let
-      inherit (builtins) concatStringsSep isList toString;
+      inherit (builtins) concatStringsSep isList toString substring;
       inherit (lib) attrsets lists;
     in
     colors: (

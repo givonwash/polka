@@ -1,4 +1,4 @@
-{ me, ... }: { pkgs, ... }:
+{ me, pkgs, ... }:
 
 {
   home-manager.users.${me} = {

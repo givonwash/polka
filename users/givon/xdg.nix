@@ -1,4 +1,4 @@
-{ me, ... }: { ... }:
+{ me, ... }:
 {
   home-manager.users.${me}.xdg = {
     enable = true;

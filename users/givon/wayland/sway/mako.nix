@@ -1,4 +1,4 @@
-{ me, ... }: { config, lib, pkgs, ... }:
+{ config, lib, me, pkgs, ... }:
 
 let
   cfg = config._.${me};

@@ -1,4 +1,4 @@
-{ me, ... }: { config, ... }:
+{ me, config, ... }:
 
 let
   cfg = config._.${me};

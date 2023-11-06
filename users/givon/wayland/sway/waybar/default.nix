@@ -1,4 +1,4 @@
-{ me, utils, ... }: { config, lib, pkgs, ... }:
+{ config, lib, me, pkgs, polkaUtils, ... }:
 
 let
   cfg = config._.${me};
@@ -75,7 +75,7 @@ in
         };
       };
       style = ''
-        ${utils.css.mkGtkColors theme.colors}
+        ${polkaUtils.css.mkGtkColors theme.colors}
 
         ${readFile ./style.css}
       '';

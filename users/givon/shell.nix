@@ -1,4 +1,4 @@
-{ me, ... }: { pkgs, ... }:
+{ me, pkgs, ... }:
 
 {
   environment.pathsToLink = [ "/share/zsh" ];

@@ -1,9 +1,9 @@
-{ me, utils, ... }: { pkgs, ... }:
+{ me, pkgs, ... }:
 
 {
   imports = [
-    (import ./gnome.nix { inherit me utils; })
-    (import ./sway { inherit me utils; })
+    ./gnome.nix
+    ./sway
   ];
 
   home-manager.users.${me} = {

@@ -1,9 +1,7 @@
 {
-  mkUser = { config, system, user, utils }: { ... }: {
-    config._.${user} = config;
+  mkUser = { user }: {
+    config._.${user.name} = user.config;
 
-    imports = [
-      (import (./. + "/${user}") { me = user; utils = utils; })
-    ];
+    imports = [ (./. + "/${user.name}") ];
   };
 }

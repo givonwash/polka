@@ -1,4 +1,4 @@
-{ me, ... }: { config, pkgs, ... }:
+{ config, me, pkgs, ... }:
 
 let
   inherit (builtins) elemAt toJSON;

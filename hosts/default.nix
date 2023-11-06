@@ -11,8 +11,6 @@
       package = nixVersions.stable;
     };
 
-    nixpkgs.config.allowUnfree = true;
-
     system.stateVersion = "21.11";
   };
 }
