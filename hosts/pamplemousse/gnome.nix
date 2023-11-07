@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     gnome.dconf-editor
     gnomeExtensions.pop-shell
+    pop-launcher
   ];
   services = {
     gnome = {
