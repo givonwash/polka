@@ -1,6 +1,6 @@
 self: super: {
   vimPlugins = super.vimPlugins // {
-    obsidian-nvim = super.vimUtils.buildVimPluginFrom2Nix {
+    obsidian-nvim = super.vimUtils.buildVimPlugin {
       pname = "obsidian-nvim";
       version = "2022-10-27";
       dependencies = with super.vimPlugins; [ nvim-cmp super.ripgrep telescope-nvim ];
