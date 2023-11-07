@@ -1,4 +1,4 @@
-{ config, lib, me, ... }:
+{ config, lib, me, polkaUtils, ... }:
 
 let
   cfg = config._.${me};
@@ -12,9 +12,11 @@ in
   config = mkIf cfg.gnome.enable {
     home-manager.users.${me} = { lib, ... }:
       let
-        inherit (cfg.theme) cursor fonts;
+        inherit (cfg.theme) colors cursor fonts;
         inherit (lib) mkForce;
         inherit (lib.hm) gvariant;
+        inherit (lib.strings) removePrefix;
+        inherit (polkaUtils.color) fromHexIntoRGBA;
       in
       {
         dconf.settings = {
@@ -102,8 +104,11 @@ in
             ];
           };
           "org/gnome/shell/extensions/pop-shell" = {
-            active-hint = false;
+            active-hint = true;
+            active-hint-border-radius = 1;
+            hint-color-rgba = fromHexIntoRGBA (removePrefix "#" colors.lavender) 1;
             show-title = false;
+            snap-to-grid = true;
             tile-by-default = true;
           };
           "org/gnome/shell/keybindings" = {
