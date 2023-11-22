@@ -74,8 +74,8 @@ return {
                 ['g.'] = '<cmd>bdelete<cr>',
 
                 -- diagnostic navigation
-                ['g['] = fn.defer(vim.diagnostic.goto_prev),
-                ['g]'] = fn.defer(vim.diagnostic.goto_next),
+                ['g['] = vim.diagnostic.goto_prev,
+                ['g]'] = vim.diagnostic.goto_next,
 
                 -- quickfix list navigation
                 ['<C-n>'] = '<cmd>cnext<cr>',
