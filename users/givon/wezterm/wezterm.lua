@@ -13,7 +13,7 @@ return {
     font_size = 13.0,
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
     hide_tab_bar_if_only_one_tab = true,
-    window_decorations = 'RESIZE',
+    integrated_button_size = 'Gnome',
 
     -- keybindings
     disable_default_key_bindings = true,
