@@ -125,6 +125,7 @@ in
                         config = { disable_formatting = true }
                     },
                     { name = 'bashls' },
+                    { name = 'ruby_ls' }
                 }
               '';
               plugin = nvim-lspconfig;

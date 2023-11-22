@@ -18,6 +18,7 @@ lib.fix (polkaUtils:
     mkConfig = { hostName, users, system ? args.system }:
       let
         inherit (builtins) elemAt length listToAttrs;
+        inherit (lib) optionalAttrs;
         hostConfig = mkHost { inherit hostName; };
         userConfigs = map (user: mkUser { inherit user; }) users;
         userNames = map (user: user.name) users;
@@ -27,14 +28,13 @@ lib.fix (polkaUtils:
             useGlobalPkgs = true;
 
             extraSpecialArgs =
-              if length userNames == 1 then {
-                inherit polkaUtils;
-                me = elemAt userNames 0;
-              }
-              else {
-                inherit polkaUtils;
+              let
                 users = listToAttrs (map (user: { name = user; value = user; }) userNames);
-              };
+              in
+              { inherit polkaUtils users; }
+              // (
+                optionalAttrs (length userNames == 1) { me = elemAt userNames 0; }
+              );
           };
         };
         nixpkgsConfig = { nixpkgs.pkgs = pkgs; };
