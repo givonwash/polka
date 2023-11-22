@@ -89,7 +89,7 @@ in
                     formatting = { 'black', 'isort', 'prettier', 'stylua', }
                 }
               '';
-              plugin = null-ls-nvim;
+              plugin = none-ls-nvim;
               type = "lua";
             }
             {
