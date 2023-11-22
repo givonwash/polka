@@ -7,6 +7,8 @@ rec {
     in
     if exp == 0 then
       1
+    else if exp < 0 then
+      throw "Negative exponents not supported"
     else
       foldl (l: r: l * r) 1 (replicate exp base);
   parseInt = s: base:
