@@ -269,6 +269,10 @@
             cfg.theme.gtkTheme.package
             cfg.theme.icons.package
           ] ++ cfg.extraPkgs;
+          pointerCursor = {
+            inherit (cfg.theme.cursor) name package;
+            inherit (config.home-manager.users.${me}.gtk.cursorTheme) size;
+          };
           stateVersion = "22.05";
         };
         xdg.configFile."fontconfig/fonts.conf".text =
