@@ -192,6 +192,7 @@ return {
         vim.opt.showmode = false
         vim.opt.termguicolors = true
         vim.opt.conceallevel = 2
+        vim.opt.mouse = ''
 
         vim.fn.sign_define {
             { name = 'DiagnosticSignError', text = '', numhl = 'LspDiagnosticsError' },
