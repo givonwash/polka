@@ -50,25 +50,26 @@ in
               tab_bar = {
                   active_tab = {
                       bg_color = "${elemAt colors.blacks 1}",
-                      fg_color = "${colors.blue}"
+                      fg_color = "${colors.blue}",
+                      intensity = 'Bold'
                   },
+                  background = "${elemAt colors.blacks 2}",
                   inactive_tab = {
                       bg_color = "${elemAt colors.blacks 1}",
-                      fg_color = "${colors.white}"
+                      fg_color = "${colors.white}",
+                      intensity = 'Bold'
                   },
-                  inactive_tab_edge = "${colors.lavender}",
                   inactive_tab_hover = {
-                      bg_color = "${elemAt colors.blacks 2}",
+                      bg_color = "${elemAt colors.blacks 3}",
                       fg_color = "${colors.white}"
                   },
                   new_tab = {
-                      bg_color = "${elemAt colors.blacks 2}",
+                      bg_color = "${elemAt colors.blacks 3}",
                       fg_color = "${elemAt colors.grays 0}"
                   },
                   new_tab_hover = {
-                      bg_color = "${elemAt colors.blacks 2}",
-                      fg_color = "${colors.white}",
-                      italic = true
+                      bg_color = "${elemAt colors.blacks 3}",
+                      fg_color = "${colors.white}"
                   },
               },
               visual_bell = "${elemAt colors.blacks 3}",

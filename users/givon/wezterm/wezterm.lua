@@ -12,8 +12,10 @@ return {
     font = wezterm.font(theme.fonts.monospace),
     font_size = 13.0,
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
+    hide_mouse_cursor_when_typing = false,
     hide_tab_bar_if_only_one_tab = true,
-    integrated_button_size = 'Gnome',
+    use_fancy_tab_bar = false,
+    window_decorations = 'INTEGRATED_BUTTONS | RESIZE',
 
     -- keybindings
     disable_default_key_bindings = true,
