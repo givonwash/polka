@@ -17,7 +17,7 @@ return {
                     if title:find '/' ~= nil then
                         local dirname = vim.fs.dirname(title)
                         local filename = (
-                            vim.fs.basename(title):gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
+                            vim.fs.basename(title):gsub(' ', '-'):gsub('[^A-Za-z0-9-.]', ''):lower()
                         )
                         return string.format('%s/%s', dirname, filename)
                     else
