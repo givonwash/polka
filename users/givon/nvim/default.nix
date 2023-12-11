@@ -22,7 +22,7 @@ in
   };
 
   config = {
-    home-manager.users.${me} = rec {
+    home-manager.users.${me} = {
       home = {
         sessionVariables = {
           EDITOR = "nvim";
