@@ -110,7 +110,7 @@ in
                             },
                         },
                     },
-                    { name = 'rnix' },
+                    { name = 'nil_ls' },
                     { name = 'lua_ls', config = { disable_formatting = true } },
                     { name = 'terraformls' },
                     { name = 'tsserver' },
@@ -215,6 +215,7 @@ in
         extraPackages = with pkgs; [
           black
           fd
+          nil
           nodePackages.bash-language-server
           nodePackages.prettier
           nodePackages.typescript-language-server
@@ -223,7 +224,6 @@ in
           pyright
           python310Packages.isort
           ripgrep
-          rnix-lsp
           rust-analyzer
           stylua
           sumneko-lua-language-server
