@@ -110,7 +110,14 @@ in
                             },
                         },
                     },
-                    { name = 'nil_ls' },
+                    {
+                        name = 'nil_ls',
+                        opts = {
+                            settings = {
+                                ['nil'] = { formatting = { command = { 'nixpkgs-fmt' } } }
+                            },
+                        }
+                    },
                     { name = 'lua_ls', config = { disable_formatting = true } },
                     { name = 'terraformls' },
                     { name = 'tsserver' },
@@ -216,6 +223,7 @@ in
           black
           fd
           nil
+          nixpkgs-fmt
           nodePackages.bash-language-server
           nodePackages.prettier
           nodePackages.typescript-language-server
