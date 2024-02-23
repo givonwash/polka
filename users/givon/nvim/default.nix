@@ -226,10 +226,10 @@ in
           nixpkgs-fmt
           nodePackages.bash-language-server
           nodePackages.prettier
+          nodePackages.pyright
           nodePackages.typescript-language-server
           nodePackages.vscode-css-languageserver-bin
           nodePackages.vscode-html-languageserver-bin
-          pyright
           python310Packages.isort
           ripgrep
           rust-analyzer
