@@ -12,6 +12,7 @@
         python311Packages.ipython
         jq
         ripgrep
+        strace
         tealdeer
         xdg-utils
         unzip
