@@ -9,7 +9,7 @@
         awscli2
         curl
         fd
-        python311Packages.ipython
+        python312Packages.ipython
         jq
         ripgrep
         strace
