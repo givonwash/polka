@@ -132,7 +132,7 @@ in
                         config = { disable_formatting = true }
                     },
                     { name = 'bashls' },
-                    { name = 'ruby_ls' }
+                    { name = 'solargraph', { config = { disable_formatting = true } } }
                 }
               '';
               plugin = nvim-lspconfig;
