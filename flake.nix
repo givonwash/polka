@@ -14,10 +14,7 @@
           inherit (nixpkgs) lib;
           pkgs = import nixpkgs {
             inherit system;
-            config = {
-              allowUnfree = true;
-              permittedInsecurePackages = lib.optional (pkgs.obsidian.version == "1.5.3") "electron-25.9.0";
-            };
+            config.allowUnfree = true;
             overlays = [ (import ./overlays) ];
           };
           lib' = import ./lib {
