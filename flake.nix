@@ -32,10 +32,12 @@
                   extraPkgs = with pkgs; [
                     bitwarden-cli
                     docker-compose
+                    element-desktop
                     obsidian
                     signal-desktop
                     slack
                     spotify
+                    zulip
                   ];
                   git.enable = true;
                   gnome.enable = true;
