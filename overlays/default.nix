@@ -2,13 +2,13 @@ self: super: {
   vimPlugins = super.vimPlugins // {
     obsidian-nvim = super.vimUtils.buildVimPlugin {
       pname = "obsidian-nvim";
-      version = "2022-10-27";
+      version = "v3.7.8";
       dependencies = with super.vimPlugins; [ nvim-cmp super.ripgrep telescope-nvim ];
       src = super.fetchFromGitHub {
         owner = "epwalsh";
         repo = "obsidian.nvim";
-        rev = "5cb5a10d6e665065e0d1ba35d78c108fedaafbcd";
-        sha256 = "sha256-5JbCGUbrV6C0xzdEGSspc5vxH2hENlf7oAPrRQ1Z/2Y=";
+        rev = "9644aca08334bb3f6fbeeccacc9e4dbb5855577e";
+        sha256 = "sha256-D2uFbB+9BrEMoKV73MGlK7mTrh2wpRpkg3CrVPYxL2c=";
       };
       meta.homepage = "https://github.com/epwalsh/obsidian.nvim/";
     };
