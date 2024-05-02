@@ -28,6 +28,10 @@ return {
                 end
             end,
             notes_subdir = 'vault',
+            wiki_link_func = 'prepend_note_id',
+            attachments = {
+                img_folder = 'assets',
+            },
         }
 
         keymaps.define {
