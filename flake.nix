@@ -33,6 +33,7 @@
                     bitwarden-cli
                     docker-compose
                     element-desktop
+                    inkscape
                     obsidian
                     signal-desktop
                     slack
