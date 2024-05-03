@@ -1,9 +1,9 @@
-{ lib, ... }:
+lib:
 
 {
   mkGtkColors =
     let
-      inherit (builtins) concatStringsSep isList toString substring;
+      inherit (builtins) concatStringsSep isList toString;
       inherit (lib) attrsets lists;
     in
     colors: (

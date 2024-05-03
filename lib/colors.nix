@@ -1,8 +1,8 @@
-{ polkaUtils, ... }:
+lib:
 
 let
   inherit (builtins) isInt toString substring;
-  inherit (polkaUtils.int) parseInt;
+  inherit (lib.polka.int) parseInt;
 in
 {
   fromHexIntoRGBA = hex: alpha:

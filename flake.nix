@@ -1,37 +1,49 @@
 {
-  description = "NixOS System Configuration";
+  description = "NixOS System Configurations";
 
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs = { self, flake-utils, home-manager, nixpkgs }:
     let
       inherit (flake-utils.lib.system) x86_64-linux;
+      inherit (nixpkgs) lib;
     in
     {
+      nixosModules = {
+        # hosts
+        pamplemousse = ./modules/hosts/pamplemousse;
+
+        # users
+        givon = import ./modules/users/givon;
+
+        # utilities
+        nixpkgs = import ./modules/utils/nixpkgs.nix;
+        nix = import ./modules/utils/nix.nix;
+      };
       nixosConfigurations =
         let
-          system = x86_64-linux;
-          inherit (nixpkgs) lib;
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-            overlays = [ (import ./overlays) ];
-          };
-          lib' = import ./lib {
-            inherit lib system home-manager pkgs;
-          };
-          inherit (lib') mkConfig;
+          inherit (builtins) readDir;
+          lib' = lib.extend (final: prev: {
+            polka = prev.mapAttrs'
+              (name: _: prev.nameValuePair (prev.removeSuffix ".nix" name) (import ./lib/${name} final))
+              (prev.filterAttrs
+                (entry: type: type == "regular" && (prev.hasSuffix ".nix" entry))
+                (readDir ./lib));
+          });
         in
-        mkConfig {
-          hostName = "pamplemousse";
-          users = let name = "givon"; in
-            [
-              {
-                inherit name;
-                config = {
+        {
+          pamplemousse = lib'.nixosSystem {
+            lib = lib';
+            system = x86_64-linux;
+            modules = [
+              self.nixosModules.nixpkgs
+              self.nixosModules.nix
+              home-manager.nixosModule
+              self.nixosModules.pamplemousse
+              self.nixosModules.givon
+              ({ pkgs, ... }: {
+                config._.givon = {
                   extraPkgs = with pkgs; [
-                    bitwarden-cli
-                    docker-compose
                     element-desktop
                     inkscape
                     obsidian
@@ -44,14 +56,15 @@
                   gnome.enable = true;
                   neovim = { enable = true; obsidian-nvim.enable = true; };
                   sway.enable = true;
-                  theme.colors = import (./. + "/users/${name}/colors/catppuccin.nix");
+                  theme.colors = import ./modules/users/givon/colors/catppuccin.nix;
                   userConfig = {
                     extraGroups = [ "networkmanager" "video" "wheel" ];
                     isNormalUser = true;
                   };
                 };
-              }
+              })
             ];
+          };
         };
     };
 }
