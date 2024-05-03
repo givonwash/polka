@@ -11,6 +11,7 @@
     {
       nixosModules = {
         # hosts
+        frambuesa = ./modules/hosts/frambuesa;
         pamplemousse = ./modules/hosts/pamplemousse;
 
         # users
@@ -32,6 +33,31 @@
           });
         in
         {
+          frambuesa = lib'.nixosSystem {
+            lib = lib';
+            system = x86_64-linux;
+            modules = [
+              self.nixosModules.nixpkgs
+              self.nixosModules.nix
+              home-manager.nixosModule
+              self.nixosModules.frambuesa
+              self.nixosModules.givon
+              {
+                config._.givon = {
+                  extraPkgs = [ ];
+                  git.enable = true;
+                  gnome.enable = true;
+                  neovim.enable = true;
+                  sway.enable = true;
+                  theme.colors = import ./modules/users/givon/colors/catppuccin.nix;
+                  userConfig = {
+                    extraGroups = [ "networkmanager" "video" "wheel" ];
+                    isNormalUser = true;
+                  };
+                };
+              }
+            ];
+          };
           pamplemousse = lib'.nixosSystem {
             lib = lib';
             system = x86_64-linux;
