@@ -235,6 +235,7 @@
         example = [
           (literalExpression "pkgs.inkscape")
         ];
+        default = [ ];
         description = ''
           Extra packages to include for givon
         '';
@@ -245,6 +246,7 @@
           extraGroups = [ "wheel" ];
           uid = 1234;
         };
+        default = { };
         description = ''
           Submodule to pass to config.users.users.givon
         '';

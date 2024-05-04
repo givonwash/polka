@@ -44,7 +44,6 @@
               self.nixosModules.givon
               {
                 config._.givon = {
-                  extraPkgs = [ ];
                   git.enable = true;
                   gnome.enable = true;
                   neovim.enable = true;
