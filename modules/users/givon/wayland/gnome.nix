@@ -35,7 +35,7 @@ in
             repeat-interval = gvariant.mkUint32 30;
           };
           "org/gnome/desktop/peripherals/mouse" = {
-            natural-scroll = true;
+            natural-scroll = false;
           };
           "org/gnome/desktop/peripherals/touchpad" = {
             tap-and-drag = false;
