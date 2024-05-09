@@ -1,10 +1,14 @@
 {
-  virtualisation.docker = {
-    enable = true;
-    autoPrune.enable = true;
-    rootless = {
+
+  virtualisation = {
+    docker = {
       enable = true;
-      setSocketVariable = true;
+      autoPrune.enable = true;
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
     };
+    vmware.guest.enable = true;
   };
 }
