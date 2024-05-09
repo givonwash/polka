@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  inherit (builtins) elemAt readFile;
+  inherit (builtins) elemAt readFile toString;
   cfg = config._.givon;
   theme = cfg.theme;
   colors = theme.colors;
@@ -75,6 +75,7 @@ in
               visual_bell = "${elemAt colors.blacks 3}",
           },
           fonts = {
+              default_size = ${toString (fonts.defaultSize * fonts.defaultScalingFactor)},
               monospace = "${fonts.monospace.name}",
               ["sans-serif"] = "${fonts.sans-serif.name}",
           }

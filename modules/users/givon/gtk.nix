@@ -10,12 +10,12 @@ in
       cursorTheme = {
         name = theme.cursor.name;
         package = theme.cursor.package;
-        size = 24;
+        size = theme.cursor.size;
       };
       font = {
         name = theme.fonts.sans-serif.name;
         package = theme.fonts.sans-serif.package;
-        size = 13;
+        size = theme.fonts.defaultSize;
       };
       iconTheme = {
         name = theme.icons.name;

@@ -74,6 +74,14 @@
               Name of cursor to use
             '';
           };
+          size = mkOption rec {
+            type = types.ints.positive;
+            example = default;
+            default = 24;
+            description = ''
+              Size of cursor
+            '';
+          };
           package = mkOption {
             type = types.package;
             example = literalExpression "pkgs.bibata-cursors";
@@ -84,6 +92,22 @@
           };
         };
         fonts = {
+          defaultScalingFactor = mkOption rec {
+            type = types.float;
+            example = 1.0;
+            default = example;
+            description = ''
+              Default "text scaling factor" to use
+            '';
+          };
+          defaultSize = mkOption rec {
+            type = types.ints.positive;
+            example = 13;
+            default = example;
+            description = ''
+              Default size of font
+            '';
+          };
           emoji = {
             name = mkOption rec {
               type = types.str;
@@ -272,8 +296,7 @@
             cfg.theme.icons.package
           ] ++ cfg.extraPkgs;
           pointerCursor = {
-            inherit (cfg.theme.cursor) name package;
-            inherit (config.home-manager.users.givon.gtk.cursorTheme) size;
+            inherit (cfg.theme.cursor) name package size;
           };
           stateVersion = "22.05";
         };

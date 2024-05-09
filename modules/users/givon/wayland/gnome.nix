@@ -13,6 +13,7 @@ in
     home-manager.users.givon = { lib, ... }:
       let
         inherit (cfg.theme) colors cursor fonts;
+        inherit (builtins) toString;
         inherit (lib) mkForce;
         inherit (lib.hm) gvariant;
         inherit (lib.strings) removePrefix;
@@ -24,11 +25,12 @@ in
             clock-format = "12h";
             color-scheme = "prefer-dark";
             cursor-theme = cursor.name;
-            document-font-name = "${fonts.serif.name} 11";
+            document-font-name = "${fonts.serif.name} ${toString fonts.defaultSize}";
             enable-animations = true;
             enable-hot-corners = false;
-            font-name = mkForce "${fonts.sans-serif.name} 11";
-            monospace-font-name = "${fonts.monospace.name} 11";
+            font-name = mkForce "${fonts.sans-serif.name} ${toString fonts.defaultSize}";
+            monospace-font-name = "${fonts.monospace.name} ${toString fonts.defaultSize}";
+            text-scaling-factor = gvariant.mkDouble fonts.defaultScalingFactor;
           };
           "org/gnome/desktop/peripherals/keyboard" = {
             delay = gvariant.mkUint32 250;
@@ -87,9 +89,10 @@ in
           };
           "org/gnome/desktop/wm/preferences" = {
             focus-mode = "sloppy";
-            titlebar-font = "${fonts.sans-serif.name} 11";
+            titlebar-font = "${fonts.sans-serif.name} ${toString fonts.defaultSize}";
           };
           "org/gnome/mutter" = {
+            experimental-features = [ "scale-monitor-framebuffer" ];
             overlay-key = "";
           };
           "org/gnome/mutter/wayland/keybindings" = {

@@ -48,7 +48,11 @@
                   gnome.enable = true;
                   neovim.enable = true;
                   sway.enable = true;
-                  theme.colors = import ./modules/users/givon/colors/catppuccin.nix;
+                  theme = {
+                    colors = import ./modules/users/givon/colors/catppuccin.nix;
+                    cursor.size = 48;
+                    fonts.defaultScalingFactor = 1.75;
+                  };
                   userConfig = {
                     extraGroups = [ "networkmanager" "video" "wheel" ];
                     isNormalUser = true;

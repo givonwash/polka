@@ -260,13 +260,13 @@ in
             titlebar = true;
           };
           focus.mouseWarping = false;
-          fonts = {
-            names = with theme.fonts; [
+          fonts = with theme.fonts; {
+            names = [
               "pango:${sans-serif.name}"
               "pango:${icons.name}"
             ];
             style = "reguluar";
-            size = 13.0;
+            size = defaultSize + 0.0;
           };
           gaps = {
             inner = 20;
