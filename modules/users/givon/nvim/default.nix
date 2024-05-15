@@ -58,8 +58,10 @@ in
             cmp-buffer
             cmp-cmdline
             cmp-emoji
+            cmp_luasnip
             cmp-nvim-lsp
             cmp-path
+            friendly-snippets
             {
               config = ''
                 require("config.plugins.gitsigns-nvim").setup()
