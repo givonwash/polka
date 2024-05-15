@@ -46,15 +46,17 @@
               self.nixosModules.frambuesa
               self.nixosModules.givon
               {
-                config._.givon = {
-                  git.enable = true;
-                  gnome.enable = true;
-                  neovim.enable = true;
-                  sway.enable = true;
-                  theme.colors = import ./modules/users/givon/colors/catppuccin.nix;
-                  userConfig = {
-                    extraGroups = [ "networkmanager" "video" "wheel" ];
-                    isNormalUser = true;
+                config._ = {
+                  frambuesa.gnome.enable = true;
+                  givon = {
+                    git.enable = true;
+                    gnome.enable = true;
+                    neovim.enable = true;
+                    theme.colors = import ./modules/users/givon/colors/catppuccin.nix;
+                    userConfig = {
+                      extraGroups = [ "networkmanager" "video" "wheel" ];
+                      isNormalUser = true;
+                    };
                   };
                 };
               }
