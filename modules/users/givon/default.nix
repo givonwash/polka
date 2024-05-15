@@ -148,7 +148,7 @@
             name = mkOption rec {
               type = types.str;
               example = default;
-              default = "Iosevka Nerd Font";
+              default = "Iosevka";
               description = ''
                 Name of monospace font to use
               '';
@@ -156,9 +156,7 @@
             package = mkOption {
               type = types.package;
               example = literalExpression "pkgs.iosevka";
-              default = pkgs.nerdfonts.override {
-                fonts = [ "Iosevka" ];
-              };
+              default = pkgs.iosevka-bin;
               description = ''
                 Package containing monospace font to use
               '';
@@ -177,7 +175,7 @@
               type = types.package;
               example = literalExpression "pkgs.roboto";
               default = pkgs.iosevka-bin.override {
-                variant = "sgr-iosevka-aile";
+                variant = "Aile";
               };
               description = ''
                 Package containing sans-serif font to use
@@ -197,7 +195,7 @@
               type = types.package;
               example = literalExpression "pkgs.noto-fonts";
               default = pkgs.iosevka-bin.override {
-                variant = "sgr-iosevka-etoile";
+                variant = "Etoile";
               };
               description = ''
                 Package containing sans-serif font to use

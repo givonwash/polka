@@ -1,7 +1,10 @@
 {
   description = "NixOS System Configurations";
 
-  inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
+  inputs = {
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs.url = "github:NixOs/nixpkgs/nixpkgs-unstable";
+  };
 
   outputs = { self, flake-utils, home-manager, nixpkgs }:
     let

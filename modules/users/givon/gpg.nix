@@ -9,7 +9,6 @@
       enable = true;
       enableSshSupport = true;
       enableZshIntegration = true;
-      pinentryFlavor = "curses";
     };
   };
 }
