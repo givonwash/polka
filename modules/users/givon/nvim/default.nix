@@ -134,7 +134,8 @@ in
                         config = { disable_formatting = true }
                     },
                     { name = 'bashls' },
-                    { name = 'solargraph', { config = { disable_formatting = true } } }
+                    { name = 'solargraph', { config = { disable_formatting = true } } },
+                    { name = 'yamlls' }
                 }
               '';
               plugin = nvim-lspconfig;
@@ -238,6 +239,7 @@ in
           stylua
           sumneko-lua-language-server
           terraform-ls
+          yaml-language-server
         ];
       };
     };
