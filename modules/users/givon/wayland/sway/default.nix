@@ -357,7 +357,7 @@ in
             };
           };
           output."*".bg = with theme; "${wallpaper} stretch";
-          seat."*".xcursor_theme = "${theme.cursor.name} 24";
+          seat."*".xcursor_theme = "${theme.cursor.name} ${toString theme.cursor.size}";
           terminal = cfg.terminal.executable;
         };
         package = null;
