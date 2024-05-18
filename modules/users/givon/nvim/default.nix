@@ -122,7 +122,7 @@ in
                     },
                     { name = 'lua_ls', config = { disable_formatting = true } },
                     { name = 'terraformls' },
-                    { name = 'tsserver' },
+                    { name = 'tsserver', config = { disable_formatting = true } },
                     {
                         name = 'cssls',
                         opts = { cmd = { 'css-languageserver', '--stdio' } },
