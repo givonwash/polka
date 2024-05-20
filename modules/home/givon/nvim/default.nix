@@ -120,7 +120,7 @@ in
                           },
                       }
                   },
-                  -- { name = 'lua_ls', config = { disable_formatting = true } },
+                  { name = 'lua_ls', config = { disable_formatting = true } },
                   { name = 'terraformls' },
                   { name = 'tsserver', config = { disable_formatting = true } },
                   {
@@ -237,7 +237,7 @@ in
         ripgrep
         rust-analyzer
         stylua
-        # sumneko-lua-language-server
+        sumneko-lua-language-server
         terraform-ls
         yaml-language-server
       ];
