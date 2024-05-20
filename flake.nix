@@ -56,8 +56,10 @@
           self.darwinModules.givon
           self.homeModules.givon
           {
+            _.pera.homebrew.enable = true;
             _.givon = {
               git.enable = true;
+              homebrew.enable = true;
               theme = {
                 colors = import ./modules/home/givon/colors/catppuccin.nix;
                 fonts.emoji = {
@@ -70,6 +72,7 @@
               wezterm = {
                 enable = true;
                 enableInstallation = false;
+                enableHomebrewInstallation = true;
               };
               stateVersion = "23.11";
               userConfig = {

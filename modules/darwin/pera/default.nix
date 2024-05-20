@@ -1,4 +1,9 @@
 {
-  services.nix-daemon.enable = true;
-  system.stateVersion = 4;
+  imports = [
+    ./homebrew.nix
+  ];
+  config = {
+    services.nix-daemon.enable = true;
+    system.stateVersion = 4;
+  };
 }

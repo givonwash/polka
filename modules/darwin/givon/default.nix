@@ -6,6 +6,7 @@ let
 in
 {
   imports = [
+    ./homebrew.nix
     ./shell.nix
   ];
   config.users.users.${name} = cfg.userConfig;
