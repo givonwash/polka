@@ -1,7 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 
+let
+  cfg = config._.pamplemousse.sway;
+in
 {
-  programs.sway = {
+  options._.pamplemousse.sway.enable = lib.mkEnableOption "sway";
+  config.programs.sway = lib.mkIf cfg.enable {
     enable = true;
     extraPackages = with pkgs; [ dmenu foot ];
     extraSessionCommands = ''
