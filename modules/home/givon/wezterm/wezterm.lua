@@ -15,7 +15,7 @@ return {
     hide_mouse_cursor_when_typing = false,
     hide_tab_bar_if_only_one_tab = true,
     use_fancy_tab_bar = false,
-    window_decorations = 'TITLE | RESIZE',
+    window_decorations = theme.window_decorations,
 
     -- keybindings
     disable_default_key_bindings = true,

@@ -9,7 +9,6 @@
     ./foliate.nix
     ./git.nix
     ./gpg.nix
-    ./gtk.nix
     ./shell.nix
     ./ssh.nix
     ./xdg.nix

@@ -22,6 +22,12 @@ in
       default = "true";
       type = lib.types.str;
     };
+    appearance.windowDecorations = lib.mkOption rec {
+      description = "Decorations for Wezterm windows";
+      example = default;
+      default = "TITLE | RESIZE";
+      type = lib.types.str;
+    };
   };
   config.home-manager.users.${name} = lib.mkIf cfg.enable {
     home.packages = lib.optional (cfg.enableInstallation) pkgs.wezterm;
@@ -93,7 +99,8 @@ in
               default_size = ${toString (fonts.defaultSize * fonts.defaultScalingFactor)},
               monospace = "${fonts.monospace.name}",
               ["sans-serif"] = "${fonts.sans-serif.name}",
-          }
+          },
+          window_decorations = "${cfg.appearance.windowDecorations}"
       }
 
       local enable_wayland = ${cfg.enableWayland}

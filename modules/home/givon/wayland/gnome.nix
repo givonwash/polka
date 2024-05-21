@@ -7,9 +7,7 @@ let
   cfg = config._.givon.wayland.gnome;
 in
 {
-  options._.givon.wayland.gnome = {
-    enable = mkEnableOption "gnome";
-  };
+  options._.givon.wayland.gnome.enable = mkEnableOption "gnome";
 
   config = mkIf cfg.enable {
     home-manager.users.${name} = { lib, ... }:
