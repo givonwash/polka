@@ -110,6 +110,7 @@
                     };
                     wezterm = {
                       enable = true;
+                      enableWayland = "false";
                       appearance.windowDecorations = "INTEGRATED_BUTTONS | RESIZE";
                     };
                     xdg.enable = true;
