@@ -131,41 +131,74 @@
               }
             ];
           };
-          pamplemousse = lib'.nixosSystem {
-            lib = lib';
-            system = x86_64-linux;
-            modules = [
-              self.nixosModules.nixpkgs
-              self.nixosModules.nix
-              home-manager.nixosModule
-              self.nixosModules.pamplemousse
-              self.nixosModules.givon
-              self.homeModules.givon
-              ({ pkgs, ... }: {
-                config._.givon = {
-                  extraPkgs = with pkgs; [
-                    element-desktop
-                    inkscape
-                    obsidian
-                    signal-desktop
-                    slack
-                    spotify
-                    zulip
-                  ];
-                  git.enable = true;
-                  gnome.enable = true;
-                  neovim = { enable = true; obsidian-nvim.enable = true; };
-                  sway.enable = true;
-                  theme.colors = import ./modules/users/givon/colors/catppuccin.nix;
-                  stateVersion = "22.05";
-                  userConfig = {
-                    extraGroups = [ "networkmanager" "video" "wheel" ];
-                    isNormalUser = true;
+          pamplemousse = lib'.nixosSystem
+            {
+              lib = lib';
+              system = x86_64-linux;
+              modules = [
+                self.nixosModules.nixpkgs
+                self.nixosModules.nix
+                home-manager.nixosModule
+                self.nixosModules.pamplemousse
+                self.nixosModules.givon
+                self.homeModules.givon
+                ({ pkgs, ... }: {
+                  config._ = {
+                    pamplemousse = {
+                      gnome.enable = true;
+                      sway.enable = true;
+                    };
+                    givon = {
+                      extraPkgs = with pkgs; [
+                        element-desktop
+                        inkscape
+                        obsidian
+                        signal-desktop
+                        slack
+                        spotify
+                        zulip
+                      ];
+                      firefox.enable = true;
+                      foliate.enable = true;
+                      git.enable = true;
+                      gnome.enable = true;
+                      gpg.enable = true;
+                      neovim = { enable = true; obsidian-nvim.enable = true; };
+                      shell.enable = true;
+                      wayland = {
+                        enable = true;
+                        gnome.enable = true;
+                        sway = {
+                          enable = true;
+                          mako.enable = true;
+                          swaylock.enable = true;
+                          waybar.enable = true;
+                          wofi.enable = true;
+                        };
+                      };
+                      wezterm = {
+                        enable = true;
+                        appearance.windowDecorations = "INTEGRATED_BUTTONS | RESIZE";
+                      };
+                      xdg.enable = true;
+                      theme = {
+                        colors = import ./modules/home/givon/colors/catppuccin.nix;
+                        cursor.enable = true;
+                        gtkTheme.enable = true;
+                        icons.enable = true;
+                      };
+                      stateVersion = "22.05";
+                      userConfig = {
+                        name = "givon";
+                        home = "/home/givon";
+                        extraGroups = [ "networkmanager" "video" "wheel" ];
+                        isNormalUser = true;
+                      };
+                    };
                   };
-                };
-              })
-            ];
-          };
+                })
+              ];
+            };
         };
     };
 }
