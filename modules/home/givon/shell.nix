@@ -81,6 +81,7 @@ in
       zsh = {
         autocd = true;
         enable = true;
+        defaultKeymap = "viins";
         enableAutosuggestions = true;
         enableCompletion = true;
         syntaxHighlighting.enable = true;
