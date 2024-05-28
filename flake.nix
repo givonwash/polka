@@ -62,9 +62,12 @@
               homebrew.enable = true;
               theme = {
                 colors = import ./modules/home/givon/colors/catppuccin.nix;
-                fonts.emoji = {
-                  name = "Apple Color Emoji";
-                  package = null;
+                fonts = {
+                  defaultSize = 15;
+                  emoji = {
+                    name = "Apple Color Emoji";
+                    package = null;
+                  };
                 };
               };
               neovim.enable = true;
