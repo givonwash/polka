@@ -3,7 +3,7 @@ local M = {}
 local fn = require 'utils.fn'
 local lsp = vim.lsp
 
----@param config { disable_formatting?: boolean }
+---@param config { disable_formatting?: boolean, extra_on_attach?: fun(client: table<string, any>, bufnr: integer): nil }
 ---@return table<string, any>
 M.client = function(config)
     return {
@@ -38,24 +38,28 @@ M.client = function(config)
                 },
             }
 
-            local capabilities = client.server_capabilities
+            if config.extra_on_attach ~= nil then
+                config.extra_on_attach(client, bufnr)
+            else
+                local capabilities = client.server_capabilities
 
-            if config.disable_formatting then
-                capabilities.documentFormattingProvider = false
-                capabilities.documentRangeFormattingProvider = false
-            elseif capabilities.documentFormattingProvider then
-                require('core.autocmds').define_group(
-                    string.format('FormatOnSaveClient%dBuf%d', client.id, bufnr),
-                    {
+                if config.disable_formatting then
+                    capabilities.documentFormattingProvider = false
+                    capabilities.documentRangeFormattingProvider = false
+                elseif capabilities.documentFormattingProvider then
+                    require('core.autocmds').define_group(
+                        string.format('FormatOnSaveClient%dBuf%d', client.id, bufnr),
                         {
-                            event = 'BufWritePre',
-                            opts = {
-                                buffer = bufnr,
-                                callback = fn.defer(lsp.buf.format),
+                            {
+                                event = 'BufWritePre',
+                                opts = {
+                                    buffer = bufnr,
+                                    callback = fn.defer(lsp.buf.format),
+                                },
                             },
-                        },
-                    }
-                )
+                        }
+                    )
+                end
             end
         end,
     }

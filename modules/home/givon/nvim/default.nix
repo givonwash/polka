@@ -88,7 +88,7 @@ in
             config = ''
               require('config.plugins.null-ls-nvim').setup {
                   code_actions = { 'gitsigns' },
-                  formatting = { 'black', 'isort', 'prettier', 'stylua', }
+                  formatting = { 'black', 'isort', 'stylua' }
               }
             '';
             plugin = none-ls-nvim;
@@ -122,7 +122,6 @@ in
                   },
                   { name = 'lua_ls', config = { disable_formatting = true } },
                   { name = 'terraformls' },
-                  { name = 'tsserver', config = { disable_formatting = true } },
                   { name = 'cssls' },
                   { name = 'html' },
                   {
@@ -226,6 +225,13 @@ in
             plugin = true-zen-nvim;
             type = "lua";
           }
+          {
+            config = ''
+              require("config.plugins.typescript-tools-nvim").setup()
+            '';
+            plugin = typescript-tools-nvim;
+            type = "lua";
+          }
           vim-surround
         ] ++ (optional cfg.obsidian-nvim.enable {
           config = ''
@@ -242,7 +248,6 @@ in
         nil
         nixpkgs-fmt
         nodePackages.bash-language-server
-        nodePackages.prettier
         nodePackages.pyright
         nodePackages.typescript-language-server
         nodePackages.vscode-langservers-extracted
