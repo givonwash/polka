@@ -123,19 +123,32 @@ in
                   { name = 'lua_ls', config = { disable_formatting = true } },
                   { name = 'terraformls' },
                   { name = 'tsserver', config = { disable_formatting = true } },
+                  { name = 'cssls' },
+                  { name = 'html' },
                   {
-                      name = 'cssls',
-                      opts = { cmd = { 'css-languageserver', '--stdio' } },
-                      config = { disable_formatting = true }
-                  },
-                  {
-                      name = 'html',
-                      opts = { cmd = { 'html-languageserver', '--stdio' } },
-                      config = { disable_formatting = true }
+                      name = 'jsonls',
+                      opts = {
+                          settings = {
+                              json = {
+                                  schemas = require('schemastore').json.schemas(),
+                                  validate = { enable = true },
+                              }
+                          }
+                      }
                   },
                   { name = 'bashls' },
                   { name = 'solargraph', { config = { disable_formatting = true } } },
-                  { name = 'yamlls' }
+                  {
+                      name = 'yamlls',
+                      opts = {
+                          settings = {
+                              yaml = {
+                                  schemaStore = { enable = false, url = "", },
+                                  schemas = require('schemastore').yaml.schemas()
+                              }
+                          }
+                      }
+                  }
               }
             '';
             plugin = nvim-lspconfig;
@@ -177,6 +190,7 @@ in
             type = "lua";
           }
           nvim-web-devicons
+          SchemaStore-nvim
           {
             config = ''
               require("config.plugins.project-nvim").setup()
@@ -231,8 +245,7 @@ in
         nodePackages.prettier
         nodePackages.pyright
         nodePackages.typescript-language-server
-        nodePackages.vscode-css-languageserver-bin
-        nodePackages.vscode-html-languageserver-bin
+        nodePackages.vscode-langservers-extracted
         python310Packages.isort
         ripgrep
         rust-analyzer
