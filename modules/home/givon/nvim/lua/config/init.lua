@@ -33,6 +33,15 @@ return {
                 },
             },
             {
+                event = 'FileType',
+                opts = {
+                    callback = function()
+                        vim.opt_local.shiftwidth = 2
+                    end,
+                    pattern = 'typescript',
+                },
+            },
+            {
                 event = 'BufWritePre',
                 opts = {
                     command = 'mark ` | %s:\\v\\s+$::ge | normal! ``',
