@@ -1,26 +1,8 @@
-local fn = require 'utils.fn'
-
 return {
-    setup = function()
-        local client = require('config.plugins.nvim-lspconfig').client {
-            extra_on_attach = function(client, bufnr)
-                require('core.autocmds').define_group(
-                    string.format('FormatOnSaveClient%dBuf%d', client.id, bufnr),
-                    {
-                        {
-                            event = 'BufWritePre',
-                            opts = {
-                                buffer = bufnr,
-                                callback = fn.defer(function()
-                                    require('typescript-tools.api').sort_imports(true)
-                                    vim.lsp.buf.format()
-                                end),
-                            },
-                        },
-                    }
-                )
-            end,
-        }
+    ---@param config { disable_formatting?: boolean, extra_on_attach?: fun(client: table<string, any>, bufnr: integer): nil }
+    ---@return nil
+    setup = function(config)
+        local client = require('config.plugins.nvim-lspconfig').client(config)
 
         require('typescript-tools').setup(vim.tbl_extend('keep', client, {
             settings = {

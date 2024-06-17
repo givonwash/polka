@@ -88,7 +88,7 @@ in
             config = ''
               require('config.plugins.null-ls-nvim').setup {
                   code_actions = { 'gitsigns' },
-                  formatting = { 'black', 'isort', 'stylua' }
+                  formatting = { 'black', 'isort', 'prettier', 'stylua' }
               }
             '';
             plugin = none-ls-nvim;
@@ -122,10 +122,12 @@ in
                   },
                   { name = 'lua_ls', config = { disable_formatting = true } },
                   { name = 'terraformls' },
-                  { name = 'cssls' },
-                  { name = 'html' },
+                  { name = 'cssls', config = { disable_formatting = true } },
+                  { name = 'html', config = { disable_formatting = true } },
+                  { name = 'eslint' },
                   {
                       name = 'jsonls',
+                      config = { disable_formatting = true },
                       opts = {
                           settings = {
                               json = {
@@ -139,6 +141,7 @@ in
                   { name = 'solargraph', { config = { disable_formatting = true } } },
                   {
                       name = 'yamlls',
+                      config = { disable_formatting = true },
                       opts = {
                           settings = {
                               yaml = {
@@ -227,7 +230,7 @@ in
           }
           {
             config = ''
-              require("config.plugins.typescript-tools-nvim").setup()
+              require("config.plugins.typescript-tools-nvim").setup { disable_formatting = true }
             '';
             plugin = typescript-tools-nvim;
             type = "lua";
@@ -248,6 +251,7 @@ in
         nil
         nixpkgs-fmt
         nodePackages.bash-language-server
+        nodePackages.prettier
         nodePackages.pyright
         nodePackages.typescript-language-server
         nodePackages.vscode-langservers-extracted
