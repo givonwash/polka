@@ -103,6 +103,13 @@ in
           }
           {
             config = ''
+              require("config.plugins.nvim-metals").setup()
+            '';
+            plugin = nvim-metals;
+            type = "lua";
+          }
+          {
+            config = ''
               require("config.plugins.nvim-lspconfig").setup {
                   {
                       name = 'pyright',
@@ -193,6 +200,7 @@ in
           }
           nvim-web-devicons
           SchemaStore-nvim
+          plenary-nvim
           {
             config = ''
               require("config.plugins.project-nvim").setup()
