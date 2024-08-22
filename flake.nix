@@ -78,6 +78,7 @@
                   enable = true;
                   enableInstallation = false;
                   enableHomebrewInstallation = true;
+                  appearance.fontSize = 17.5;
                 };
                 stateVersion = "23.11";
                 userConfig = {
@@ -119,6 +120,7 @@
                   enable = true;
                   enableInstallation = false;
                   enableHomebrewInstallation = true;
+                  appearance.fontSize = 17.5;
                 };
                 stateVersion = "23.11";
                 userConfig = {

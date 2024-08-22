@@ -22,11 +22,19 @@ in
       default = "true";
       type = lib.types.str;
     };
-    appearance.windowDecorations = lib.mkOption rec {
-      description = "Decorations for Wezterm windows";
-      example = default;
-      default = "TITLE | RESIZE";
-      type = lib.types.str;
+    appearance = {
+      fontSize = lib.mkOption rec {
+        description = "Font size";
+        default = fonts.defaultSize * fonts.defaultScalingFactor;
+        example = default;
+        type = with lib.types; addCheck (oneOf [ int float ]) (n: n > 0);
+      };
+      windowDecorations = lib.mkOption rec {
+        description = "Decorations for Wezterm windows";
+        example = default;
+        default = "TITLE | RESIZE";
+        type = lib.types.str;
+      };
     };
   };
   config.home-manager.users.${name} = lib.mkIf cfg.enable {
@@ -96,7 +104,7 @@ in
               visual_bell = "${elemAt colors.blacks 3}",
           },
           fonts = {
-              default_size = ${toString (fonts.defaultSize * fonts.defaultScalingFactor)},
+              default_size = ${toString cfg.appearance.fontSize},
               monospace = "${fonts.monospace.name}",
               ["sans-serif"] = "${fonts.sans-serif.name}",
           },
