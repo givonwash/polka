@@ -256,14 +256,14 @@ in
       extraPackages = with pkgs; [
         black
         fd
+        isort
         nil
         nixpkgs-fmt
         nodePackages.bash-language-server
         nodePackages.prettier
-        nodePackages.pyright
         nodePackages.typescript-language-server
         nodePackages.vscode-langservers-extracted
-        isort
+        pyright
         ripgrep
         rust-analyzer
         stylua
