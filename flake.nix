@@ -16,7 +16,7 @@
 
   outputs = { self, flake-utils, home-manager, nixpkgs, nix-darwin }:
     let
-      inherit (flake-utils.lib.system) x86_64-darwin x86_64-linux;
+      inherit (flake-utils.lib.system) aarch64-darwin x86_64-darwin x86_64-linux;
       inherit (nixpkgs) lib;
       inherit (builtins) readDir;
 
@@ -30,6 +30,7 @@
     in
     {
       darwinModules = {
+        guanabana = ./modules/darwin/guanabana;
         pera = ./modules/darwin/pera;
         givon = ./modules/darwin/givon;
       };
@@ -45,46 +46,89 @@
         nix = ./modules/utils/nix.nix;
         nixpkgs = ./modules/utils/nixpkgs.nix;
       };
-      darwinConfigurations.Givon-Washington-Pera = nix-darwin.lib.darwinSystem {
-        lib = lib';
-        system = x86_64-darwin;
-        modules = [
-          home-manager.darwinModule
-          self.utilityModules.nix
-          self.utilityModules.nixpkgs
-          self.darwinModules.pera
-          self.darwinModules.givon
-          self.homeModules.givon
-          {
-            _.pera.homebrew.enable = true;
-            _.givon = {
-              git.enable = true;
-              homebrew.enable = true;
-              theme = {
-                colors = import ./modules/home/givon/colors/catppuccin.nix;
-                fonts = {
-                  defaultSize = 15;
-                  emoji = {
-                    name = "Apple Color Emoji";
-                    package = null;
+      darwinConfigurations = {
+        Givon-Washington-Guanabana = nix-darwin.lib.darwinSystem {
+          lib = lib';
+          system = aarch64-darwin;
+          modules = [
+            home-manager.darwinModule
+            self.utilityModules.nix
+            self.utilityModules.nixpkgs
+            self.darwinModules.guanabana
+            self.darwinModules.givon
+            self.homeModules.givon
+            {
+              _.guanabana.homebrew.enable = true;
+              _.givon = {
+                git.enable = true;
+                homebrew.enable = true;
+                theme = {
+                  colors = import ./modules/home/givon/colors/catppuccin.nix;
+                  fonts = {
+                    defaultSize = 15;
+                    emoji = {
+                      name = "Apple Color Emoji";
+                      package = null;
+                    };
                   };
                 };
+                neovim.enable = true;
+                shell.enable = true;
+                wezterm = {
+                  enable = true;
+                  enableInstallation = false;
+                  enableHomebrewInstallation = true;
+                };
+                stateVersion = "23.11";
+                userConfig = {
+                  name = "givon";
+                  home = "/Users/givon";
+                };
               };
-              neovim.enable = true;
-              shell.enable = true;
-              wezterm = {
-                enable = true;
-                enableInstallation = false;
-                enableHomebrewInstallation = true;
+            }
+          ];
+        };
+        Givon-Washington-Pera = nix-darwin.lib.darwinSystem {
+          lib = lib';
+          system = x86_64-darwin;
+          modules = [
+            home-manager.darwinModule
+            self.utilityModules.nix
+            self.utilityModules.nixpkgs
+            self.darwinModules.pera
+            self.darwinModules.givon
+            self.homeModules.givon
+            {
+              _.pera.homebrew.enable = true;
+              _.givon = {
+                git.enable = true;
+                homebrew.enable = true;
+                theme = {
+                  colors = import ./modules/home/givon/colors/catppuccin.nix;
+                  fonts = {
+                    defaultSize = 15;
+                    emoji = {
+                      name = "Apple Color Emoji";
+                      package = null;
+                    };
+                  };
+                };
+                neovim.enable = true;
+                shell.enable = true;
+                wezterm = {
+                  enable = true;
+                  enableInstallation = false;
+                  enableHomebrewInstallation = true;
+                };
+                stateVersion = "23.11";
+                userConfig = {
+                  name = "givonwashington";
+                  home = "/Users/givonwashington";
+                };
               };
-              stateVersion = "23.11";
-              userConfig = {
-                name = "givonwashington";
-                home = "/Users/givonwashington";
-              };
-            };
-          }
-        ];
+            }
+          ];
+        };
       };
       nixosConfigurations =
         {
