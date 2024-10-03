@@ -255,7 +255,7 @@ in
         nodePackages.pyright
         nodePackages.typescript-language-server
         nodePackages.vscode-langservers-extracted
-        python310Packages.isort
+        isort
         ripgrep
         rust-analyzer
         stylua
