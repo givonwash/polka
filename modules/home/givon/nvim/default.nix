@@ -61,6 +61,13 @@ in
           cmp_luasnip
           cmp-nvim-lsp
           cmp-path
+          {
+            config = ''
+              require("config.plugins.fidget-nvim").setup()
+            '';
+            plugin = fidget-nvim;
+            type = "lua";
+          }
           friendly-snippets
           {
             config = ''
