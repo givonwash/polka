@@ -11,8 +11,21 @@ return {
                             vim.tbl_extend(
                                 'keep',
                                 require('config.plugins.nvim-lspconfig').client {},
-                                metals.bare_config(),
-                                { settings = { showImplicitArguments = true } }
+                                {
+                                    init_options = { statusBarProvider = 'on ' },
+                                    settings = {
+                                        excludedPackages = {
+                                            'akka.actor.typed.javadsl',
+                                            'com.github.swagger.akka.javadsl',
+                                        },
+                                        showImplicitArguments = true,
+                                        showImplicitConversionsAndClasses = true,
+                                        showInferredType = true,
+                                        superMethodLensesEnabled = true,
+                                        useGlobalExecutable = true,
+                                    },
+                                },
+                                metals.bare_config()
                             )
                         )
                     end,
