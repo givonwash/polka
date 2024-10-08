@@ -7,6 +7,12 @@ return {
                 opts = {
                     pattern = { 'scala', 'sbt' },
                     callback = function()
+                        require('core.keymaps').define {
+                            n = {
+                                ['<leader>fl'] = require('telescope').extensions.metals.commands,
+                            },
+                        }
+                        vim.opt_global.shortmess:remove 'F'
                         metals.initialize_or_attach(
                             vim.tbl_extend(
                                 'keep',
