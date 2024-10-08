@@ -6,13 +6,11 @@ return {
 
         local trouble = require 'trouble'
 
-        trouble.setup { mode = 'document_diagnostics' }
+        trouble.setup()
 
         keymaps.define {
             n = {
-                ['<leader>tt'] = '<cmd>TroubleToggle<cr>',
-                ['<leader>tw'] = '<cmd>Trouble workspace_diagnostics<cr>',
-                ['<leader>td'] = '<cmd>Trouble document_diagnostics<cr>',
+                ['<leader>tt'] = '<cmd>Trouble diagnostics<cr>',
                 ['<leader>tq'] = '<cmd>Trouble quickfix<cr>',
                 ['<leader>tl'] = '<cmd>Trouble loclist<cr>',
             },
