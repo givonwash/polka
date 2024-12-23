@@ -5,7 +5,7 @@ return {
             {
                 event = 'FileType',
                 opts = {
-                    pattern = { 'scala', 'sbt' },
+                    pattern = { 'java', 'scala', 'sbt' },
                     callback = function()
                         require('core.keymaps').define {
                             n = {
