@@ -7,6 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvim-nixpkgs.url = "github:NixOs/nixpkgs/4de4818c1ffa76d57787af936e8a23648bda6be4";
     nixpkgs.url = "github:NixOs/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -14,7 +15,7 @@
     };
   };
 
-  outputs = { self, flake-utils, home-manager, nixpkgs, nix-darwin }:
+  outputs = { self, flake-utils, home-manager, nixpkgs, nix-darwin, nvim-nixpkgs }:
     let
       inherit (flake-utils.lib.system) aarch64-darwin x86_64-darwin x86_64-linux;
       inherit (nixpkgs) lib;
@@ -47,48 +48,56 @@
         nixpkgs = ./modules/utils/nixpkgs.nix;
       };
       darwinConfigurations = {
-        Givon-Washington-Guanabana = nix-darwin.lib.darwinSystem {
-          lib = lib';
-          system = aarch64-darwin;
-          modules = [
-            home-manager.darwinModule
-            self.utilityModules.nix
-            self.utilityModules.nixpkgs
-            self.darwinModules.guanabana
-            self.darwinModules.givon
-            self.homeModules.givon
-            {
-              _.guanabana.homebrew.enable = true;
-              _.givon = {
-                git.enable = true;
-                homebrew.enable = true;
-                theme = {
-                  colors = import ./modules/home/givon/colors/catppuccin.nix;
-                  fonts = {
-                    defaultSize = 15;
-                    emoji = {
-                      name = "Apple Color Emoji";
-                      package = null;
+        Givon-Washington-Guanabana =
+          let
+            system = aarch64-darwin;
+            nvimPkgs = import nvim-nixpkgs { inherit system; };
+          in
+          nix-darwin.lib.darwinSystem {
+            inherit system;
+            lib = lib';
+            modules = [
+              home-manager.darwinModule
+              self.utilityModules.nix
+              self.utilityModules.nixpkgs
+              self.darwinModules.guanabana
+              self.darwinModules.givon
+              self.homeModules.givon
+              {
+                _.guanabana.homebrew.enable = true;
+                _.givon = {
+                  git.enable = true;
+                  homebrew.enable = true;
+                  theme = {
+                    colors = import ./modules/home/givon/colors/catppuccin.nix;
+                    fonts = {
+                      defaultSize = 15;
+                      emoji = {
+                        name = "Apple Color Emoji";
+                        package = null;
+                      };
                     };
                   };
+                  neovim.enable = true;
+                  shell.enable = true;
+                  wezterm = {
+                    enable = true;
+                    enableInstallation = false;
+                    enableHomebrewInstallation = true;
+                    appearance.fontSize = 17.5;
+                  };
+                  stateVersion = "23.11";
+                  userConfig = {
+                    name = "givon";
+                    home = "/Users/givon";
+                  };
                 };
-                neovim.enable = true;
-                shell.enable = true;
-                wezterm = {
-                  enable = true;
-                  enableInstallation = false;
-                  enableHomebrewInstallation = true;
-                  appearance.fontSize = 17.5;
-                };
-                stateVersion = "23.11";
-                userConfig = {
-                  name = "givon";
-                  home = "/Users/givon";
-                };
-              };
-            }
-          ];
-        };
+                nixpkgs.overlays = [
+                  (_: _: { inherit (nvimPkgs) vimPlugins; })
+                ];
+              }
+            ];
+          };
         Givon-Washington-Pera = nix-darwin.lib.darwinSystem {
           lib = lib';
           system = x86_64-darwin;
