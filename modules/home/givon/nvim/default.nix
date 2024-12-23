@@ -23,14 +23,9 @@ in
   };
 
   config.home-manager.users.${name} = {
-    home = {
-      sessionVariables = {
-        EDITOR = "nvim";
-      };
-    };
-
     programs.neovim = {
       enable = true;
+      defaultEditor = true;
       extraConfig = ''
         let mapleader = " "
         let maplocalleader = ","
