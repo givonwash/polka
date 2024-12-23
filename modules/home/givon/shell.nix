@@ -10,7 +10,6 @@ in
     home = {
       packages = with pkgs; [
         awscli2
-        bitwarden-cli
         google-cloud-sdk
         curl
         fd
