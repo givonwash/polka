@@ -91,14 +91,36 @@ return {
             action = wezterm.action { ActivatePaneDirection = 'Right' },
         },
         {
+            key = 'm',
+            mods = 'LEADER',
+            action = wezterm.action { PaneSelect = { mode = 'MoveToNewWindow' } },
+        },
+        {
             key = 'r',
             mods = 'LEADER',
             action = wezterm.action { RotatePanes = 'Clockwise' },
         },
         {
             key = 'r',
+            mods = 'CTRL|SHIFT',
+            action = wezterm.action.PromptInputLine {
+                description = 'Enter new name for tab',
+                action = wezterm.action_callback(function(window, _, line)
+                    if line then
+                        window:active_tab():set_title(line)
+                    end
+                end),
+            },
+        },
+        {
+            key = 'r',
             mods = 'LEADER|SHIFT',
             action = wezterm.action { RotatePanes = 'CounterClockwise' },
+        },
+        {
+            key = 's',
+            mods = 'LEADER',
+            action = wezterm.action { PaneSelect = { mode = 'Activate' } },
         },
 
         -- tab navigation (absolute forward)
