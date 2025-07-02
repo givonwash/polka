@@ -1,6 +1,6 @@
 return {
     ---@return nil
     setup = function()
-        require('tresitter-context').setup()
+        require('treesitter-context').setup()
     end,
 }
