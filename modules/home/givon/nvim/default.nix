@@ -200,6 +200,13 @@ in
             plugin = nvim-treesitter.withAllGrammars;
             type = "lua";
           }
+          {
+            config = ''
+              require("config.plugins.nvim-treesitter-context").setup()
+            '';
+            plugin = nvim-treesitter-context;
+            type = "lua";
+          }
           nvim-web-devicons
           SchemaStore-nvim
           plenary-nvim

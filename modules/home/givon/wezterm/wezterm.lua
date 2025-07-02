@@ -8,12 +8,17 @@ return {
     -- theming
     bold_brightens_ansi_colors = false,
     colors = theme.colors,
+    command_palette_bg_color = theme.colors.background,
+    command_palette_fg_color = theme.colors.foreground,
+    command_palette_font = wezterm.font(theme.fonts.monospace),
+    command_palette_font_size = theme.fonts.default_size,
     default_cursor_style = 'SteadyBar',
     font = wezterm.font(theme.fonts.monospace),
     font_size = theme.fonts.default_size,
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
     hide_mouse_cursor_when_typing = false,
     hide_tab_bar_if_only_one_tab = true,
+    ui_key_cap_rendering = 'UnixLong',
     use_fancy_tab_bar = false,
     window_decorations = theme.window_decorations,
 
@@ -21,6 +26,9 @@ return {
     disable_default_key_bindings = true,
     leader = { key = 'Space', mods = 'CTRL' },
     keys = {
+        -- activate command palette
+        { key = 'p', mods = 'LEADER', action = 'ActivateCommandPalette' },
+
         -- system clipboard
         { key = 'c', mods = 'CTRL|SHIFT', action = wezterm.action { CopyTo = 'Clipboard' } },
         { key = 'v', mods = 'CTRL|SHIFT', action = wezterm.action { PasteFrom = 'Clipboard' } },
