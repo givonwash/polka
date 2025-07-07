@@ -10,7 +10,6 @@ return {
     colors = theme.colors,
     command_palette_bg_color = theme.colors.background,
     command_palette_fg_color = theme.colors.foreground,
-    command_palette_font = wezterm.font(theme.fonts.monospace),
     command_palette_font_size = theme.fonts.default_size,
     default_cursor_style = 'SteadyBar',
     font = wezterm.font(theme.fonts.monospace),
