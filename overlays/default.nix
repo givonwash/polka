@@ -1,5 +1,16 @@
 self: super: {
   vimPlugins = super.vimPlugins // {
+    dbtpal = super.vimUtils.buildVimPlugin {
+      pname = "dbtpal";
+      version = "nightly";
+      dependencies = with super.vimPlugins; [ plenary-nvim telescope-nvim ];
+      src = super.fetchFromGitHub {
+        owner = "PedramNavid";
+        repo = "dbtpal";
+        rev = "981eab51609362712c64e3cf3fb773fe11f859b9";
+        sha256 = "sha256-jxyD1knlfCqENotkSvzHQr3+vVOiOD735umHwRWuCpY=";
+      };
+    };
     obsidian-nvim = super.vimUtils.buildVimPlugin {
       pname = "obsidian-nvim";
       version = "v3.7.8";
