@@ -49,7 +49,7 @@ return {
             },
             {
                 event = 'TextYankPost',
-                opts = { callback = fn.defer(vim.highlight.on_yank) },
+                opts = { callback = fn.defer(vim.hl.on_yank) },
             },
         })
 

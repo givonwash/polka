@@ -215,7 +215,14 @@ in
             config = ''
               require("config.plugins.project-nvim").setup()
             '';
-            plugin = project-nvim;
+            plugin = project-nvim.overrideAttrs {
+              src = pkgs.fetchFromGitHub {
+                owner = "DrKJeff16";
+                repo = "project.nvim";
+                rev = "d20d5fb6cd4a7b21fb9a74d96764e4739abc3ad8";
+                sha256 = "1kbvhzv1nv87jqnwckvgj6mimy27bcx1vlbrp0farv39ylbk58kb";
+              };
+            };
             type = "lua";
           }
           {
