@@ -97,7 +97,8 @@ in
             config = ''
               require('config.plugins.null-ls-nvim').setup {
                   code_actions = { 'gitsigns' },
-                  formatting = { 'black', 'isort', 'prettier', 'stylua' }
+                  diagnostics = { 'sqlfluff' },
+                  formatting = { 'black', 'isort', 'prettier', 'stylua', 'sqlfluff' }
               }
             '';
             plugin = none-ls-nvim;
@@ -283,6 +284,7 @@ in
         ripgrep
         rust-analyzer
         stylua
+        sqlfluff
         sumneko-lua-language-server
         terraform-ls
         yaml-language-server
