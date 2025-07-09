@@ -58,13 +58,6 @@ in
           cmp-path
           {
             config = ''
-              require("config.plugins.dbtpal").setup()
-            '';
-            plugin = dbtpal;
-            type = "lua";
-          }
-          {
-            config = ''
               require("config.plugins.fidget-nvim").setup()
             '';
             plugin = fidget-nvim;
