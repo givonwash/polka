@@ -7,7 +7,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvim-nixpkgs.url = "github:NixOs/nixpkgs/4de4818c1ffa76d57787af936e8a23648bda6be4";
     nixpkgs.url = "github:NixOs/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -15,7 +14,7 @@
     };
   };
 
-  outputs = { self, flake-utils, home-manager, nixpkgs, nix-darwin, nvim-nixpkgs }:
+  outputs = { self, flake-utils, home-manager, nixpkgs, nix-darwin }:
     let
       inherit (flake-utils.lib.system) aarch64-darwin x86_64-darwin x86_64-linux;
       inherit (nixpkgs) lib;
@@ -51,13 +50,12 @@
         Givon-Washington-Guanabana =
           let
             system = aarch64-darwin;
-            nvimPkgs = import nvim-nixpkgs { inherit system; };
           in
           nix-darwin.lib.darwinSystem {
             inherit system;
             lib = lib';
             modules = [
-              home-manager.darwinModule
+              home-manager.darwinModules.default
               self.utilityModules.nix
               self.utilityModules.nixpkgs
               self.darwinModules.guanabana
@@ -92,9 +90,6 @@
                     home = "/Users/givon";
                   };
                 };
-                nixpkgs.overlays = [
-                  (_: _: { inherit (nvimPkgs) vimPlugins; })
-                ];
               }
             ];
           };
@@ -102,7 +97,7 @@
           lib = lib';
           system = x86_64-darwin;
           modules = [
-            home-manager.darwinModule
+            home-manager.darwinModules.default
             self.utilityModules.nix
             self.utilityModules.nixpkgs
             self.darwinModules.pera

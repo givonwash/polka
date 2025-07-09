@@ -9,5 +9,8 @@ in
     ./homebrew.nix
     ./shell.nix
   ];
-  config.users.users.${name} = cfg.userConfig;
+  config = {
+    ids.gids.nixbld = 350;
+    users.users.${name} = cfg.userConfig;
+  };
 }
