@@ -82,10 +82,10 @@ in
         enableZshIntegration = true;
       };
       zsh = {
-        autocd = true;
         enable = true;
+        autocd = true;
+        autosuggestion.enable = true;
         defaultKeymap = "viins";
-        enableAutosuggestions = true;
         enableCompletion = true;
         syntaxHighlighting.enable = true;
       };
