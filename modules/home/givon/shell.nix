@@ -10,6 +10,7 @@ in
     home = {
       packages = with pkgs; [
         awscli2
+        claude-code
         google-cloud-sdk
         curl
         fd
