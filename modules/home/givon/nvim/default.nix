@@ -38,6 +38,13 @@ in
         [
           {
             config = ''
+              require('config.plugins.avante-nvim').setup()
+            '';
+            plugin = avante-nvim;
+            type = "lua";
+          }
+          {
+            config = ''
               require("config.plugins.bufferline-nvim").setup()
             '';
             plugin = bufferline-nvim;
