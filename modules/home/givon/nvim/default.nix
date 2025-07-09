@@ -227,6 +227,13 @@ in
           }
           {
             config = ''
+              require("config.plugins.render-markdown-nvim").setup()
+            '';
+            plugin = render-markdown-nvim;
+            type = "lua";
+          }
+          {
+            config = ''
               require("config.plugins.rust-tools-nvim").setup()
             '';
             plugin = rust-tools-nvim;

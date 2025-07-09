@@ -83,6 +83,7 @@ return {
                 { name = 'luasnip' },
                 { name = 'path' },
                 { name = 'emoji' },
+                { name = 'render_markdown' },
             },
             window = {
                 completion = cmp.config.window.bordered(),
