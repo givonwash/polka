@@ -1,7 +1,8 @@
 return {
-    ---@return nil
-    setup = function()
-        require('gitsigns').setup {
+    {
+        'lewis6991/gitsigns.nvim',
+        name = 'gitsigns.nvim',
+        opts = {
             on_attach = function()
                 require('core.keymaps').define {
                     n = {
@@ -48,6 +49,6 @@ return {
                     },
                 }
             end,
-        }
-    end,
+        },
+    },
 }

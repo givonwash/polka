@@ -1,12 +1,15 @@
 return {
-    ---@return nil
-    setup = function()
-        local notify = require 'notify'
+    {
+        'rcarriga/nvim-notify',
+        name = 'nvim-notify',
+        config = function()
+            local notify = require 'notify'
 
-        notify.setup {
-            stages = 'slide',
-        }
+            notify.setup {
+                stages = 'slide',
+            }
 
-        vim.notify = notify
-    end,
+            vim.notify = notify
+        end,
+    },
 }

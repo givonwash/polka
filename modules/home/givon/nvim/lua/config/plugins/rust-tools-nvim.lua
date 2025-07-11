@@ -1,12 +1,14 @@
 return {
-    ---@return nil
-    setup = function()
-        require('rust-tools').setup {
+    {
+        'simrat39/rust-tools.nvim',
+        name = 'rust-tools.nvim',
+        ft = { 'rust' },
+        opts = {
             server = vim.tbl_extend(
                 'keep',
-                require('config.plugins.nvim-lspconfig').client {},
+                require('lib.plugins.nvim-lspconfig').client {},
                 { settings = { ['rust-analyzer'] = { checkOnSave = 'clippy' } } }
             ),
-        }
-    end,
+        },
+    },
 }

@@ -217,7 +217,7 @@
                       git.enable = true;
                       gnome.enable = true;
                       gpg.enable = true;
-                      neovim = { enable = true; obsidian-nvim.enable = true; };
+                      neovim = { enable = true; };
                       shell.enable = true;
                       wayland = {
                         enable = true;

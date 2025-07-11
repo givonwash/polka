@@ -1,8 +1,9 @@
 return {
-    ---@return nil
-    setup = function()
-        require('lualine').setup {
+    {
+        'nvim-lualine/lualine.nvim',
+        name = 'lualine.nvim',
+        opts = {
             options = { theme = 'catppuccin' },
-        }
-    end,
+        },
+    },
 }
