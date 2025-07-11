@@ -1,5 +1,1 @@
-return {
-    setup = function()
-        require('fidget').setup {}
-    end,
-}
+return { { 'j-hui/fidget.nvim', name = 'fidget.nvim' } }

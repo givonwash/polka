@@ -12,7 +12,7 @@ return {
     command_palette_fg_color = theme.colors.foreground,
     command_palette_font_size = theme.fonts.default_size,
     default_cursor_style = 'SteadyBar',
-    font = wezterm.font(theme.fonts.monospace),
+    font = wezterm.font(theme.fonts.monospace.name, theme.fonts.monospace.opts),
     font_size = theme.fonts.default_size,
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
     hide_mouse_cursor_when_typing = false,

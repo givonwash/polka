@@ -1,77 +1,67 @@
-local M = {}
-
-local fn = require 'utils.fn'
-local lsp = vim.lsp
-
----@param config { disable_formatting?: boolean, extra_on_attach?: fun(client: table<string, any>, bufnr: integer): nil }
----@return table<string, any>
-M.client = function(config)
-    return {
-        capabilities = require('config.plugins.nvim-cmp')['lsp.capabilities'],
-        handlers = {
-            ['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
-                border = 'rounded',
-            }),
-            ['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, {
-                border = 'rounded',
-                close_events = { 'CursorMoved', 'BufHidden', 'InsertCharPre' },
-            }),
-        },
-        ---@param client table<string, any>
-        ---@param bufnr integer
-        ---@return nil
-        on_attach = function(client, bufnr)
-            local actions = require 'core.actions'
-            require('core.keymaps').define {
-                n = {
-                    ['gd'] = { cmd = lsp.buf.definition, opts = { buffer = true } },
-                    ['<C-k>'] = { cmd = lsp.buf.signature_help, opts = { buffer = true } },
-                    ['ga'] = { cmd = lsp.buf.code_action, opts = { buffer = true } },
-                    ['gr'] = { cmd = lsp.buf.rename, opts = { buffer = true } },
-                    ['K'] = {
-                        cmd = fn.defer(fn.find_ok, { { actions.goto_ft, lsp.buf.hover } }),
-                        opts = { buffer = true },
+return {
+    {
+        'neovim/nvim-lspconfig',
+        opts = {
+            servers = {
+                {
+                    name = 'pyright',
+                    opts = {
+                        settings = {
+                            pyright = { disableOrganizeImports = true },
+                            python = { analysis = { typeCheckingMode = 'strict' } },
+                        },
                     },
                 },
-                i = {
-                    ['<C-k>'] = { cmd = lsp.buf.signature_help, opts = { buffer = true } },
+                { name = 'ruff' },
+                {
+                    name = 'nil_ls',
+                    opts = {
+                        settings = {
+                            ['nil'] = { formatting = { command = { 'nixpkgs-fmt' } } },
+                        },
+                    },
                 },
-            }
-
-            if config.extra_on_attach ~= nil then
-                config.extra_on_attach(client, bufnr)
-            else
-                local capabilities = client.server_capabilities
-
-                if config.disable_formatting then
-                    capabilities.documentFormattingProvider = false
-                    capabilities.documentRangeFormattingProvider = false
-                elseif capabilities.documentFormattingProvider then
-                    require('core.autocmds').define_group(
-                        string.format('FormatOnSaveClient%dBuf%d', client.id, bufnr),
-                        {
-                            {
-                                event = 'BufWritePre',
-                                opts = {
-                                    buffer = bufnr,
-                                    callback = fn.defer(lsp.buf.format),
-                                },
+                { name = 'lua_ls', config = { disable_formatting = true } },
+                { name = 'terraformls' },
+                { name = 'cssls', config = { disable_formatting = true } },
+                { name = 'html', config = { disable_formatting = true } },
+                { name = 'eslint' },
+                {
+                    name = 'jsonls',
+                    config = { disable_formatting = true },
+                    opts = {
+                        settings = {
+                            json = {
+                                schemas = require('schemastore').json.schemas(),
+                                validate = { enable = true },
                             },
-                        }
-                    )
-                end
+                        },
+                    },
+                },
+                { name = 'bashls' },
+                { name = 'solargraph', { config = { disable_formatting = true } } },
+                {
+                    name = 'yamlls',
+                    config = { disable_formatting = true },
+                    opts = {
+                        settings = {
+                            yaml = {
+                                schemaStore = { enable = false, url = '' },
+                                schemas = require('schemastore').yaml.schemas(),
+                            },
+                        },
+                    },
+                },
+                { name = 'jinja_lsp', opts = { filetypes = { 'jinja', 'sql' } } },
+            },
+        },
+        config = function(_, opts)
+            local liblsp = require 'lib.plugins.nvim-lspconfig'
+            for _, server in pairs(opts.servers) do
+                require('lspconfig')[server.name].setup(
+                    vim.tbl_extend('keep', server.opts or {}, liblsp.client(server.config or {}))
+                )
             end
         end,
-    }
-end
-
----@param servers { name: string, opts?: table<string, any>, config?: table<string, any> }[]
----@return nil
-M.setup = function(servers)
-    for _, server in ipairs(servers) do
-        local opts = vim.tbl_extend('keep', server.opts or {}, M.client(server.config or {}))
-        require('lspconfig')[server.name].setup(opts)
-    end
-end
-
-return M
+    },
+}

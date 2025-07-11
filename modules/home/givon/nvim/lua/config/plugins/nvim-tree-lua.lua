@@ -1,7 +1,7 @@
 return {
-    ---@return nil
-    setup = function()
-        require('nvim-tree').setup {
+    {
+        'nvim-tree/nvim-tree.lua',
+        opts = {
             renderer = {
                 group_empty = true,
             },
@@ -36,11 +36,14 @@ return {
                     end,
                 },
             },
-        }
-        require('core.keymaps').define {
-            n = {
-                ['<leader>e'] = '<cmd>NvimTreeToggle<cr>',
-            },
-        }
-    end,
+        },
+        config = function(_, opts)
+            require('nvim-tree').setup(opts)
+            require('core.keymaps').define {
+                n = {
+                    ['<leader>e'] = '<cmd>NvimTreeToggle<cr>',
+                },
+            }
+        end,
+    },
 }

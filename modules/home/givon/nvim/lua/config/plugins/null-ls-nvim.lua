@@ -1,27 +1,19 @@
 return {
-    ---@param opts table<string, (string|table<string, any>)[]>
-    setup = function(opts)
-        local null_ls = require 'null-ls'
-        local configured_sources = {}
-
-        for provider, sources in pairs(opts) do
-            local builtins = null_ls.builtins[provider]
-
-            for _, source in ipairs(sources) do
-                if type(source) == 'string' then
-                    table.insert(configured_sources, builtins[source])
-                elseif type(source) == 'table' then
-                    table.insert(configured_sources, builtins[source.source].with(source.config))
-                else
-                    local msg = 'Unexpected type %s received for null-ls source configuration'
-                    vim.notify(string.format(msg, type(source)))
-                end
-            end
-        end
-
-        null_ls.setup {
-            on_attach = require('config.plugins.nvim-lspconfig').client({}).on_attach,
-            sources = configured_sources,
-        }
-    end,
+    {
+        'nvimtools/none-ls.nvim',
+        opts = {
+            on_attach = require('lib.plugins.nvim-lspconfig').client({}).on_attach,
+        },
+        config = function(_, opts)
+            local null_ls = require 'null-ls'
+            null_ls.setup(vim.tbl_extend('keep', opts, {
+                sources = {
+                    null_ls.builtins.code_actions.gitsigns,
+                    null_ls.builtins.formatting.prettier,
+                    null_ls.builtins.formatting.stylua,
+                    null_ls.builtins.formatting.sqlfluff,
+                },
+            }))
+        end,
+    },
 }
