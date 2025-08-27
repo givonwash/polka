@@ -7,6 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mediator.url = "github:givonwash/mediator";
     nixpkgs.url = "github:NixOs/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -14,7 +15,7 @@
     };
   };
 
-  outputs = { self, flake-utils, home-manager, nixpkgs, nix-darwin }:
+  outputs = { self, flake-utils, home-manager, mediator, nixpkgs, nix-darwin }:
     let
       inherit (flake-utils.lib.system) aarch64-darwin x86_64-darwin x86_64-linux;
       inherit (nixpkgs) lib;
@@ -63,6 +64,7 @@
               self.homeModules.givon
               {
                 _.guanabana.homebrew.enable = true;
+                home-manager.users.gwashington.home.packages = [ mediator.packages.${system}.default ];
                 _.givon = {
                   git.enable = true;
                   homebrew.enable = true;
@@ -76,7 +78,6 @@
                       };
                     };
                   };
-                  neovim.enable = true;
                   shell.enable = true;
                   wezterm = {
                     enable = true;

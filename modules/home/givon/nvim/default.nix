@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkEnableOption mkOption optional types;
+  inherit (lib) mkEnableOption;
   inherit (config._.givon.userConfig) name;
 
   cfg = config._.givon.neovim;
@@ -10,7 +10,7 @@ in
 {
   options._.givon.neovim.enable = mkEnableOption "neovim";
 
-  config.home-manager.users.${name} = {
+  config.home-manager.users.${name} = lib.mkIf cfg.enable {
     programs.neovim = {
       enable = true;
       defaultEditor = true;

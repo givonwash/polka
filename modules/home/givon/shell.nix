@@ -8,6 +8,7 @@ in
   options._.givon.shell.enable = lib.mkEnableOption "shell";
   config.home-manager.users.${name} = lib.mkIf cfg.enable {
     home = {
+      sessionVariables.EDITOR = "nvim";
       packages = with pkgs; [
         awscli2
         claude-code
