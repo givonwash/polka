@@ -13,6 +13,7 @@ in
         awscli2
         claude-code
         google-cloud-sdk
+        graphite-cli
         curl
         fd
         python312Packages.ipython
