@@ -19,6 +19,7 @@ in
         python312Packages.ipython
         jq
         ripgrep
+        snowflake-cli
         tealdeer
         unzip
       ];
