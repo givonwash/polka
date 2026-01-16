@@ -148,7 +148,7 @@
             name = mkOption rec {
               type = types.str;
               example = default;
-              default = "Iosevka";
+              default = "IosevkaTerm Nerd Font Mono";
               description = ''
                 Name of monospace font to use
               '';
@@ -156,7 +156,7 @@
             package = mkOption {
               type = types.package;
               example = literalExpression "pkgs.iosevka";
-              default = pkgs.iosevka-bin;
+              default = pkgs.nerd-fonts.iosevka-term;
               description = ''
                 Package containing monospace font to use
               '';

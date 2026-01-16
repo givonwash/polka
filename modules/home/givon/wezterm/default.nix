@@ -105,10 +105,7 @@ in
           },
           fonts = {
               default_size = ${toString cfg.appearance.fontSize},
-              monospace = {
-                  name = "${fonts.monospace.name}",
-                  opts = { stretch = "Expanded" }
-              },
+              monospace = { name = "${fonts.monospace.name}" },
               ["sans-serif"] = { name = "${fonts.sans-serif.name}" }
           },
           window_decorations = "${cfg.appearance.windowDecorations}"
