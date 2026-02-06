@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./nvim
     ./wayland
     ./wezterm
     ./firefox.nix

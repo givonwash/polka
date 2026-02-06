@@ -153,7 +153,6 @@
                     };
                   };
                 };
-                neovim.enable = true;
                 shell.enable = true;
                 wezterm = {
                   enable = true;
@@ -189,7 +188,6 @@
                   firefox.enable = true;
                   git.enable = true;
                   gpg.enable = true;
-                  neovim.enable = true;
                   shell.enable = true;
                   wayland = {
                     enable = true;
@@ -256,9 +254,6 @@
                     git.enable = true;
                     gnome.enable = true;
                     gpg.enable = true;
-                    neovim = {
-                      enable = true;
-                    };
                     shell.enable = true;
                     wayland = {
                       enable = true;

@@ -4,7 +4,6 @@ let
   inherit (lib) mkEnableOption mkIf mkOption types;
   inherit (config._.givon.userConfig) name;
   cfg = config._.givon.git;
-  nvimEnabled = config.home-manager.users.${name}.programs.neovim.enable;
 in
 {
   options._.givon.git = {
