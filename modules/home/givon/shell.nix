@@ -15,14 +15,11 @@ in
     home = {
       sessionVariables.EDITOR = "nvim";
       packages = with pkgs; [
-        awscli2
-        google-cloud-sdk
+        # Core baseline utilities
         curl
         fd
-        python312Packages.ipython
         jq
         ripgrep
-        snowflake-cli
         tealdeer
         unzip
       ];
@@ -63,7 +60,7 @@ in
           l = "eza -la --git --time modified --time-style long-iso --group --icons";
           ll = "eza -la --git --time modified --time-style long-iso --group --icons --only-dirs";
           md = "mkdir -p";
-          n = "\${EDITOR}";
+          n = "$${EDITOR}";
         };
     };
 

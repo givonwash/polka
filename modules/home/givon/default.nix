@@ -263,6 +263,30 @@
           Extra packages to include for user
         '';
       };
+      stableCliTools = mkOption {
+        type = with types; listOf package;
+        example = [
+          (literalExpression "pkgs.curl")
+          (literalExpression "pkgs.jq")
+        ];
+        default = [ ];
+        description = ''
+          Stable CLI tools installed from the main nixpkgs input.
+          These tools are updated when the full system is upgraded.
+        '';
+      };
+      frequentCliTools = mkOption {
+        type = with types; listOf package;
+        example = [
+          (literalExpression "cliPkgs.awscli2")
+          (literalExpression "cliPkgs.graphite-cli")
+        ];
+        default = [ ];
+        description = ''
+          Frequently-updated CLI tools installed from the cliPkgs input.
+          These can be updated independently with: nix flake lock --update-input cliPkgs
+        '';
+      };
       stateVersion = mkOption rec {
         type = types.str;
         example = default;
@@ -325,7 +349,9 @@
           ++ lib.optional theme.cursor.enable theme.cursor.package
           ++ lib.optional theme.gtkTheme.enable theme.gtkTheme.package
           ++ lib.optional theme.icons.enable theme.icons.package
-          ++ config._.givon.extraPkgs;
+          ++ config._.givon.extraPkgs
+          ++ config._.givon.stableCliTools
+          ++ config._.givon.frequentCliTools;
           pointerCursor = lib.mkIf (theme.cursor.enable) {
             inherit (theme.cursor) name package size;
           };

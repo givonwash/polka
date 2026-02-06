@@ -17,7 +17,10 @@
 
     # Nixpkgs versions
     nixpkgs.url = "github:NixOs/nixpkgs/nixpkgs-unstable";
-    nightlyPkgs.url = "github:NixOs/nixpkgs/nixpkgs-unstable";
+
+    # Separate input for frequently-updated CLI tools
+    # Update independently with: nix flake lock --update-input cliPkgs
+    cliPkgs.url = "github:NixOs/nixpkgs/nixpkgs-unstable";
 
     # Personal flakes
     mediator.url = "github:givonwash/mediator";
@@ -30,7 +33,7 @@
       home-manager,
       mediator,
       nixpkgs,
-      nightlyPkgs,
+      cliPkgs,
       nix-darwin,
     }:
     let
@@ -80,7 +83,7 @@
         Givon-Washington-Guanabana =
           let
             system = aarch64-darwin;
-            npkgs = import nightlyPkgs { inherit system; config.allowUnfree = true; };
+            cpkgs = import cliPkgs { inherit system; config.allowUnfree = true; };
           in
           nix-darwin.lib.darwinSystem {
             inherit system;
@@ -92,40 +95,58 @@
               self.darwinModules.guanabana
               self.darwinModules.givon
               self.homeModules.givon
-              {
-                home-manager.users.gwashington.home.packages = [
-                  npkgs.claude-code
-                  mediator.packages.${system}.default
-                  npkgs.graphite-cli
-                ];
-                _.guanabana.homebrew.enable = false;
-                _.givon = {
-                  git.enable = true;
-                  homebrew.enable = true;
-                  theme = {
-                    colors = import ./modules/home/givon/colors/catppuccin.nix;
-                    fonts = {
-                      defaultSize = 15;
-                      emoji = {
-                        name = "Apple Color Emoji";
-                        package = null;
+              (
+                { pkgs, ... }:
+                {
+                  _.guanabana.homebrew.enable = false;
+                  _.givon = {
+                    # Frequently-updated CLI tools (cloud + modern dev)
+                    frequentCliTools = with cpkgs; [
+                      awscli2
+                      google-cloud-sdk
+                      claude-code
+                      graphite-cli
+                    ];
+                    # Stable tools
+                    stableCliTools = with pkgs; [
+                      mediator.packages.${system}.default
+                      snowflake-cli
+                    ];
+                    git = {
+                      enable = true;
+                      wt = {
+                        enable = true;
+                        package = cpkgs.git-wt;
+                      };
+                      email = "gwashington@makenotion.com";
+                      userName = "Givon Washington";
+                    };
+                    homebrew.enable = false;
+                    theme = {
+                      colors = import ./modules/home/givon/colors/catppuccin.nix;
+                      fonts = {
+                        defaultSize = 15;
+                        emoji = {
+                          name = "Apple Color Emoji";
+                          package = null;
+                        };
                       };
                     };
+                    shell.enable = true;
+                    wezterm = {
+                      enable = true;
+                      enableInstallation = false;
+                      enableHomebrewInstallation = false;
+                      appearance.fontSize = 17.5;
+                    };
+                    stateVersion = "23.11";
+                    userConfig = {
+                      name = "gwashington";
+                      home = "/Users/gwashington";
+                    };
                   };
-                  shell.enable = true;
-                  wezterm = {
-                    enable = true;
-                    enableInstallation = false;
-                    enableHomebrewInstallation = false;
-                    appearance.fontSize = 17.5;
-                  };
-                  stateVersion = "23.11";
-                  userConfig = {
-                    name = "gwashington";
-                    home = "/Users/gwashington";
-                  };
-                };
-              }
+                }
+              )
             ];
           };
         Givon-Washington-Pera = nix-darwin.lib.darwinSystem {
@@ -225,8 +246,8 @@
           lib = lib';
           system = x86_64-linux;
           modules = [
-            self.nixosModules.nixpkgs
-            self.nixosModules.nix
+            self.utilityModules.nixpkgs
+            self.utilityModules.nix
             home-manager.nixosModule
             self.nixosModules.pamplemousse
             self.nixosModules.givon
