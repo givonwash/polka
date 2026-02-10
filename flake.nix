@@ -110,7 +110,16 @@
                     # Stable tools
                     stableCliTools = with pkgs; [
                       mediator.packages.${system}.default
-                      snowflake-cli
+                      (snowflake-cli.override {
+                        python3Packages = python3Packages.override {
+                          overrides = self: super: {
+                            snowflake-connector-python = super.snowflake-connector-python.overridePythonAttrs (old: {
+                              propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++
+                                (old.optional-dependencies.secure-local-storage or [ ]);
+                            });
+                          };
+                        };
+                      })
                     ];
                     git = {
                       enable = true;
