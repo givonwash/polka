@@ -103,6 +103,7 @@
                     # Frequently-updated CLI tools (cloud + modern dev)
                     frequentCliTools = with cpkgs; [
                       awscli2
+                      gh
                       google-cloud-sdk
                       claude-code
                       graphite-cli
