@@ -142,7 +142,11 @@
                         };
                       };
                     };
-                    shell.enable = true;
+                    shell = {
+                      enable = true;
+                      pyenv.enable = true;
+                      tfenv.enable = true;
+                    };
                     wezterm = {
                       enable = true;
                       enableInstallation = false;
