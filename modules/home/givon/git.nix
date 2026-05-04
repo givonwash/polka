@@ -79,12 +79,6 @@ in
           description = "Name of the sync command";
         };
 
-        baseBranch = mkOption {
-          type = types.str;
-          default = "main";
-          description = "Base branch to compare against when detecting merged branches";
-        };
-
         deleteBranch = mkOption {
           type = types.bool;
           default = true;
@@ -112,18 +106,15 @@ in
 
         worktreeSyncFunction = ''
           ${sync.command}() {
-            local base_branch="${sync.baseBranch}"
             local delete_branch="${if sync.deleteBranch then "true" else "false"}"
 
             # Parse flags
             while [[ $# -gt 0 ]]; do
               case "$1" in
-                --base) base_branch="$2"; shift 2 ;;
                 --keep-branch) delete_branch="false"; shift ;;
                 --delete-branch) delete_branch="true"; shift ;;
                 -h|--help)
                   echo "Usage: ${sync.command} [OPTIONS]"
-                  echo "  --base BRANCH    Base branch (default: ${sync.baseBranch})"
                   echo "  --keep-branch    Don't delete local branch"
                   echo "  --delete-branch  Delete local branch (default: ${if sync.deleteBranch then "yes" else "no"})"
                   return 0 ;;
@@ -135,25 +126,34 @@ in
               echo "Error: Not in a git repository"; return 1
             fi
 
-            # Fetch latest main to ensure accurate comparison
-            echo "Fetching latest $base_branch..."
-            git fetch origin "$base_branch" 2>/dev/null || true
+            if ! ${pkgs.gh}/bin/gh auth status > /dev/null 2>&1; then
+              echo "Error: gh CLI is not authenticated. Run 'gh auth login' first."; return 1
+            fi
 
             # Parse git-wt output (skip header, handle * prefix for current worktree)
             ${cfg.wt.package}/bin/git-wt \
               | ${pkgs.gnused}/bin/sed -En '/^[[:space:]]*\*/!p' \
-              | ${pkgs.gawk}/bin/awk "NR > 1 && \$2 !~ /^\s*$base_branch\s*$/ {print \$1, \$2}" \
+              | ${pkgs.gawk}/bin/awk 'NR > 1 {print $1, $2}' \
               | while read -r wt_path branch; do
 
-              echo "Checking $branch if merged."
-              # Check if merged via tree comparison (empty diff = all changes in main)
-              if git diff --merge-base --quiet "origin/$base_branch".."$branch" 2>/dev/null; then
-                echo "Removing merged worktree: $wt_path ($branch)"
+              echo "Checking $branch..."
+              local pr_state
+              pr_state=$(${pkgs.gh}/bin/gh pr list --head "$branch" --state all --limit 1 --json state --jq '.[0].state // empty' 2>/dev/null)
+
+              if [[ -z "$pr_state" ]]; then
+                echo "No PR found for $branch, skipping."
+                continue
+              fi
+
+              if [[ "$pr_state" == "MERGED" || "$pr_state" == "CLOSED" ]]; then
+                echo "Removing worktree ($pr_state): $wt_path ($branch)"
                 if [[ "$delete_branch" == "true" ]]; then
                   ${cfg.wt.package}/bin/git-wt -D "$branch"
                 else
                   git worktree remove "$wt_path"
                 fi
+              else
+                echo "PR for $branch is $pr_state, skipping."
               fi
             done
           }
