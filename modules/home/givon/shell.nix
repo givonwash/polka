@@ -44,6 +44,7 @@ in
           ripgrep
           tealdeer
           unzip
+          yq-go
         ];
         shellAliases =
           let
