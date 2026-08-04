@@ -109,6 +109,7 @@
                       google-cloud-sdk
                       graphite-cli
                       (callPackage ./pkgs/meticulous-cli { })
+                      (callPackage ./pkgs/ntn.nix { })
                     ];
                     # Stable tools
                     stableCliTools = with pkgs; [
