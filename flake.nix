@@ -105,6 +105,7 @@
                       awscli2
                       (callPackage ./pkgs/av.nix { })
                       claude-code
+                      devbox
                       gh
                       google-cloud-sdk
                       graphite-cli
