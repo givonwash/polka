@@ -100,11 +100,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1775853250,
-        "narHash": "sha256-qe5FLzkfBwmT8ihiGuu1vx525TXlwPCwM1H8r2cDMKo=",
+        "lastModified": 1785784555,
+        "narHash": "sha256-/cWFTh/TKL9wVQS9j5ybOC790rkPFHxvzPDsLgIMlE8=",
         "owner": "givonwash",
         "repo": "mediator",
-        "rev": "465b1dc434cfdf400e52a790384189318eb9bd62",
+        "rev": "33036bfa726eb37eda7ae4071e314777b96f4374",
         "type": "github"
       },
       "original": {
