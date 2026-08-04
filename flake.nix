@@ -103,10 +103,12 @@
                     # Frequently-updated CLI tools (cloud + modern dev)
                     frequentCliTools = with cpkgs; [
                       awscli2
+                      (callPackage ./pkgs/av.nix { })
+                      claude-code
                       gh
                       google-cloud-sdk
-                      claude-code
                       graphite-cli
+                      (callPackage ./pkgs/meticulous-cli { })
                     ];
                     # Stable tools
                     stableCliTools = with pkgs; [
