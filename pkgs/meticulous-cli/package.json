@@ -1,0 +1,8 @@
+{
+  "name": "meticulous-cli-env",
+  "version": "2.318.0",
+  "private": true,
+  "dependencies": {
+    "@alwaysmeticulous/cli": "2.318.0"
+  }
+}
