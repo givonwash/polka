@@ -149,7 +149,7 @@ in
     # tfenv
     (mkIf (cfg.enable && cfg.tfenv.enable) {
       home.packages = [ cfg.tfenv.package ];
-      programs.zsh.initExtra = ''
+      programs.zsh.initContent = ''
         export TFENV_CONFIG_DIR="${cfg.tfenv.configDir}"
       '';
       programs.bash.initExtra = ''

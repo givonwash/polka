@@ -183,7 +183,7 @@ in
         userName = cfg.userName;
       };
 
-      programs.zsh.initExtra = mkIf (cfg.wt.enable && cfg.wt.enableZshIntegration) ''
+      programs.zsh.initContent = mkIf (cfg.wt.enable && cfg.wt.enableZshIntegration) ''
         # Initialize git-wt shell integration
         eval "$(${cfg.wt.package}/bin/git-wt --init zsh${optionalString cfg.wt.nocd " --nocd"})"
         ${optionalString cfg.wt.select.enable worktreeSelectorFunction}
