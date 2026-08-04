@@ -111,9 +111,17 @@
                       graphite-cli
                       (callPackage ./pkgs/meticulous-cli { })
                       (callPackage ./pkgs/ntn.nix { })
+                      opencode
+                      tuicr
                     ];
                     # Stable tools
                     stableCliTools = with pkgs; [
+                      ast-grep
+                      comby
+                      go
+                      imagemagick
+                      pandoc
+                      shfmt
                       mediator.packages.${system}.default
                       (snowflake-cli.override {
                         python3Packages = python3Packages.override {
