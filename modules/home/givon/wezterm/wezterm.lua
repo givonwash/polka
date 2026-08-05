@@ -173,6 +173,71 @@ return {
             mods = 'LEADER|SHIFT',
             action = wezterm.action { ClearScrollback = 'ScrollbackAndViewport' },
         },
+
+        -- hyperlinks
+        -- keyboard-driven link opening; the only route that works regardless of
+        -- whether the foreground app has grabbed the mouse
+        {
+            key = 'o',
+            mods = 'LEADER',
+            action = wezterm.action.QuickSelectArgs {
+                label = 'open url',
+                patterns = { 'https?://\\S+' },
+                action = wezterm.action_callback(function(window, pane)
+                    wezterm.open_with(window:get_selection_text_for_pane(pane))
+                end),
+            },
+        },
+    },
+
+    -- mouse bindings
+    -- NOTE: every *default* mouse binding is implicitly `mouse_reporting = false`,
+    -- so apps that enable mouse reporting (claude code, nvim, ...) swallow clicks
+    -- on hyperlinks. Bind explicit `mouse_reporting = true` variants so a
+    -- modifier-click still opens links in those apps.
+    mouse_bindings = {
+        {
+            event = { Up = { streak = 1, button = 'Left' } },
+            mods = 'SUPER',
+            mouse_reporting = true,
+            alt_screen = 'Any',
+            action = wezterm.action.OpenLinkAtMouseCursor,
+        },
+        {
+            event = { Up = { streak = 1, button = 'Left' } },
+            mods = 'CTRL',
+            mouse_reporting = true,
+            alt_screen = 'Any',
+            action = wezterm.action.OpenLinkAtMouseCursor,
+        },
+        -- and the same combos when mouse reporting is *off*, so the gesture is
+        -- consistent everywhere
+        {
+            event = { Up = { streak = 1, button = 'Left' } },
+            mods = 'SUPER',
+            action = wezterm.action.OpenLinkAtMouseCursor,
+        },
+        {
+            event = { Up = { streak = 1, button = 'Left' } },
+            mods = 'CTRL',
+            action = wezterm.action.OpenLinkAtMouseCursor,
+        },
+        -- suppress the click that would otherwise be reported to the app when
+        -- using the modifier-click gesture above
+        {
+            event = { Down = { streak = 1, button = 'Left' } },
+            mods = 'SUPER',
+            mouse_reporting = true,
+            alt_screen = 'Any',
+            action = wezterm.action.Nop,
+        },
+        {
+            event = { Down = { streak = 1, button = 'Left' } },
+            mods = 'CTRL',
+            mouse_reporting = true,
+            alt_screen = 'Any',
+            action = wezterm.action.Nop,
+        },
     },
 
     -- misc
