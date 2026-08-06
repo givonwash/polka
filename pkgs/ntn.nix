@@ -6,7 +6,7 @@
 }:
 
 let
-  version = "0.16.0";
+  version = "0.21.8";
 
   # The `ntn` npm package bundles a prebuilt, self-contained executable per
   # platform under dist/<dir>/ntn. Pick the one matching the host.
@@ -26,7 +26,7 @@ stdenvNoCC.mkDerivation {
 
   src = fetchurl {
     url = "https://registry.npmjs.org/ntn/-/ntn-${version}.tgz";
-    hash = "sha256-iXN+1RK6OAKgI4iQc1x/IdVWfUO6skkUg136zqa+4tg=";
+    hash = "sha256-GwZvZaXg5RfUtZPnWzCyLscHlmYyeph4OBzyPYyjvIM=";
   };
 
   # macOS binaries run as-is; Linux ELF binaries need their interpreter patched.
