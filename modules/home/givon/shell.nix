@@ -35,7 +35,10 @@ in
     # Base shell config
     (mkIf cfg.enable {
       home = {
-        sessionVariables.EDITOR = "nvim";
+        sessionVariables = {
+          EDITOR = "nvim";
+          VISUAL = "nvim";
+        };
         packages = with pkgs; [
           # Core baseline utilities
           curl

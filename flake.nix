@@ -105,12 +105,14 @@
                       awscli2
                       (callPackage ./pkgs/av.nix { })
                       claude-code
+                      codex
                       devbox
                       gh
                       google-cloud-sdk
                       graphite-cli
                       (callPackage ./pkgs/meticulous-cli { })
                       (callPackage ./pkgs/ntn.nix { })
+                      (callPackage ./pkgs/omp.nix { })
                       opencode
                       tuicr
                     ];
