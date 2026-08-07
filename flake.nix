@@ -167,6 +167,10 @@
                       enableHomebrewInstallation = false;
                       appearance.fontSize = 17.5;
                     };
+                    ghostty = {
+                      enable = true;
+                      appearance.fontSize = 17.5;
+                    };
                     stateVersion = "23.11";
                     userConfig = {
                       name = "gwashington";

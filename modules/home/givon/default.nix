@@ -4,6 +4,7 @@
   imports = [
     ./wayland
     ./wezterm
+    ./ghostty
     ./firefox.nix
     ./foliate.nix
     ./git.nix
