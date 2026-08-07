@@ -14,6 +14,8 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mac-app-util.url = "github:hraban/mac-app-util";
+
 
     # Nixpkgs versions
     nixpkgs.url = "github:NixOs/nixpkgs/nixpkgs-unstable";
@@ -35,6 +37,7 @@
       nixpkgs,
       cliPkgs,
       nix-darwin,
+      mac-app-util,
     }:
     let
       inherit (flake-utils.lib.system) aarch64-darwin x86_64-darwin x86_64-linux;
@@ -89,6 +92,7 @@
             inherit system;
             lib = lib';
             modules = [
+              mac-app-util.darwinModules.default
               home-manager.darwinModules.default
               self.utilityModules.nix
               self.utilityModules.nixpkgs
@@ -99,6 +103,9 @@
                 { pkgs, ... }:
                 {
                   _.guanabana.homebrew.enable = false;
+                  home-manager.sharedModules = [
+                    mac-app-util.homeManagerModules.default
+                  ];
                   _.givon = {
                     # Frequently-updated CLI tools (cloud + modern dev)
                     frequentCliTools = with cpkgs; [
