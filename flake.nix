@@ -176,6 +176,7 @@
                     };
                     ghostty = {
                       enable = true;
+                      enableInstallation = false;
                       appearance.fontSize = 17.5;
                     };
                     stateVersion = "23.11";

@@ -36,6 +36,11 @@ in
 {
   options._.givon.ghostty = {
     enable = lib.mkEnableOption "Ghostty";
+    enableInstallation = lib.mkOption {
+      description = "Enable installation of the `ghostty` package";
+      default = true;
+      type = lib.types.bool;
+    };
     appearance.fontSize = lib.mkOption {
       description = "Font size";
       default = fonts.defaultSize * fonts.defaultScalingFactor;
@@ -44,7 +49,7 @@ in
   };
 
   config.home-manager.users.${name} = lib.mkIf cfg.enable {
-    home.packages = [ package ];
+    home.packages = lib.optional cfg.enableInstallation package;
     xdg.configFile."ghostty/config".text = ''
       background = ${elemAt colors.blacks 2}
       foreground = ${colors.white}
