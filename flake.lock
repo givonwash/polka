@@ -199,11 +199,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1785784555,
-        "narHash": "sha256-/cWFTh/TKL9wVQS9j5ybOC790rkPFHxvzPDsLgIMlE8=",
+        "lastModified": 1786470398,
+        "narHash": "sha256-ElDT4tG1nwbrU22g1ae9HMySZqlnQf1zAgp6JhPCcZ0=",
         "owner": "givonwash",
         "repo": "mediator",
-        "rev": "33036bfa726eb37eda7ae4071e314777b96f4374",
+        "rev": "6da8602d3bf0218caef0356558ecf8f91c435f74",
         "type": "github"
       },
       "original": {
