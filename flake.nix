@@ -157,6 +157,7 @@
                       colors = import ./modules/home/givon/colors/catppuccin.nix;
                       fonts = {
                         defaultSize = 15;
+                        defaultScalingFactor = 1.1;
                         emoji = {
                           name = "Apple Color Emoji";
                           package = null;
