@@ -72,6 +72,42 @@
         inherit aarch64-darwin x86_64-darwin x86_64-linux;
         lib = lib';
       };
+      darwinConfigurations = {
+        Givon-Washington-Guanabana = import ./machines/guanabana.nix machineArgs;
+        Givon-Washington-Pera = import ./machines/pera.nix machineArgs;
+      };
+
+      nixosConfigurations = {
+        frambuesa = import ./machines/frambuesa.nix machineArgs;
+        pamplemousse = import ./machines/pamplemousse.nix machineArgs;
+      };
+
+      # Toplevel derivations keyed by short machine name.
+      machineToplevels = {
+        guanabana = darwinConfigurations.Givon-Washington-Guanabana.system;
+        pera = darwinConfigurations.Givon-Washington-Pera.system;
+        frambuesa = nixosConfigurations.frambuesa.config.system.build.toplevel;
+        pamplemousse = nixosConfigurations.pamplemousse.config.system.build.toplevel;
+      };
+
+      # Machines buildable on each system (darwin configs only build on macOS).
+      machinesBySystem = {
+        aarch64-darwin = [ "guanabana" ];
+        x86_64-darwin = [ "pera" ];
+        x86_64-linux = [ "frambuesa" "pamplemousse" ];
+      };
+
+      # Per-system checks and aggregate of every machine buildable on that system.
+      perSystem = flake-utils.lib.eachSystem (builtins.attrNames machinesBySystem) (
+        system:
+        let
+          machines = machinesBySystem.${system};
+        in
+        {
+          checks = lib.genAttrs machines (name: machineToplevels.${name});
+        }
+      );
+
     in
     {
       darwinModules = {
@@ -91,13 +127,8 @@
         nix = ./modules/utils/nix.nix;
         nixpkgs = ./modules/utils/nixpkgs.nix;
       };
-      darwinConfigurations = {
-        Givon-Washington-Guanabana = import ./machines/guanabana.nix machineArgs;
-        Givon-Washington-Pera = import ./machines/pera.nix machineArgs;
-      };
-      nixosConfigurations = {
-        frambuesa = import ./machines/frambuesa.nix machineArgs;
-        pamplemousse = import ./machines/pamplemousse.nix machineArgs;
-      };
+      inherit darwinConfigurations nixosConfigurations;
+
+      checks = perSystem.checks;
     };
 }

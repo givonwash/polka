@@ -8,7 +8,7 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      gnome.dconf-editor
+      dconf-editor
       gnomeExtensions.pop-shell
       pop-launcher
     ];
