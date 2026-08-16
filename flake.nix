@@ -119,7 +119,7 @@
                       graphite-cli
                       (callPackage ./pkgs/meticulous-cli { })
                       (callPackage ./pkgs/ntn.nix { })
-                      (callPackage ./pkgs/omp.nix { })
+                      omp.packages.${system}.default
                       opencode
                       tuicr
                     ];
@@ -303,18 +303,16 @@
                   };
                   givon = {
                     extraPkgs = with pkgs; [
-                      element-desktop
-                      inkscape
-                      obsidian
-                      signal-desktop
-                      slack
+                      (callPackage ./pkgs/ntn.nix { })
+                      gemini-cli
+                      gh
+                      mediator.packages.${system}.default
+                      omp.packages.${system}.default
                       spotify
-                      zulip
                     ];
                     firefox.enable = true;
                     foliate.enable = true;
                     git.enable = true;
-                    gnome.enable = true;
                     gpg.enable = true;
                     shell.enable = true;
                     wayland = {
