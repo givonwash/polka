@@ -8,6 +8,7 @@
   nix-darwin,
   mac-app-util,
   aarch64-darwin,
+  utilityModules,
   ...
 }:
 let
@@ -23,8 +24,8 @@ nix-darwin.lib.darwinSystem {
   modules = [
     mac-app-util.darwinModules.default
     home-manager.darwinModules.default
-    self.utilityModules.nix
-    self.utilityModules.nixpkgs
+    utilityModules.nix
+    utilityModules.nixpkgs
     self.darwinModules.guanabana
     self.darwinModules.givon
     self.homeModules.givon

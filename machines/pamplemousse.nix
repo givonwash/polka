@@ -5,14 +5,15 @@
   mediator,
   omp,
   x86_64-linux,
+  utilityModules,
   ...
 }:
 lib.nixosSystem {
   lib = lib;
   system = x86_64-linux;
   modules = [
-    self.utilityModules.nixpkgs
-    self.utilityModules.nix
+    utilityModules.nixpkgs
+    utilityModules.nix
     home-manager.nixosModules.default
     self.nixosModules.pamplemousse
     self.nixosModules.givon

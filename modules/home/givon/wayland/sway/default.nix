@@ -153,15 +153,18 @@ in
           in
           {
             enable = true;
-            profiles = {
-              docked = {
-                exec = [ "${cfg.package}/bin/swaymsg 'workspace ${firstWorkspace.name}; move workspace to output DP-1'" ];
-                outputs = [
-                  { criteria = "DP-1"; position = "0,0"; }
-                  { criteria = "eDP-1"; position = "3840,0"; }
-                ];
-              };
-            };
+            settings = [
+              {
+                profile = {
+                  name = "docked";
+                  exec = [ "${cfg.package}/bin/swaymsg 'workspace ${firstWorkspace.name}; move workspace to output DP-1'" ];
+                  outputs = [
+                    { criteria = "DP-1"; position = "0,0"; }
+                    { criteria = "eDP-1"; position = "3840,0"; }
+                  ];
+                };
+              }
+            ];
           };
         swayidle = {
           enable = true;

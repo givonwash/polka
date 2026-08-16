@@ -24,10 +24,21 @@ in
       in
       {
         enable = true;
-        anchor = "top-right";
-        backgroundColor = elemAt theme.colors.blacks 0;
-        borderColor = theme.colors.peach;
-        defaultTimeout = 10000;
+        settings = {
+          anchor = "top-right";
+          background-color = elemAt theme.colors.blacks 0;
+          border-color = theme.colors.peach;
+          default-timeout = 10000;
+          font = "${theme.fonts.sans-serif.name} 12";
+          format = createFormat { font-color = theme.colors.rosewater; };
+          group-by = "app-name,summary";
+          height = 150;
+          icon-path = "${theme.icons.package}/share/icons/${theme.icons.name}";
+          layer = "overlay";
+          progress-color = "over ${theme.colors.green}";
+          text-color = "${theme.colors.white}";
+          width = 400;
+        };
         extraConfig = ''
           [app-name=Spotify]
           default-timeout=3000
@@ -53,15 +64,6 @@ in
           [mode=abbreviate]
           format=${createFormat { font-color = theme.colors.rosewater; withSummary = false; withBody = false; }}
         '';
-        font = "${theme.fonts.sans-serif.name} 12";
-        format = createFormat { font-color = theme.colors.rosewater; };
-        groupBy = "app-name,summary";
-        height = 150;
-        iconPath = "${theme.icons.package}/share/icons/${theme.icons.name}";
-        layer = "overlay";
-        progressColor = "over ${theme.colors.green}";
-        textColor = "${theme.colors.white}";
-        width = 400;
       };
 
     services.swayidle.events = [

@@ -1,7 +1,7 @@
 { lib, ... }:
 
 {
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   networking = {
     networkmanager.enable = true;

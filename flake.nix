@@ -67,9 +67,15 @@
           }
       );
 
+      utilityModules = {
+        nix = ./modules/utils/nix.nix;
+        nixpkgs = ./modules/utils/nixpkgs.nix;
+      };
+
       machineArgs = {
         inherit self home-manager mediator nixpkgs cliPkgs nix-darwin mac-app-util omp;
         inherit aarch64-darwin x86_64-darwin x86_64-linux;
+        inherit utilityModules;
         lib = lib';
       };
       darwinConfigurations = {
@@ -122,10 +128,6 @@
         frambuesa = ./modules/nixos/frambuesa;
         pamplemousse = ./modules/nixos/pamplemousse;
         givon = ./modules/nixos/givon;
-      };
-      utilityModules = {
-        nix = ./modules/utils/nix.nix;
-        nixpkgs = ./modules/utils/nixpkgs.nix;
       };
       inherit darwinConfigurations nixosConfigurations;
 

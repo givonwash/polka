@@ -11,7 +11,7 @@ in
     {
       cpu.intel.updateMicrocode = mkDefault cfg.enableRedistributableFirmware;
       bluetooth.enable = true;
-      opengl.enable = true;
+      graphics.enable = true;
     };
 
   networking = {

@@ -4,6 +4,7 @@
   home-manager,
   nix-darwin,
   x86_64-darwin,
+  utilityModules,
   ...
 }:
 nix-darwin.lib.darwinSystem {
@@ -11,8 +12,8 @@ nix-darwin.lib.darwinSystem {
   system = x86_64-darwin;
   modules = [
     home-manager.darwinModules.default
-    self.utilityModules.nix
-    self.utilityModules.nixpkgs
+    utilityModules.nix
+    utilityModules.nixpkgs
     self.darwinModules.pera
     self.darwinModules.givon
     self.homeModules.givon
