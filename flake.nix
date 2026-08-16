@@ -239,7 +239,7 @@
           modules = [
             self.utilityModules.nixpkgs
             self.utilityModules.nix
-            home-manager.nixosModule
+            home-manager.nixosModules.default
             self.nixosModules.frambuesa
             self.nixosModules.givon
             self.homeModules.givon
@@ -289,7 +289,7 @@
           modules = [
             self.utilityModules.nixpkgs
             self.utilityModules.nix
-            home-manager.nixosModule
+            home-manager.nixosModules.default
             self.nixosModules.pamplemousse
             self.nixosModules.givon
             self.homeModules.givon

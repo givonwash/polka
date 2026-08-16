@@ -3,7 +3,7 @@
 let
   inherit (config._.givon) theme;
   inherit (config._.givon.userConfig) name;
-  inherit (config._.wayland) sway;
+  inherit (config._.givon.wayland) sway;
   inherit (builtins) readFile;
   cfg = config._.givon.wayland.sway.wofi;
 in
