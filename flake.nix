@@ -16,7 +16,6 @@
     };
     mac-app-util.url = "github:hraban/mac-app-util";
 
-
     # Nixpkgs versions
     nixpkgs.url = "github:NixOs/nixpkgs/nixpkgs-unstable";
 
@@ -26,18 +25,20 @@
 
     # Personal flakes
     mediator.url = "github:givonwash/mediator";
+
+    omp.url = "github:can1357/oh-my-pi";
   };
 
   outputs =
-    {
-      self,
-      flake-utils,
-      home-manager,
-      mediator,
-      nixpkgs,
-      cliPkgs,
-      nix-darwin,
-      mac-app-util,
+    { self
+    , flake-utils
+    , home-manager
+    , mediator
+    , nixpkgs
+    , cliPkgs
+    , nix-darwin
+    , mac-app-util
+    , omp
     }:
     let
       inherit (flake-utils.lib.system) aarch64-darwin x86_64-darwin x86_64-linux;
@@ -46,23 +47,31 @@
 
       lib' = lib.extend (
         final: prev:
-        let
-          inherit (prev)
-            filterAttrs
-            hasSuffix
-            mapAttrs'
-            nameValuePair
-            removeSuffix
-            ;
-          myLibEntries = readDir ./lib;
-          nixFiles = filterAttrs (entry: type: type == "regular" && (hasSuffix ".nix" entry)) myLibEntries;
-        in
-        {
-          polka = mapAttrs' (
-            name: _: nameValuePair (removeSuffix ".nix" name) (import ./lib/${name} final)
-          ) nixFiles;
-        }
+          let
+            inherit (prev)
+              filterAttrs
+              hasSuffix
+              mapAttrs'
+              nameValuePair
+              removeSuffix
+              ;
+            myLibEntries = readDir ./lib;
+            nixFiles = filterAttrs (entry: type: type == "regular" && (hasSuffix ".nix" entry)) myLibEntries;
+          in
+          {
+            polka = mapAttrs'
+              (
+                name: _: nameValuePair (removeSuffix ".nix" name) (import ./lib/${name} final)
+              )
+              nixFiles;
+          }
       );
+
+      machineArgs = {
+        inherit self home-manager mediator nixpkgs cliPkgs nix-darwin mac-app-util omp;
+        inherit aarch64-darwin x86_64-darwin x86_64-linux;
+        lib = lib';
+      };
     in
     {
       darwinModules = {
@@ -83,277 +92,12 @@
         nixpkgs = ./modules/utils/nixpkgs.nix;
       };
       darwinConfigurations = {
-        Givon-Washington-Guanabana =
-          let
-            system = aarch64-darwin;
-            cpkgs = import cliPkgs { inherit system; config.allowUnfree = true; };
-          in
-          nix-darwin.lib.darwinSystem {
-            inherit system;
-            lib = lib';
-            modules = [
-              mac-app-util.darwinModules.default
-              home-manager.darwinModules.default
-              self.utilityModules.nix
-              self.utilityModules.nixpkgs
-              self.darwinModules.guanabana
-              self.darwinModules.givon
-              self.homeModules.givon
-              (
-                { pkgs, ... }:
-                {
-                  _.guanabana.homebrew.enable = false;
-                  home-manager.sharedModules = [
-                    mac-app-util.homeManagerModules.default
-                  ];
-                  _.givon = {
-                    # Frequently-updated CLI tools (cloud + modern dev)
-                    frequentCliTools = with cpkgs; [
-                      awscli2
-                      (callPackage ./pkgs/av.nix { })
-                      claude-code
-                      codex
-                      devbox
-                      gh
-                      google-cloud-sdk
-                      graphite-cli
-                      (callPackage ./pkgs/meticulous-cli { })
-                      (callPackage ./pkgs/ntn.nix { })
-                      omp.packages.${system}.default
-                      opencode
-                      tuicr
-                    ];
-                    # Stable tools
-                    stableCliTools = with pkgs; [
-                      ast-grep
-                      comby
-                      go
-                      imagemagick
-                      pandoc
-                      shfmt
-                      mediator.packages.${system}.default
-                      (snowflake-cli.override {
-                        python3Packages = python3Packages.override {
-                          overrides = self: super: {
-                            snowflake-connector-python = super.snowflake-connector-python.overridePythonAttrs (old: {
-                              propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++
-                                (old.optional-dependencies.secure-local-storage or [ ]);
-                            });
-                          };
-                        };
-                      })
-                    ];
-                    git = {
-                      enable = true;
-                      wt = {
-                        enable = true;
-                        package = cpkgs.git-wt;
-                      };
-                      email = "gwashington@makenotion.com";
-                      userName = "Givon Washington";
-                    };
-                    homebrew.enable = false;
-                    theme = {
-                      colors = import ./modules/home/givon/colors/catppuccin.nix;
-                      fonts = {
-                        defaultSize = 15;
-                        defaultScalingFactor = 1.1;
-                        emoji = {
-                          name = "Apple Color Emoji";
-                          package = null;
-                        };
-                      };
-                    };
-                    shell = {
-                      enable = true;
-                      pyenv.enable = true;
-                      tfenv.enable = true;
-                    };
-                    wezterm = {
-                      enable = true;
-                      enableInstallation = false;
-                      enableHomebrewInstallation = false;
-                      appearance.fontSize = 17.5;
-                    };
-                    ghostty = {
-                      enable = true;
-                      enableInstallation = false;
-                      appearance.fontSize = 17.5;
-                    };
-                    stateVersion = "23.11";
-                    userConfig = {
-                      name = "gwashington";
-                      home = "/Users/gwashington";
-                    };
-                  };
-                }
-              )
-            ];
-          };
-        Givon-Washington-Pera = nix-darwin.lib.darwinSystem {
-          lib = lib';
-          system = x86_64-darwin;
-          modules = [
-            home-manager.darwinModules.default
-            self.utilityModules.nix
-            self.utilityModules.nixpkgs
-            self.darwinModules.pera
-            self.darwinModules.givon
-            self.homeModules.givon
-            {
-              _.pera.homebrew.enable = true;
-              _.givon = {
-                git.enable = true;
-                homebrew.enable = true;
-                theme = {
-                  colors = import ./modules/home/givon/colors/catppuccin.nix;
-                  fonts = {
-                    defaultSize = 15;
-                    emoji = {
-                      name = "Apple Color Emoji";
-                      package = null;
-                    };
-                  };
-                };
-                shell.enable = true;
-                wezterm = {
-                  enable = true;
-                  enableInstallation = false;
-                  enableHomebrewInstallation = true;
-                  appearance.fontSize = 17.5;
-                };
-                stateVersion = "23.11";
-                userConfig = {
-                  name = "givonwashington";
-                  home = "/Users/givonwashington";
-                };
-              };
-            }
-          ];
-        };
+        Givon-Washington-Guanabana = import ./machines/guanabana.nix machineArgs;
+        Givon-Washington-Pera = import ./machines/pera.nix machineArgs;
       };
       nixosConfigurations = {
-        frambuesa = lib'.nixosSystem {
-          lib = lib';
-          system = x86_64-linux;
-          modules = [
-            self.utilityModules.nixpkgs
-            self.utilityModules.nix
-            home-manager.nixosModules.default
-            self.nixosModules.frambuesa
-            self.nixosModules.givon
-            self.homeModules.givon
-            {
-              config._ = {
-                frambuesa.gnome.enable = true;
-                givon = {
-                  firefox.enable = true;
-                  git.enable = true;
-                  gpg.enable = true;
-                  shell.enable = true;
-                  wayland = {
-                    enable = true;
-                    gnome.enable = true;
-                  };
-                  wezterm = {
-                    enable = true;
-                    enableWayland = "false";
-                    appearance.windowDecorations = "INTEGRATED_BUTTONS | RESIZE";
-                  };
-                  xdg.enable = true;
-                  theme = {
-                    colors = import ./modules/home/givon/colors/catppuccin.nix;
-                    cursor.enable = true;
-                    gtkTheme.enable = true;
-                    icons.enable = true;
-                  };
-                  stateVersion = "22.05";
-                  userConfig = {
-                    name = "givon";
-                    home = "/home/givon";
-                    extraGroups = [
-                      "networkmanager"
-                      "video"
-                      "wheel"
-                    ];
-                    isNormalUser = true;
-                  };
-                };
-              };
-            }
-          ];
-        };
-        pamplemousse = lib'.nixosSystem {
-          lib = lib';
-          system = x86_64-linux;
-          modules = [
-            self.utilityModules.nixpkgs
-            self.utilityModules.nix
-            home-manager.nixosModules.default
-            self.nixosModules.pamplemousse
-            self.nixosModules.givon
-            self.homeModules.givon
-            (
-              { pkgs, ... }:
-              {
-                config._ = {
-                  pamplemousse = {
-                    gnome.enable = true;
-                    sway.enable = true;
-                  };
-                  givon = {
-                    extraPkgs = with pkgs; [
-                      (callPackage ./pkgs/ntn.nix { })
-                      gemini-cli
-                      gh
-                      mediator.packages.${system}.default
-                      omp.packages.${system}.default
-                      spotify
-                    ];
-                    firefox.enable = true;
-                    foliate.enable = true;
-                    git.enable = true;
-                    gpg.enable = true;
-                    shell.enable = true;
-                    wayland = {
-                      enable = true;
-                      gnome.enable = true;
-                      sway = {
-                        enable = true;
-                        mako.enable = true;
-                        swaylock.enable = true;
-                        waybar.enable = true;
-                        wofi.enable = true;
-                      };
-                    };
-                    wezterm = {
-                      enable = true;
-                      appearance.windowDecorations = "INTEGRATED_BUTTONS | RESIZE";
-                    };
-                    xdg.enable = true;
-                    theme = {
-                      colors = import ./modules/home/givon/colors/catppuccin.nix;
-                      cursor.enable = true;
-                      gtkTheme.enable = true;
-                      icons.enable = true;
-                    };
-                    stateVersion = "22.05";
-                    userConfig = {
-                      name = "givon";
-                      home = "/home/givon";
-                      extraGroups = [
-                        "networkmanager"
-                        "video"
-                        "wheel"
-                      ];
-                      isNormalUser = true;
-                    };
-                  };
-                };
-              }
-            )
-          ];
-        };
+        frambuesa = import ./machines/frambuesa.nix machineArgs;
+        pamplemousse = import ./machines/pamplemousse.nix machineArgs;
       };
     };
 }
