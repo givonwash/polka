@@ -66,7 +66,7 @@ in
         '';
       };
 
-    services.swayidle.events = [
+    services.swayidle.events = lib.mkDefault [
       { event = "lock"; command = "${pkgs.mako}/bin/makoctl mode -a abbreviate"; }
       { event = "unlock"; command = "${pkgs.mako}/bin/makoctl mode -r abbreviate"; }
     ];

@@ -5,9 +5,6 @@ let
 in
 lib.mkIf (cfg.enable or false) {
   environment.systemPackages = [ pkgs.pulseaudio ];
-  programs = {
-    dconf.enable = true;
-    light.enable = true;
-  };
+  programs.dconf.enable = true;
   xdg.portal.wlr.enable = true;
 }

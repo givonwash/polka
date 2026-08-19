@@ -175,8 +175,8 @@ in
           timeouts = [
             {
               timeout = 300;
-              command = "${pkgs.light}/bin/light -O && ${pkgs.light}/bin/light -S 1";
-              resumeCommand = "${pkgs.light}/bin/light -I";
+              command = "${pkgs.brightnessctl}/bin/brightnessctl --save && ${pkgs.brightnessctl}/bin/brightnessctl set 1";
+              resumeCommand = "${pkgs.brightnessctl}/bin/brightnessctl --restore";
             }
             {
               timeout = 330;
@@ -318,10 +318,10 @@ in
             "${modifier}+f" = "fullscreen toggle";
             "${modifier}+a" = "focus parent";
             "${modifier}+r" = "mode resize";
-            "${modifier}+b" = "exec ${pkgs.light}/bin/light -U 5";
-            "${modifier}+shift+b" = "exec ${pkgs.light}/bin/light -A 5";
-            "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 5";
-            "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 5";
+            "${modifier}+b" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
+            "${modifier}+shift+b" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%+";
+            "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
+            "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%+";
             "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
             "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
             "XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
