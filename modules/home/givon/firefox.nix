@@ -9,6 +9,7 @@ in
   config.home-manager.users.${name} = lib.mkIf cfg.enable {
     programs.firefox = {
       enable = true;
+      configPath = ".config/mozilla/firefox";
       package = pkgs.firefox.override {
         cfg.enableGnomeExtensions = true;
         extraPolicies = {

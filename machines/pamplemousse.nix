@@ -29,7 +29,6 @@ lib.nixosSystem {
           givon = {
             extraPkgs = with pkgs; [
               (callPackage ../pkgs/ntn.nix { })
-              gemini-cli
               gh
               mediator.packages.${system}.default
               omp.packages.${system}.default

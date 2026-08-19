@@ -330,6 +330,10 @@
             package = theme.fonts.sans-serif.package;
             size = theme.fonts.defaultSize;
           };
+          gtk4.theme = {
+            name = theme.gtkTheme.name;
+            package = theme.gtkTheme.package;
+          };
           iconTheme = lib.mkIf theme.icons.enable {
             name = theme.icons.name;
             package = theme.icons.package;
@@ -339,6 +343,7 @@
             package = theme.gtkTheme.package;
           };
         };
+        xdg.userDirs.setSessionVariables = false;
         home = {
           packages = [
             theme.fonts.icons.package
@@ -354,6 +359,7 @@
           ++ config._.givon.stableCliTools
           ++ config._.givon.frequentCliTools;
           pointerCursor = lib.mkIf (theme.cursor.enable) {
+            enable = true;
             inherit (theme.cursor) name package size;
           };
           stateVersion = cfg.stateVersion;

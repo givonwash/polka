@@ -117,6 +117,7 @@ in
         };
         zsh = {
           enable = true;
+          dotDir = "${config._.givon.userConfig.home}/.config/zsh";
           autocd = true;
           autosuggestion.enable = true;
           defaultKeymap = "viins";

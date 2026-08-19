@@ -66,10 +66,10 @@ in
         '';
       };
 
-    services.swayidle.events = lib.mkDefault [
-      { event = "lock"; command = "${pkgs.mako}/bin/makoctl mode -a abbreviate"; }
-      { event = "unlock"; command = "${pkgs.mako}/bin/makoctl mode -r abbreviate"; }
-    ];
+    services.swayidle.events = lib.mkDefault {
+      lock = "${pkgs.mako}/bin/makoctl mode -a abbreviate";
+      unlock = "${pkgs.mako}/bin/makoctl mode -r abbreviate";
+    };
 
     wayland.windowManager.sway.config.keybindings =
       let

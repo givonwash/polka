@@ -7,6 +7,7 @@ in
   home-manager.users.${name} = {
     programs.ssh = {
       enable = true;
+      enableDefaultConfig = false;
     };
   };
 }

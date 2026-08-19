@@ -168,10 +168,10 @@ in
           };
         swayidle = {
           enable = true;
-          events = [
-            { event = "lock"; command = cfg.locker.executable; }
-            { event = "before-sleep"; command = cfg.locker.executable; }
-          ];
+          events = {
+            lock = cfg.locker.executable;
+            before-sleep = cfg.locker.executable;
+          };
           timeouts = [
             {
               timeout = 300;

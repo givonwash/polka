@@ -163,15 +163,11 @@ in
 
       programs.git = {
         enable = true;
-        delta = {
-          enable = true;
-          options = {
-            navigate = true;
-            hyperlinks = true;
-            line-numbers = true;
+        settings = {
+          user = {
+            email = cfg.email;
+            name = cfg.userName;
           };
-        };
-        extraConfig = {
           core = { editor = "nvim"; };
           diff = { algorithm = "histogram"; colorMoved = "default"; tool = "nvimdiff"; };
           init = { defaultBranch = "main"; };
@@ -179,8 +175,16 @@ in
           pull = { rebase = true; };
         };
         ignores = [ ".direnv" ];
-        userEmail = cfg.email;
-        userName = cfg.userName;
+      };
+
+      programs.delta = {
+        enable = true;
+        enableGitIntegration = true;
+        options = {
+          navigate = true;
+          hyperlinks = true;
+          line-numbers = true;
+        };
       };
 
       programs.zsh.initContent = mkIf (cfg.wt.enable && cfg.wt.enableZshIntegration) ''
