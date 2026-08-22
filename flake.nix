@@ -27,6 +27,13 @@
     mediator.url = "github:givonwash/mediator";
 
     omp.url = "github:can1357/oh-my-pi";
+
+    # Secure Boot support for NixOS
+    # Using main branch for compatibility with latest nixpkgs
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -39,6 +46,7 @@
     , nix-darwin
     , mac-app-util
     , omp
+    , lanzaboote
     }:
     let
       inherit (flake-utils.lib.system) aarch64-darwin x86_64-darwin x86_64-linux;
@@ -73,7 +81,7 @@
       };
 
       machineArgs = {
-        inherit self home-manager mediator nixpkgs cliPkgs nix-darwin mac-app-util omp;
+        inherit self home-manager mediator nixpkgs cliPkgs nix-darwin mac-app-util omp lanzaboote;
         inherit aarch64-darwin x86_64-darwin x86_64-linux;
         inherit utilityModules;
         lib = lib';
