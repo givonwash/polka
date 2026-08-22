@@ -37,6 +37,7 @@ lib.nixosSystem {
             firefox.enable = true;
             foliate.enable = true;
             git.enable = true;
+            ghostty.enable = true;
             gpg.enable = true;
             shell.enable = true;
             wayland = {
@@ -49,10 +50,6 @@ lib.nixosSystem {
                 waybar.enable = true;
                 wofi.enable = true;
               };
-            };
-            wezterm = {
-              enable = true;
-              appearance.windowDecorations = "INTEGRATED_BUTTONS | RESIZE";
             };
             xdg.enable = true;
             theme = {
