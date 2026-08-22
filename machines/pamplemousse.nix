@@ -4,6 +4,7 @@
   home-manager,
   mediator,
   omp,
+  lanzaboote,
   x86_64-linux,
   utilityModules,
   ...
@@ -15,6 +16,7 @@ lib.nixosSystem {
     utilityModules.nixpkgs
     utilityModules.nix
     home-manager.nixosModules.default
+    lanzaboote.nixosModules.lanzaboote
     self.nixosModules.pamplemousse
     self.nixosModules.givon
     self.homeModules.givon
