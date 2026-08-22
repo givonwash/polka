@@ -20,5 +20,9 @@ in
     interfaces.wlp0s20f3.useDHCP = true;
   };
 
+  # Hibernation resume is configured in boot.nix via boot.resumeDevice
+  # The resume offset will be set via boot.kernelParams after installation
+  # To calculate offset: sudo filefrag -v /swapfile | head -20
+  # Then add to kernelParams: "resume_offset=<physical_offset>"
   powerManagement.cpuFreqGovernor = mkDefault "powersave";
 }
