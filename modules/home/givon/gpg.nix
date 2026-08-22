@@ -13,7 +13,7 @@ in
     };
     services.gpg-agent = {
       enable = true;
-      enableSshSupport = true;
+      enableSshSupport = false;  # Disabled: using standard SSH agent for Ed25519 key
       enableZshIntegration = true;
     };
   };
