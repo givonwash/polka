@@ -5,6 +5,7 @@
   mediator,
   omp,
   cliPkgs,
+  combyPkgs,
   nix-darwin,
   mac-app-util,
   aarch64-darwin,
@@ -56,7 +57,7 @@ nix-darwin.lib.darwinSystem {
           # Stable tools
           stableCliTools = with pkgs; [
             ast-grep
-            comby
+            combyPkgs.legacyPackages.${system}.comby
             go
             imagemagick
             pandoc

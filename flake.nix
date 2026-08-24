@@ -23,6 +23,9 @@
     # Update independently with: nix flake lock --update-input cliPkgs
     cliPkgs.url = "github:NixOs/nixpkgs/nixpkgs-unstable";
 
+    # Comby is broken in current nixpkgs because it is incompatible with tar ≥ 3.
+    combyPkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+
     # Personal flakes
     mediator.url = "github:givonwash/mediator";
 
@@ -43,6 +46,7 @@
     , mediator
     , nixpkgs
     , cliPkgs
+    , combyPkgs
     , nix-darwin
     , mac-app-util
     , omp
@@ -81,7 +85,7 @@
       };
 
       machineArgs = {
-        inherit self home-manager mediator nixpkgs cliPkgs nix-darwin mac-app-util omp lanzaboote;
+        inherit self home-manager mediator nixpkgs cliPkgs combyPkgs nix-darwin mac-app-util omp lanzaboote;
         inherit aarch64-darwin x86_64-darwin x86_64-linux;
         inherit utilityModules;
         lib = lib';
