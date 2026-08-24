@@ -63,16 +63,7 @@ nix-darwin.lib.darwinSystem {
             pandoc
             shfmt
             mediator.packages.${system}.default
-            (snowflake-cli.override {
-              python3Packages = python3Packages.override {
-                overrides = self: super: {
-                  snowflake-connector-python = super.snowflake-connector-python.overridePythonAttrs (old: {
-                    propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++
-                      (old.optional-dependencies.secure-local-storage or [ ]);
-                  });
-                };
-              };
-            })
+            (callPackage ../pkgs/snowflake-cli.nix { nixpkgsPath = pkgs.path; })
           ];
           git = {
             enable = true;
