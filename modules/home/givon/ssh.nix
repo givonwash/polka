@@ -7,12 +7,23 @@ in
   home-manager.users.${name} = {
     programs.ssh = {
       enable = true;
-      enableDefaultConfig = true;
-      addKeysToAgent = "yes";
-      matchBlocks = {
+      enableDefaultConfig = false;
+      settings = {
+        "*" = {
+          AddKeysToAgent = "yes";
+          Compression = false;
+          ControlMaster = "no";
+          ControlPath = "~/.ssh/master-%r@%n:%p";
+          ControlPersist = "no";
+          ForwardAgent = false;
+          HashKnownHosts = false;
+          ServerAliveCountMax = 3;
+          ServerAliveInterval = 0;
+          UserKnownHostsFile = "~/.ssh/known_hosts";
+        };
         "github.com" = {
-          identityFile = "~/.ssh/id_ed25519";
-          identitiesOnly = true;
+          IdentitiesOnly = true;
+          IdentityFile = "~/.ssh/id_ed25519";
         };
       };
     };

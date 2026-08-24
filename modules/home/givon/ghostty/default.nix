@@ -6,7 +6,7 @@ let
   inherit (theme) colors fonts;
   inherit (config._.givon.userConfig) name;
   cfg = config._.givon.ghostty;
-  package = if pkgs.stdenv.isDarwin then pkgs.ghostty-bin else pkgs.ghostty;
+  package = if pkgs.stdenv.hostPlatform.isDarwin then pkgs.ghostty-bin else pkgs.ghostty;
 
   ansi = [
     (elemAt colors.grays 0)
@@ -71,7 +71,7 @@ in
       font-size = ${toString cfg.appearance.fontSize}
       font-feature = -calt,-clig,-liga
 
-      ${lib.optionalString pkgs.stdenv.isDarwin "macos-titlebar-style = tabs"}
+      ${lib.optionalString pkgs.stdenv.hostPlatform.isDarwin "macos-titlebar-style = tabs"}
       confirm-close-surface = true
 
       keybind = ctrl+shift+c=copy_to_clipboard
