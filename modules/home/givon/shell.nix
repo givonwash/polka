@@ -83,8 +83,8 @@ in
             gshow = "git show";
             gss = "git status --short";
             gsw = "git switch";
-            l = "eza -la --git --time modified --time-style long-iso --group --icons";
-            ll = "eza -la --git --time modified --time-style long-iso --group --icons --only-dirs";
+            l = "eza -la --git --time modified --time-style long-iso --group --icons auto";
+            ll = "eza -la --git --time modified --time-style long-iso --group --icons auto --only-dirs";
             md = "mkdir -p";
             n = "$EDITOR";
           };
