@@ -3,7 +3,6 @@
   lib,
   home-manager,
   mediator,
-  omp,
   lanzaboote,
   x86_64-linux,
   utilityModules,
@@ -33,7 +32,6 @@ lib.nixosSystem {
               (callPackage ../pkgs/ntn.nix { })
               gh
               mediator.packages.${system}.default
-              omp.packages.${system}.default
               spotify
             ];
             firefox.enable = true;

@@ -3,7 +3,6 @@
   lib,
   home-manager,
   mediator,
-  omp,
   cliPkgs,
   combyPkgs,
   nix-darwin,
@@ -50,7 +49,7 @@ nix-darwin.lib.darwinSystem {
             graphite-cli
             (callPackage ../pkgs/meticulous-cli { })
             (callPackage ../pkgs/ntn.nix { })
-            omp.packages.${system}.default
+						omp
             opencode
             tuicr
           ];
@@ -58,6 +57,7 @@ nix-darwin.lib.darwinSystem {
           stableCliTools = with pkgs; [
             ast-grep
             combyPkgs.legacyPackages.${system}.comby
+						envchain
             go
             imagemagick
             pandoc

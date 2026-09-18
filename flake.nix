@@ -29,8 +29,6 @@
     # Personal flakes
     mediator.url = "github:givonwash/mediator";
 
-    omp.url = "github:can1357/oh-my-pi";
-
     # Secure Boot support for NixOS
     # Using main branch for compatibility with latest nixpkgs
     lanzaboote = {
@@ -49,7 +47,6 @@
     , combyPkgs
     , nix-darwin
     , mac-app-util
-    , omp
     , lanzaboote
     }:
     let
