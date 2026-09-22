@@ -82,7 +82,7 @@
       };
 
       machineArgs = {
-        inherit self home-manager mediator nixpkgs cliPkgs combyPkgs nix-darwin mac-app-util omp lanzaboote;
+        inherit self home-manager mediator nixpkgs cliPkgs combyPkgs nix-darwin mac-app-util lanzaboote;
         inherit aarch64-darwin x86_64-darwin x86_64-linux;
         inherit utilityModules;
         lib = lib';

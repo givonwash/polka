@@ -49,7 +49,7 @@ nix-darwin.lib.darwinSystem {
             graphite-cli
             (callPackage ../pkgs/meticulous-cli { })
             (callPackage ../pkgs/ntn.nix { })
-						omp
+            (callPackage ../pkgs/omp.nix { })
             opencode
             tuicr
           ];
